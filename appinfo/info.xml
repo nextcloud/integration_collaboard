@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<info>
+	<id>integration_collaboard</id>
+	<name>Collaboard integration</name>
+	<summary>Integration of Collaboard</summary>
+	<description><![CDATA[Collaboard whiteboard service integration]]></description>
+	<version>1.0.0</version>
+	<licence>agpl</licence>
+	<author>Julien Veyssier</author>
+	<namespace>Collaboard</namespace>
+	<documentation>
+		<developer>https://github.com/julien-nc/integration_collaboard</developer>
+	</documentation>
+	<category>integration</category>
+	<category>dashboard</category>
+	<website>https://github.com/julien-nc/integration_collaboard</website>
+	<bugs>https://github.com/julien-nc/integration_collaboard/issues</bugs>
+	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/master/img/screenshot1.jpg</screenshot>
+	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/master/img/screenshot2.jpg</screenshot>
+	<dependencies>
+		<nextcloud min-version="25" max-version="26"/>
+	</dependencies>
+	<settings>
+		<admin>OCA\Collaboard\Settings\Admin</admin>
+		<admin-section>OCA\Collaboard\Settings\AdminSection</admin-section>
+		<personal>OCA\Collaboard\Settings\Personal</personal>
+		<personal-section>OCA\Collaboard\Settings\PersonalSection</personal-section>
+	</settings>
+	<navigations>
+		<navigation>
+			<id>integration_collaboard</id>
+			<name>Collaboard</name>
+			<route>integration_collaboard.page.index</route>
+			<icon>app.svg</icon>
+			<order>8</order>
+		</navigation>
+	</navigations>
+</info>

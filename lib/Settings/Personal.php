@@ -42,12 +42,15 @@ class Personal implements ISettings {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$url = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 
+		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
+
 		$userConfig = [
 			// we consider the token is not valid until there is also a refresh token
 			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
 			'url' => $url,
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
+			'sfa_method' => $sfaMethod,
 		];
 		$this->initialStateService->provideInitialState('user-config', $userConfig);
 		return new TemplateResponse(Application::APP_ID, 'personalSettings');

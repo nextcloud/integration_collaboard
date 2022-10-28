@@ -248,6 +248,54 @@ class CollaboardAPIService {
 		}
 	}
 
+	public function sendUserOtpToken(string $userId, string $collaboardUserName, string $sfaMethod): array {
+		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
+		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
+		try {
+			$url = $baseUrl . '/auth/api/Authorization/SendUserOTPToken';
+			$options = [
+				'headers' => [
+					'Authorization' => 'Bearer ' . $accessToken,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
+					'Content-Type' => 'application/json',
+				],
+				'body' => json_encode([
+					'User' => $collaboardUserName,
+					// that's what the API doc says, does not work
+					// 'MessagingPlatform' => $sfaMethod === 'email' ? 'Email' : 'SMS',
+					// here is what the frontend actually does, retro-engineering is always the best
+					'MessageTheme' => 'default',
+				]),
+			];
+			$response = $this->client->post($url, $options);
+			$body = $response->getBody();
+			$respCode = $response->getStatusCode();
+
+			if ($respCode >= 400) {
+				return ['error' => 'sendUserOtpToken error'];
+			} else {
+				try {
+					return json_decode($body, true);
+				} catch (Exception | Throwable $e) {
+				}
+				$this->logger->warning('Collaboard sendUserOtpToken error : Invalid response', ['app' => Application::APP_ID]);
+				return ['error' => $this->l10n->t('Invalid response')];
+			}
+		} catch (ServerException $e) {
+			$response = $e->getResponse();
+			$body = $response->getBody();
+			$this->logger->warning('Collaboard sendUserOtpToken server error : ' . $body, ['app' => Application::APP_ID]);
+			return ['error' => $this->l10n->t('sendUserOtpToken server error')];
+		} catch (Exception | Throwable $e) {
+			$this->logger->warning('Collaboard sendUserOtpToken error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
+			return [
+				'error' => $this->l10n->t('sendUserOtpToken error'),
+				'exception' => $e->getMessage(),
+			];
+		}
+	}
+
 	/**
 	 * Check if the auth token has expired and try to refresh it if so
 	 * @param string $userId

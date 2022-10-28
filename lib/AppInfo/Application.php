@@ -24,6 +24,7 @@ class Application extends App implements IBootstrap {
 	public const INTEGRATION_USER_AGENT = 'Nextcloud Collaboard integration';
 
 	public const DEFAULT_COLLABOARD_URL = 'https://api.collaboard.app';
+	public const DEFAULT_2FA_METHOD = 'email';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);

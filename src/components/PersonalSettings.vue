@@ -39,12 +39,39 @@
 					:placeholder="t('integration_collaboard', 'Collaboard password')"
 					@keyup.enter="onConnectClick">
 			</div>
+			<div v-show="showLoginPassword && !twoFactorRequired">
+				<br>
+				<p class="settings-hint">
+					<InformationOutlineIcon :size="24" class="icon" />
+					{{ t('integration_collaboard', 'You can ignore the "Preferred second factor" setting if you don\'t have "Two factor authentication" enabled in Collaboard') }}
+				</p>
+				<div class="field">
+					<label for="collaboard-2fa-method">
+						<LockIcon :size="20" class="icon" />
+						{{ t('integration_collaboard', 'Preferred second factor') }}
+					</label>
+					<select id="collaboard-2fa-method"
+						v-model="state.sfa_method"
+						@change="on2FAMethodChange">
+						<option value="otp">
+							{{ t('integration_collaboard', 'OTP client') }}
+						</option>
+						<option value="email">
+							{{ t('integration_collaboard', 'Email') }}
+						</option>
+						<!--option value="sms">
+							{{ t('integration_collaboard', 'SMS') }}
+						</option-->
+					</select>
+				</div>
+			</div>
 			<div v-show="showLoginPassword && twoFactorRequired" class="field">
 				<label for="collaboard-2fa">
 					<LockIcon :size="20" class="icon" />
 					{{ t('integration_collaboard', 'Second authentication factor') }}
 				</label>
 				<input id="collaboard-2fa"
+					ref="sfa_input"
 					v-model="twoFactorCode"
 					type="text"
 					placeholder="xxxxxx"
@@ -83,6 +110,7 @@ import LockIcon from 'vue-material-design-icons/Lock.vue'
 import AccountIcon from 'vue-material-design-icons/Account.vue'
 import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
 import CloseIcon from 'vue-material-design-icons/Close.vue'
+import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
 
 import CollaboardIcon from './icons/CollaboardIcon.vue'
 
@@ -105,6 +133,7 @@ export default {
 		EarthIcon,
 		AccountIcon,
 		LockIcon,
+		InformationOutlineIcon,
 	},
 
 	props: [],
@@ -154,6 +183,11 @@ export default {
 				})
 			}, 2000)()
 		},
+		on2FAMethodChange(e) {
+			this.saveOptions({
+				sfa_method: e.target.value,
+			})
+		},
 		saveOptions(values) {
 			const req = {
 				values,
@@ -165,6 +199,9 @@ export default {
 					if (this.login && this.password && response.data.user_name === '') {
 						if (response.data.two_factor_required) {
 							this.twoFactorRequired = true
+							this.$nextTick(() => {
+								this.$refs.sfa_input.focus()
+							})
 							showError(t('integration_collaboard', 'Collaboard second factor is required'))
 						} else {
 							if (this.twoFactorRequired) {

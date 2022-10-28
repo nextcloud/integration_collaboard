@@ -100,18 +100,27 @@ class ConfigController extends Controller {
 			$result['AuthenticationMode']
 		)) {
 			// we can already store the user info
+			// and the token even if it is maybe not definitive (if 2FA is required)
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $result['User']['UserName']);
 			$displayName = $result['User']['FirstName'] . ' ' . $result['User']['LastName'];
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'user_displayname', $displayName);
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $result['AuthorizationToken']);
 
 			// do we need 2FA?
 			if ($result['AuthenticationMode'] === 3) {
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $result['AuthorizationToken']);
+				// check 2FA method
+				$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
+				$sendOtpResult = null;
+				if ($sfaMethod !== 'otp') {
+					$sendOtpResult = $this->collaboardAPIService->sendUserOtpToken($this->userId, $result['User']['UserName'], $sfaMethod);
+				}
 				return new DataResponse([
 					'user_name' => '',
 					'user_displayname' => '',
 					'error' => 'login response says 2fa is required (AuthenticationMode === ' . $result['AuthenticationMode'] . ')',
 					'two_factor_required' => true,
+					'send_user_otp_token_result' => $sendOtpResult,
 				]);
 			}
 			if ($result['AuthenticationMode'] !== 1) {
@@ -132,7 +141,6 @@ class ConfigController extends Controller {
 				]);
 			}
 
-			$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $result['AuthorizationToken']);
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'refresh_token', $result['RefreshToken']);
 
 			$nowTs = (new DateTime())->getTimestamp();

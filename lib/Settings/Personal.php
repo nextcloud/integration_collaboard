@@ -36,13 +36,15 @@ class Personal implements ISettings {
 	 */
 	public function getForm(): TemplateResponse {
 		$token = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
+		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$url = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 
 		$userConfig = [
-			'token' => $token ? 'dummyTokenContent' : '',
+			// we consider the token is not valid until there is also a refresh token
+			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
 			'url' => $url,
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,

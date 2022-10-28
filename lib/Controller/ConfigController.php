@@ -51,7 +51,7 @@ class ConfigController extends Controller {
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'url', $values['url']);
 			$secondFactor = ($values['two_factor_code'] ?? null) ?: null;
 			if ($secondFactor) {
-				return $this->loginWithSecondFactor($values['login'], $values['password'], $secondFactor);
+				return $this->loginWithSecondFactor($secondFactor);
 			} else {
 				return $this->loginWithCredentials($values['login'], $values['password']);
 			}
@@ -95,12 +95,18 @@ class ConfigController extends Controller {
 			$result['User']['FirstName'],
 			$result['User']['LastName'],
 			$result['AuthorizationToken'],
-			$result['RefreshToken'],
+			// $result['RefreshToken'],
 			$result['ExpiresIn'],
 			$result['AuthenticationMode']
 		)) {
+			// we can already store the user info
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $result['User']['UserName']);
+			$displayName = $result['User']['FirstName'] . ' ' . $result['User']['LastName'];
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'user_displayname', $displayName);
+
 			// do we need 2FA?
-			if ($result['AuthenticationMode'] !== 1) {
+			if ($result['AuthenticationMode'] === 3) {
+				$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $result['AuthorizationToken']);
 				return new DataResponse([
 					'user_name' => '',
 					'user_displayname' => '',
@@ -108,12 +114,26 @@ class ConfigController extends Controller {
 					'two_factor_required' => true,
 				]);
 			}
+			if ($result['AuthenticationMode'] !== 1) {
+				return new DataResponse([
+					'user_name' => '',
+					'user_displayname' => '',
+					'error' => 'this authentication method is not yet implemented (AuthenticationMode === ' . $result['AuthenticationMode'] . ')',
+					'two_factor_required' => false,
+				]);
+			}
+
+			if (!isset($result['RefreshToken'])) {
+				return new DataResponse([
+					'user_name' => '',
+					'user_displayname' => '',
+					'error' => 'something went wrong, no refresh token in login response (AuthenticationMode === ' . $result['AuthenticationMode'] . ')',
+					'two_factor_required' => false,
+				]);
+			}
 
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $result['AuthorizationToken']);
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'refresh_token', $result['RefreshToken']);
-			$this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $result['User']['UserName']);
-			$displayName = $result['User']['FirstName'] . ' ' . $result['User']['LastName'];
-			$this->config->setUserValue($this->userId, Application::APP_ID, 'user_displayname', $displayName);
 
 			$nowTs = (new DateTime())->getTimestamp();
 			$tokenExpireAt = $nowTs + (int)($result['ExpiresIn']);
@@ -128,6 +148,40 @@ class ConfigController extends Controller {
 			'user_name' => '',
 			'user_displayname' => '',
 			'error' => 'invalid login/password',
+			'details' => $result,
+		]);
+	}
+
+	private function loginWithSecondFactor($secondFactor): DataResponse {
+		// this request will use the token we obtained and stored with the login/password auth request
+		$result = $this->collaboardAPIService->validate2FA($this->userId, $secondFactor);
+
+		if (isset(
+			$result['AuthorizationToken'],
+			$result['RefreshToken'],
+			$result['ExpiresIn'],
+			$result['AuthenticationMode']
+		)) {
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $result['AuthorizationToken']);
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'refresh_token', $result['RefreshToken']);
+
+			$nowTs = (new DateTime())->getTimestamp();
+			$tokenExpireAt = $nowTs + (int)($result['ExpiresIn']);
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'token_expires_at', (string)$tokenExpireAt);
+
+			// the user info was obtained on the login/password request
+			$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
+			$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
+
+			return new DataResponse([
+				'user_name' => $collaboardUserName,
+				'user_displayname' => $collaboardUserDisplayName,
+			]);
+		}
+		return new DataResponse([
+			'user_name' => '',
+			'user_displayname' => '',
+			'error' => 'invalid second factor',
 			'details' => $result,
 		]);
 	}

@@ -5,40 +5,6 @@
 			{{ t('integration_collaboard', 'Collaboard integration') }}
 		</h2>
 		<div id="collaboard-content">
-			<div class="field">
-				<label for="collaboard-url">
-					<EarthIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Collaboard instance address') }}
-				</label>
-				<input id="collaboard-url"
-					v-model="state.url"
-					type="text"
-					:disabled="connected === true"
-					:placeholder="t('integration_collaboard', 'Collaboard instance address')"
-					@input="onInput">
-			</div>
-			<div v-show="showLoginPassword" class="field">
-				<label for="collaboard-login">
-					<AccountIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Login') }}
-				</label>
-				<input id="collaboard-login"
-					v-model="login"
-					type="text"
-					:placeholder="t('integration_collaboard', 'Collaboard login')"
-					@keyup.enter="onConnectClick">
-			</div>
-			<div v-show="showLoginPassword" class="field">
-				<label for="collaboard-password">
-					<LockIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Password or OTP Code') }}
-				</label>
-				<input id="collaboard-password"
-					v-model="password"
-					type="password"
-					:placeholder="t('integration_collaboard', 'Collaboard password')"
-					@keyup.enter="onConnectClick">
-			</div>
 			<div v-show="showLoginPassword && !twoFactorRequired">
 				<br>
 				<p class="settings-hint">
@@ -64,6 +30,48 @@
 						</option-->
 					</select>
 				</div>
+			</div>
+			<div class="field">
+				<label for="collaboard-url">
+					<EarthIcon :size="20" class="icon" />
+					{{ t('integration_collaboard', 'Collaboard instance address') }}
+				</label>
+				<input id="collaboard-url"
+					v-model="state.url"
+					type="text"
+					:disabled="connected === true"
+					:placeholder="t('integration_collaboard', 'Collaboard instance address')"
+					@input="onInput">
+			</div>
+			<div v-show="showLoginPassword" class="field">
+				<label for="collaboard-login">
+					<AccountIcon :size="20" class="icon" />
+					{{ t('integration_collaboard', 'Login') }}
+				</label>
+				<input id="collaboard-login"
+					v-model="login"
+					type="text"
+					:placeholder="t('integration_collaboard', 'Collaboard login')"
+					@keyup.enter="onConnectClick">
+				<NcButton v-if="login && state.sfa_method === 'email' && !twoFactorRequired"
+					id="collaboard-ask-email-2fa"
+					@click="onAsk2FAClick">
+					<template #icon>
+						<LockIcon />
+					</template>
+					{{ t('integration_collaboard', 'Send OTP code via email') }}
+				</NcButton>
+			</div>
+			<div v-show="showLoginPassword" class="field">
+				<label for="collaboard-password">
+					<LockIcon :size="20" class="icon" />
+					{{ t('integration_collaboard', 'Password or OTP Code') }}
+				</label>
+				<input id="collaboard-password"
+					v-model="password"
+					type="password"
+					:placeholder="t('integration_collaboard', 'Collaboard password')"
+					@keyup.enter="onConnectClick">
 			</div>
 			<div v-show="showLoginPassword && twoFactorRequired" class="field">
 				<label for="collaboard-2fa">
@@ -243,6 +251,23 @@ export default {
 				password: this.password,
 				url: this.state.url,
 				two_factor_code: this.twoFactorCode,
+			})
+		},
+		onAsk2FAClick() {
+			const url = generateUrl('/apps/integration_collaboard/email-2fa-password')
+			const params = {
+				params: {
+					login: this.login,
+				},
+			}
+			axios.get(url, params).then((response) => {
+				showSuccess(t('integration_collaboard', 'Collaboard OTP code sent via email'))
+			}).catch((error) => {
+				showError(
+					t('integration_collaboard', 'Failed to ask OTP password code by email')
+					+ ': ' + (error.response?.request?.responseText ?? '')
+				)
+				console.error(error)
 			})
 		},
 	},

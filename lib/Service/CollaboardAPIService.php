@@ -251,7 +251,13 @@ class CollaboardAPIService {
 		}
 	}
 
-	public function sendUserOtpToken(string $userId, string $collaboardUserName, string $sfaMethod): array {
+	/**
+	 * @param string $userId
+	 * @param string $collaboardUserName
+	 * @param string|null $sfaMethod
+	 * @return array|string[]
+	 */
+	public function sendUserOtpToken(string $userId, string $collaboardUserName, ?string $sfaMethod = null): array {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
@@ -259,7 +265,6 @@ class CollaboardAPIService {
 			$url = $baseUrl . '/auth/api/Authorization/SendUserOTPToken';
 			$options = [
 				'headers' => [
-					'Authorization' => 'Bearer ' . $accessToken,
 					'User-Agent' => Application::INTEGRATION_USER_AGENT,
 					'Content-Type' => 'application/json',
 				],
@@ -271,6 +276,13 @@ class CollaboardAPIService {
 					'MessageTheme' => 'default',
 				]),
 			];
+
+			// only use the token if we have one
+			// difference between OTP code used as password (no token yet) or as second factor (got a token from login/password)
+			if ($accessToken) {
+				$options['headers']['Authorization'] = 'Bearer ' . $accessToken;
+			}
+
 			$response = $this->client->post($url, $options);
 			$body = $response->getBody();
 			$respCode = $response->getStatusCode();

@@ -196,6 +196,19 @@ class ConfigController extends Controller {
 	}
 
 	/**
+	 * @NoAdminRequired
+	 *
+	 * @param string $login
+	 * @return DataResponse
+	 */
+	public function sendUserOtpPasswordCode(string $login): DataResponse {
+		$result = $this->collaboardAPIService->sendUserOtpToken($this->userId, $login);
+		return new DataResponse([
+			'send_user_otp_token_result' => $result,
+		]);
+	}
+
+	/**
 	 * set admin config values
 	 *
 	 * @param array $values

@@ -200,7 +200,10 @@ class CollaboardAPIService {
 			return ['error' => $this->l10n->t('Login server error')];
 		} catch (Exception | Throwable $e) {
 			$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
-			return ['error' => $this->l10n->t('Login error')];
+			return [
+				'error' => $this->l10n->t('Login error'),
+				'exception' => $e->getMessage(),
+			];
 		}
 	}
 

@@ -31,7 +31,7 @@
 			<div v-show="showLoginPassword" class="field">
 				<label for="collaboard-password">
 					<LockIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Password') }}
+					{{ t('integration_collaboard', 'Password or OTP Code') }}
 				</label>
 				<input id="collaboard-password"
 					v-model="password"
@@ -54,7 +54,7 @@
 						v-model="state.sfa_method"
 						@change="on2FAMethodChange">
 						<option value="otp">
-							{{ t('integration_collaboard', 'OTP client') }}
+							{{ t('integration_collaboard', 'OTP client app') }}
 						</option>
 						<option value="email">
 							{{ t('integration_collaboard', 'Email') }}

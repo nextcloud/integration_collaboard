@@ -123,12 +123,13 @@ class ConfigController extends Controller {
 					'send_user_otp_token_result' => $sendOtpResult,
 				]);
 			}
-			if ($result['AuthenticationMode'] !== 1) {
+			if ($result['AuthenticationMode'] !== 1 && $result['AuthenticationMode'] !== 2) {
 				return new DataResponse([
 					'user_name' => '',
 					'user_displayname' => '',
 					'error' => 'this authentication method is not yet implemented (AuthenticationMode === ' . $result['AuthenticationMode'] . ')',
 					'two_factor_required' => false,
+					'authenticate_response' => $result,
 				]);
 			}
 

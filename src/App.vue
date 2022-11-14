@@ -42,12 +42,8 @@
 					</NcButton>
 				</template>
 			</NcEmptyContent>
-			<NcEmptyContent v-else
-				:title="t('integration_collaboard', 'No selected project')">
-				<template #icon>
-					<NuiteqIcon />
-				</template>
-			</NcEmptyContent>
+			<ProjectList v-else
+				:projects="activeProjects" />
 		</NcAppContent>
 		<NcModal v-if="creationModalOpen"
 			size="small"
@@ -74,6 +70,8 @@ import NcContent from '@nextcloud/vue/dist/Components/NcContent.js'
 import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 
+import ProjectList from './components/ProjectList.vue'
+
 import { generateUrl } from '@nextcloud/router'
 import { loadState } from '@nextcloud/initial-state'
 import axios from '@nextcloud/axios'
@@ -87,6 +85,7 @@ export default {
 	name: 'App',
 
 	components: {
+		ProjectList,
 		CollaboardIcon,
 		PersonalSettings,
 		// CreationForm,

@@ -58,6 +58,19 @@ class CollaboardAPIService {
 		return $url && $userName && $token && $refreshToken;
 	}
 
+	public function getProjects(string $userId): array {
+		$params = [
+			'AppVer' => '5.15.1.7',
+			'PageSize' => 100,
+			'PageNumber' => 1,
+		];
+		$projectsResult = $this->restRequest($userId, 'api/CollaborationHub/GetParticipatingProjecs', $params, 'POST');
+		if (isset($projectsResult['error'])) {
+			return $projectsResult;
+		}
+		return $projectsResult['Results'] ?? [];
+	}
+
 	/**
 	 * @param string $userId
 	 * @return array|string[]
@@ -91,6 +104,7 @@ class CollaboardAPIService {
 				'headers' => [
 					'User-Agent'  => Application::INTEGRATION_USER_AGENT,
 					'Authorization' => 'Bearer ' . $accessToken,
+					'Content-Type' => 'application/json',
 				],
 			];
 
@@ -111,7 +125,7 @@ class CollaboardAPIService {
 				}
 			} else {
 				if (count($params) > 0) {
-					$options['body'] = $params;
+					$options['body'] = json_encode($params);
 				}
 			}
 

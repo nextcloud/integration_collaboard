@@ -43,12 +43,11 @@ class CollaboardAPIController extends Controller {
 	 * @return DataResponse
 	 * @throws Exception
 	 */
-	public function getContacts(): DataResponse {
-		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
-		if ($collaboardUserName === '') {
+	public function getProjects(): DataResponse {
+		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
 			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
 		}
-		$result = $this->collaboardAPIService->getContacts($this->userId);
+		$result = $this->collaboardAPIService->getProjects($this->userId);
 		if (isset($result['error'])) {
 			return new DataResponse($result['error'], Http::STATUS_BAD_REQUEST);
 		} else {

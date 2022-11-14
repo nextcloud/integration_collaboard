@@ -52,7 +52,7 @@ class Personal implements ISettings {
 			'user_displayname' => $collaboardUserDisplayName,
 			'sfa_method' => $sfaMethod,
 		];
-		$this->initialStateService->provideInitialState('user-config', $userConfig);
+		$this->initialStateService->provideInitialState('collaboard-state', $userConfig);
 		return new TemplateResponse(Application::APP_ID, 'personalSettings');
 	}
 

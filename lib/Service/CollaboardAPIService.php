@@ -54,9 +54,8 @@ class CollaboardAPIService {
 
 		$userName = $this->config->getUserValue($userId, Application::APP_ID, 'user_name');
 		$token = $this->config->getUserValue($userId, Application::APP_ID, 'token');
-		$login = $this->config->getUserValue($userId, Application::APP_ID, 'login');
-		$password = $this->config->getUserValue($userId, Application::APP_ID, 'password');
-		return $url && $userName && $token && $login && $password;
+		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
+		return $url && $userName && $token && $refreshToken;
 	}
 
 	/**

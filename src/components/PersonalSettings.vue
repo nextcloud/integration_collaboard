@@ -1,6 +1,6 @@
 <template>
 	<div id="collaboard_prefs" class="section">
-		<h2>
+		<h2 v-if="showTitle">
 			<CollaboardIcon class="icon" />
 			{{ t('integration_collaboard', 'Collaboard integration') }}
 		</h2>
@@ -10,6 +10,10 @@
 				<p class="settings-hint">
 					<InformationOutlineIcon :size="24" class="icon" />
 					{{ t('integration_collaboard', 'You can ignore the "Preferred second factor" setting if you don\'t have "Two factor authentication" enabled in Collaboard') }}
+				</p>
+				<p class="settings-hint">
+					<InformationOutlineIcon :size="24" class="icon" />
+					{{ t('integration_collaboard', 'The "One Time Password" (OTP) can be used as a password or as a second factor depending on the authentication mode you chose in your Collaboard settings') }}
 				</p>
 				<div class="field">
 					<label for="collaboard-2fa-method">
@@ -144,11 +148,16 @@ export default {
 		InformationOutlineIcon,
 	},
 
-	props: [],
+	props: {
+		showTitle: {
+			type: Boolean,
+			default: true,
+		},
+	},
 
 	data() {
 		return {
-			state: loadState('integration_collaboard', 'user-config'),
+			state: loadState('integration_collaboard', 'collaboard-state'),
 			loading: false,
 			login: '',
 			password: '',
@@ -225,6 +234,7 @@ export default {
 						this.state.token = 'dumdum'
 						this.twoFactorCode = ''
 						this.twoFactorRequired = false
+						this.$emit('connected', this.state.user_name, this.state.url)
 					}
 				} else {
 					showSuccess(t('integration_collaboard', 'Collaboard options saved'))

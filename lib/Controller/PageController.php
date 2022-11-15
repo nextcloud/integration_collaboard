@@ -65,6 +65,9 @@ class PageController extends Controller {
 		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
 
 		$talkEnabled = $this->appManager->isEnabledForUser('spreed', $this->userId);
+
+		$licensingInfo = $this->collaboardAPIService->getUserLicenseInfo($this->userId);
+
 		$pageInitialState = [
 			// we consider the token is not valid until there is also a refresh token
 			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
@@ -72,6 +75,7 @@ class PageController extends Controller {
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
 			'sfa_method' => $sfaMethod,
+			'licensing_info' => $licensingInfo,
 
 			'talk_enabled' => $talkEnabled,
 			'project_list' => [],

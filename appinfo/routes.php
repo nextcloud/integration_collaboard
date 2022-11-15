@@ -18,5 +18,7 @@ return [
 		['name' => 'config#sendUserOtpPasswordCode', 'url' => '/email-2fa-password', 'verb' => 'GET'],
 
 		['name' => 'collaboardAPI#getProjects', 'url' => '/projects', 'verb' => 'GET'],
+		['name' => 'collaboardAPI#createProject', 'url' => '/projects', 'verb' => 'POST'],
+		['name' => 'collaboardAPI#deleteProject', 'url' => '/projects/{projectId}', 'verb' => 'DELETE'],
 	]
 ];

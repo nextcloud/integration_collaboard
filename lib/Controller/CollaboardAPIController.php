@@ -49,7 +49,41 @@ class CollaboardAPIController extends Controller {
 		}
 		$result = $this->collaboardAPIService->getProjects($this->userId);
 		if (isset($result['error'])) {
-			return new DataResponse($result['error'], Http::STATUS_BAD_REQUEST);
+			return new DataResponse($result, Http::STATUS_BAD_REQUEST);
+		} else {
+			return new DataResponse($result);
+		}
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @param string $name
+	 * @return DataResponse
+	 */
+	public function createProject(string $name): DataResponse {
+		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
+			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
+		}
+		$result = $this->collaboardAPIService->createProject($this->userId, $name);
+		if (isset($result['error'])) {
+			return new DataResponse($result, Http::STATUS_BAD_REQUEST);
+		} else {
+			return new DataResponse($result);
+		}
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @param int $projectId
+	 * @return DataResponse
+	 */
+	public function deleteProject(int $projectId): DataResponse {
+		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
+			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
+		}
+		$result = $this->collaboardAPIService->deleteProject($this->userId, $projectId);
+		if (isset($result['error'])) {
+			return new DataResponse($result, Http::STATUS_BAD_REQUEST);
 		} else {
 			return new DataResponse($result);
 		}

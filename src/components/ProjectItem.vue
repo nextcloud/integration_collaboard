@@ -1,7 +1,7 @@
 <template>
 	<div class="project">
 		<span class="field title">
-			{{ project.Project.Description }}
+			{{ project.name }}
 		</span>
 		<span class="subfield">
 			{{ t('integration_collaboard', 'Updated: {date}', { date: formattedUpdated }) }}
@@ -66,7 +66,7 @@ export default {
 	align-items: start;
 	box-shadow: 0 0 10px var(--color-box-shadow);
 	border-radius: var(--border-radius-large);
-	padding: 0 20px;
+	padding: 12px 20px;
 
 	.title {
 		font-weight: bold;

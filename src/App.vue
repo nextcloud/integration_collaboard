@@ -42,18 +42,25 @@
 					</NcButton>
 				</template>
 			</NcEmptyContent>
-			<ProjectList v-else
-				:projects="activeProjects" />
+			<div v-else>
+				<ProjectList
+					:projects="activeProjects"
+					@new-project="onCreateProjectClick" />
+				<NcButton @click="reloadProjects">
+					<template #icon>
+						<ReloadIcon :size="20" />
+					</template>
+				</NcButton>
+			</div>
 		</NcAppContent>
 		<NcModal v-if="creationModalOpen"
 			size="small"
 			@close="closeCreationModal">
-			plop
-			<!--CreationForm
+			<CreationForm
 				:loading="creating"
 				focus-on-field="name"
 				@ok-clicked="onCreationValidate"
-				@cancel-clicked="closeCreationModal" /-->
+				@cancel-clicked="closeCreationModal" />
 		</NcModal>
 	</NcContent>
 </template>
@@ -61,6 +68,7 @@
 <script>
 import CogIcon from 'vue-material-design-icons/Cog.vue'
 import PlusIcon from 'vue-material-design-icons/Plus.vue'
+import ReloadIcon from 'vue-material-design-icons/Reload.vue'
 
 import CollaboardIcon from './components/icons/CollaboardIcon.vue'
 
@@ -75,9 +83,9 @@ import ProjectList from './components/ProjectList.vue'
 import { generateUrl } from '@nextcloud/router'
 import { loadState } from '@nextcloud/initial-state'
 import axios from '@nextcloud/axios'
-import { showSuccess, showError, showUndo } from '@nextcloud/dialogs'
+import { showSuccess, showError, showUndo, showMessage } from '@nextcloud/dialogs'
 
-// import CreationForm from './components/CreationForm.vue'
+import CreationForm from './components/CreationForm.vue'
 import PersonalSettings from './components/PersonalSettings.vue'
 import { Timer } from './utils.js'
 
@@ -88,9 +96,10 @@ export default {
 		ProjectList,
 		CollaboardIcon,
 		PersonalSettings,
-		// CreationForm,
+		CreationForm,
 		CogIcon,
 		PlusIcon,
+		ReloadIcon,
 		NcAppContent,
 		NcContent,
 		NcModal,
@@ -152,6 +161,10 @@ export default {
 			// window.location.reload()
 			this.getProjects()
 		},
+		reloadProjects() {
+			this.state.project_list = []
+			this.getProjects()
+		},
 		getProjects() {
 			const url = generateUrl('/apps/integration_collaboard/projects')
 			axios.get(url).then((response) => {
@@ -176,20 +189,23 @@ export default {
 			project.trash = false
 			const req = {
 				name: project.name,
-				password: project.password,
 			}
 			const url = generateUrl('/apps/integration_collaboard/projects')
 			axios.post(url, req).then((response) => {
 				showSuccess(t('integration_collaboard', 'New project was created in Collaboard'))
-				project.id = response.data?.id
-				this.state.project_list.push(project)
-				this.selectedProjectId = project.id
+				// project.id = response.data?.id
+				// this.state.project_list.push(project)
+				// this.selectedProjectId = project.id
+				this.reloadProjects()
 				this.creationModalOpen = false
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to create new project')
 					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
 				)
+				if (!this.state.licensing_info?.IsActive) {
+					showMessage(t('integration_collaboard', 'Free Collaboard plan is limited to 3 projects'))
+				}
 				console.debug(error)
 			}).then(() => {
 				this.creating = false

@@ -68,7 +68,31 @@ class CollaboardAPIService {
 		if (isset($projectsResult['error'])) {
 			return $projectsResult;
 		}
-		return $projectsResult['Results'] ?? [];
+		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
+			$remoteProjects = $projectsResult['Results'];
+			return array_map(static function(array $remoteProject) {
+				$remoteProject['name'] = $remoteProject['Project']['Description'];
+				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
+				return $remoteProject;
+			}, $remoteProjects);
+		}
+		return [];
+	}
+
+	public function createProject(string $userId, string $name): array {
+		$params = [
+			'AppVer' => '5.15.1.7',
+			'Description' => $name,
+		];
+		return $this->restRequest($userId, 'api/CollaborationHub/CreateProject', $params, 'POST');
+	}
+
+	public function deleteProject(string $userId, int $projectId): array {
+		$params = [
+			'AppVer' => '5.15.1.7',
+			'ProjectId' => $projectId,
+		];
+		return $this->restRequest($userId, 'api/CollaborationHub/DeleteProject', $params, 'POST');
 	}
 
 	/**
@@ -78,6 +102,19 @@ class CollaboardAPIService {
 	 */
 	public function getUserInfo(string $userId): array {
 		return $this->restRequest($userId, 'auth/api/Authorization/GetAuthenticatedUser');
+	}
+
+	/**
+	 * @param string $userId
+	 * @return array|string[]
+	 * @throws Exception
+	 */
+	public function getUserLicenseInfo(string $userId): array {
+		$params = [
+			'AppVer' => '5.15.1.7',
+			'ProductFamilyCode' => 'COLLABOARD',
+		];
+		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');
 	}
 
 	/**
@@ -157,20 +194,32 @@ class CollaboardAPIService {
 			}
 		} catch (ClientException $e) {
 			$response = $e->getResponse();
+			$responseBody = $response->getBody()->getContents();
+			try {
+				$responseBody = json_decode($responseBody, true);
+			} catch (Exception $e) {
+			}
 			$this->logger->warning('Collaboard API client error : ' . $e->getMessage(), [
 				'app' => Application::APP_ID,
-				'responseBody' => $response->getBody(),
+				'responseBody' => $responseBody,
 				'exception' => $e->getMessage(),
 			]);
-			return ['error' => $this->l10n->t('Collaboard request error')];
+			return [
+				'error' => 'Collaboard API client error',
+				'responseBody' => $responseBody,
+			];
 		} catch (ServerException $e) {
 			$response = $e->getResponse();
+			$responseBody = $response->getBody();
 			$this->logger->debug('Collaboard API server error : ' . $e->getMessage(), [
 				'app' => Application::APP_ID,
-				'responseBody' => $response->getBody(),
+				'responseBody' => $responseBody,
 				'exception' => $e->getMessage(),
 			]);
-			return ['error' => $this->l10n->t('Collaboard request failure')];
+			return [
+				'error' => 'Collaboard API server error',
+				'responseBody' => $responseBody,
+			];
 		}
 	}
 

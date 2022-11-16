@@ -5,7 +5,11 @@
 			@update:showDetails="a = 2">
 			<!--template slot="list">
 			</template-->
-			<div v-if="!connected">
+			<ProjectDetails v-if="selectedProject"
+				:project="selectedProject"
+				:talk-enabled="state.talk_enabled"
+				@back="selectedProjectId = ''" />
+			<div v-else-if="!connected">
 				<NcEmptyContent
 					:title="t('integration_collaboard', 'You are not connected to Collaboard')">
 					<template #icon>
@@ -45,12 +49,9 @@
 			<div v-else>
 				<ProjectList
 					:projects="activeProjects"
-					@new-project="onCreateProjectClick" />
-				<NcButton @click="reloadProjects">
-					<template #icon>
-						<ReloadIcon :size="20" />
-					</template>
-				</NcButton>
+					@new-project="onCreateProjectClick"
+					@project-click="onProjectClicked"
+					@reload="reloadProjects" />
 			</div>
 		</NcAppContent>
 		<NcModal v-if="creationModalOpen"
@@ -68,7 +69,6 @@
 <script>
 import CogIcon from 'vue-material-design-icons/Cog.vue'
 import PlusIcon from 'vue-material-design-icons/Plus.vue'
-import ReloadIcon from 'vue-material-design-icons/Reload.vue'
 
 import CollaboardIcon from './components/icons/CollaboardIcon.vue'
 
@@ -79,27 +79,28 @@ import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 
 import ProjectList from './components/ProjectList.vue'
+import CreationForm from './components/CreationForm.vue'
+import PersonalSettings from './components/PersonalSettings.vue'
+import ProjectDetails from './components/ProjectDetails.vue'
 
 import { generateUrl } from '@nextcloud/router'
 import { loadState } from '@nextcloud/initial-state'
 import axios from '@nextcloud/axios'
 import { showSuccess, showError, showUndo, showMessage } from '@nextcloud/dialogs'
 
-import CreationForm from './components/CreationForm.vue'
-import PersonalSettings from './components/PersonalSettings.vue'
 import { Timer } from './utils.js'
 
 export default {
 	name: 'App',
 
 	components: {
+		ProjectDetails,
 		ProjectList,
 		CollaboardIcon,
 		PersonalSettings,
 		CreationForm,
 		CogIcon,
 		PlusIcon,
-		ReloadIcon,
 		NcAppContent,
 		NcContent,
 		NcModal,

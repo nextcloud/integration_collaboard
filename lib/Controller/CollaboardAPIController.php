@@ -13,6 +13,9 @@ namespace OCA\Collaboard\Controller;
 
 use Exception;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\DataDisplayResponse;
+use OCP\AppFramework\Http\RedirectResponse;
+use OCP\AppFramework\Http\Response;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\AppFramework\Http\DataResponse;
@@ -20,22 +23,55 @@ use OCP\AppFramework\Controller;
 
 use OCA\Collaboard\Service\CollaboardAPIService;
 use OCA\Collaboard\AppInfo\Application;
+use OCP\IURLGenerator;
 
 class CollaboardAPIController extends Controller {
 
 	private IConfig $config;
 	private CollaboardAPIService $collaboardAPIService;
 	private ?string $userId;
+	private IURLGenerator $urlGenerator;
 
 	public function __construct(string               $appName,
 								IRequest             $request,
 								IConfig              $config,
 								CollaboardAPIService $collaboardAPIService,
+								IURLGenerator        $urlGenerator,
 								?string              $userId) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->collaboardAPIService = $collaboardAPIService;
 		$this->userId = $userId;
+		$this->urlGenerator = $urlGenerator;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 * @return DataResponse
+	 * @throws Exception
+	 */
+	public function getUserPhoto(string $url, string $userName): Response {
+		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
+			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
+		}
+		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
+		$collaboardUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+		if (substr($url, 0, strlen($collaboardUrl)) === $collaboardUrl) {
+			$image = $this->collaboardAPIService->getImage($url);
+			if ($image !== null && isset($image['body'], $image['headers'])) {
+				$response = new DataDisplayResponse(
+					$image['body'],
+					Http::STATUS_OK,
+					['Content-Type' => $image['headers']['Content-Type'][0] ?? 'image/jpeg']
+				);
+				$response->cacheFor(60 * 60 * 24, false, true);
+				return $response;
+			}
+		}
+
+		$fallbackAvatarUrl = $this->urlGenerator->linkToRouteAbsolute('core.GuestAvatar.getAvatar', ['guestName' => $userName, 'size' => 44]);
+		return new RedirectResponse($fallbackAvatarUrl);
 	}
 
 	/**

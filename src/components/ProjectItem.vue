@@ -1,5 +1,6 @@
 <template>
-	<div class="project">
+	<div class="project"
+		@click="$emit('click')">
 		<span class="field title">
 			{{ project.name }}
 		</span>

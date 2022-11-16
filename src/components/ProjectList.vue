@@ -2,12 +2,23 @@
 	<div class="project-list">
 		<ProjectItem v-for="p in projects"
 			:key="p.id"
-			:project="p" />
+			:project="p"
+			@click="$emit('project-click', p.id)" />
 		<NewProjectItem @click="$emit('new-project')" />
+		<NcButton
+			v-tooltip.top="{ content: t('integration_collaboard', 'Reload project list from Collaboard') }"
+			@click="$emit('reload')">
+			<template #icon>
+				<ReloadIcon :size="20" />
+			</template>
+		</NcButton>
 	</div>
 </template>
 
 <script>
+import ReloadIcon from 'vue-material-design-icons/Reload.vue'
+
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 
 import ProjectItem from './ProjectItem.vue'
 import NewProjectItem from './NewProjectItem.vue'
@@ -17,6 +28,8 @@ export default {
 	components: {
 		NewProjectItem,
 		ProjectItem,
+		NcButton,
+		ReloadIcon,
 	},
 
 	props: {
@@ -54,6 +67,7 @@ export default {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	align-items: center;
 	> * {
 		margin: 20px;
 	}

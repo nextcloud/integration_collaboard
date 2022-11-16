@@ -58,6 +58,14 @@ class CollaboardAPIService {
 		return $url && $userName && $token && $refreshToken;
 	}
 
+	public function getImage(string $url): array {
+		$response = $this->client->get($url);
+		return [
+			'body' => $response->getBody(),
+			'headers' => $response->getHeaders(),
+		];
+	}
+
 	public function getProjects(string $userId): array {
 		$params = [
 			'AppVer' => '5.15.1.7',
@@ -73,6 +81,12 @@ class CollaboardAPIService {
 			return array_map(static function(array $remoteProject) {
 				$remoteProject['name'] = $remoteProject['Project']['Description'];
 				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
+				$remoteProject['created_at'] = $remoteProject['Project']['CreationDate'];
+				$remoteProject['owned_by'] = [
+					'userName' => $remoteProject['Owner']['UserName'] ?? '??',
+					'photoUrl' => $remoteProject['Owner']['PhotoUrl'] ?? null,
+				];
+				$remoteProject['updated_at'] = $remoteProject['Project']['LastUpdate'];
 				return $remoteProject;
 			}, $remoteProjects);
 		}

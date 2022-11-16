@@ -1,10 +1,10 @@
 <template>
 	<div class="creationForm">
 		<h2>
-			{{ t('integration_collaboard', 'Create a board') }}
+			{{ t('integration_collaboard', 'Create a project') }}
 		</h2>
 		<div class="fields">
-			<div v-for="(field, fieldId) in fields"
+			<div v-for="(field, fieldId) in creationFields"
 				:key="fieldId"
 				class="field">
 				<div v-if="!['ncSwitch', 'ncCheckbox'].includes(field.type)"
@@ -182,7 +182,7 @@ import NcHighlight from '@nextcloud/vue/dist/Components/NcHighlight.js'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
 import { showError } from '@nextcloud/dialogs'
 
-import { fields } from '../utils.js'
+import { fields } from '../fields.js'
 
 export default {
 	name: 'CreationForm',
@@ -220,6 +220,14 @@ export default {
 	},
 
 	computed: {
+		creationFields() {
+			return Object.fromEntries(
+				Object.entries(this.fields)
+					.filter(([fieldId, field]) => {
+						return !field.readonly
+					})
+			)
+		},
 	},
 
 	watch: {
@@ -227,8 +235,8 @@ export default {
 
 	beforeMount() {
 		const boardWithDefaults = {}
-		Object.keys(fields).forEach((fieldId) => {
-			boardWithDefaults[fieldId] = fields[fieldId].default
+		Object.keys(this.creationFields).forEach((fieldId) => {
+			boardWithDefaults[fieldId] = this.creationFields[fieldId].default
 		})
 		this.newBoard = {
 			...boardWithDefaults,

@@ -1,5 +1,3 @@
-import TextIcon from 'vue-material-design-icons/Text.vue'
-
 export function Timer(callback, mydelay) {
 	let timerId
 	let start
@@ -54,15 +52,4 @@ export function humanFileSize(bytes, approx = false, si = false, dp = 1) {
 	} else {
 		return bytes.toFixed(dp) + ' ' + units[u]
 	}
-}
-
-export const fields = {
-	name: {
-		icon: TextIcon,
-		label: t('integration_collaboard', 'Project name'),
-		type: 'text',
-		placeholder: t('integration_collaboard', 'Project name'),
-		default: t('integration_collaboard', 'New Project'),
-		mandatory: true,
-	},
 }

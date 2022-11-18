@@ -21,5 +21,6 @@ return [
 		['name' => 'collaboardAPI#getProjects', 'url' => '/projects', 'verb' => 'GET'],
 		['name' => 'collaboardAPI#createProject', 'url' => '/projects', 'verb' => 'POST'],
 		['name' => 'collaboardAPI#deleteProject', 'url' => '/projects/{projectId}', 'verb' => 'DELETE'],
+		['name' => 'collaboardAPI#createInvitationLink', 'url' => '/invitation-link', 'verb' => 'POST'],
 	]
 ];

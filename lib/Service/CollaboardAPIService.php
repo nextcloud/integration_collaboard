@@ -131,6 +131,24 @@ class CollaboardAPIService {
 		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');
 	}
 
+	public function createInvitationLink(string $userId, int $projectId,
+										 string $invitationUrl, int $memberPermission, string $password, int $validForMinutes,
+										 bool $guestIdentificationRequired, int $guestPermission): array {
+		$params = [
+			'AppVer' => '5.15.1.7',
+			'ProjectId' => $projectId,
+			'InvitationUrl' => $invitationUrl,
+			'MemberPermission' => $memberPermission,
+			'ValidForMinutes' => $validForMinutes,
+			'GuestPermission' => $guestPermission,
+			'GuestIdentificationRequired' => $guestIdentificationRequired,
+		];
+		if ($password) {
+			$params['Password'] = $password;
+		}
+		return $this->restRequest($userId, 'api/CollaborationHub/CreateProjectInvitationLink', $params, 'POST');
+	}
+
 	/**
 	 * @param string $userId
 	 * @param string $endPoint

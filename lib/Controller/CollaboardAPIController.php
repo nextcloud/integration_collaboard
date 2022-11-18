@@ -124,4 +124,33 @@ class CollaboardAPIController extends Controller {
 			return new DataResponse($result);
 		}
 	}
+
+	/**
+	 * @NoAdminRequired
+	 * @param int $projectId
+	 * @param string $invitationUrl
+	 * @param int $memberPermission
+	 * @param string $password
+	 * @param int $validForMinutes
+	 * @param bool $guestIdentificationRequired
+	 * @param int $guestPermission
+	 * @return DataResponse
+	 */
+	public function createInvitationLink(int $projectId,
+										string $invitationUrl, int $memberPermission, string $password, int $validForMinutes,
+										bool $guestIdentificationRequired, int $guestPermission): DataResponse {
+		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
+			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
+		}
+		$result = $this->collaboardAPIService->createInvitationLink(
+			$this->userId, $projectId,
+			$invitationUrl, $memberPermission, $password, $validForMinutes,
+			$guestIdentificationRequired, $guestPermission
+		);
+		if (isset($result['error'])) {
+			return new DataResponse($result, Http::STATUS_BAD_REQUEST);
+		} else {
+			return new DataResponse($result);
+		}
+	}
 }

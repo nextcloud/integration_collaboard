@@ -30,6 +30,12 @@
 					:show-title="false"
 					@connected="onConnected" />
 			</div>
+			<NcEmptyContent v-else-if="activeProjectCount === 0 && loadingProjects"
+				:title="t('integration_collaboard', 'Loading project list')">
+				<template #icon>
+					<NcLoadingIcon />
+				</template>
+			</NcEmptyContent>
 			<NcEmptyContent v-else-if="activeProjectCount === 0"
 				:title="t('integration_collaboard', 'You haven\'t created any project yet')">
 				<template #icon>
@@ -72,6 +78,7 @@ import PlusIcon from 'vue-material-design-icons/Plus.vue'
 
 import CollaboardIcon from './components/icons/CollaboardIcon.vue'
 
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 import NcAppContent from '@nextcloud/vue/dist/Components/NcAppContent.js'
 import NcContent from '@nextcloud/vue/dist/Components/NcContent.js'
@@ -106,6 +113,7 @@ export default {
 		NcModal,
 		NcEmptyContent,
 		NcButton,
+		NcLoadingIcon,
 	},
 
 	props: {
@@ -118,6 +126,7 @@ export default {
 			state: loadState('integration_collaboard', 'collaboard-state'),
 			configureUrl: generateUrl('/settings/user/connected-accounts'),
 			creating: false,
+			loadingProjects: false,
 		}
 	},
 
@@ -167,6 +176,7 @@ export default {
 			this.getProjects()
 		},
 		getProjects() {
+			this.loadingProjects = true
 			const url = generateUrl('/apps/integration_collaboard/projects')
 			axios.get(url).then((response) => {
 				this.state.project_list.push(...response.data)
@@ -177,6 +187,7 @@ export default {
 				)
 				console.debug(error)
 			}).then(() => {
+				this.loadingProjects = false
 			})
 		},
 		onCreateProjectClick() {

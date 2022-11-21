@@ -137,15 +137,15 @@ class CollaboardAPIController extends Controller {
 	 * @return DataResponse
 	 */
 	public function createInvitationLink(int $projectId,
-										string $invitationUrl, int $memberPermission, string $password, int $validForMinutes,
-										bool $guestIdentificationRequired, int $guestPermission): DataResponse {
+										string $invitationUrl, int $memberPermission, int $validForMinutes,
+										bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): DataResponse {
 		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
 			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
 		}
 		$result = $this->collaboardAPIService->createInvitationLink(
 			$this->userId, $projectId,
-			$invitationUrl, $memberPermission, $password, $validForMinutes,
-			$guestIdentificationRequired, $guestPermission
+			$invitationUrl, $memberPermission, $validForMinutes,
+			$guestIdentificationRequired, $guestPermission, $password
 		);
 		if (isset($result['error'])) {
 			return new DataResponse($result, Http::STATUS_BAD_REQUEST);

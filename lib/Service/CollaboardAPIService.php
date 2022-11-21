@@ -132,8 +132,8 @@ class CollaboardAPIService {
 	}
 
 	public function createInvitationLink(string $userId, int $projectId,
-										 string $invitationUrl, int $memberPermission, string $password, int $validForMinutes,
-										 bool $guestIdentificationRequired, int $guestPermission): array {
+										 string $invitationUrl, int $memberPermission, int $validForMinutes,
+										 bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): array {
 		$params = [
 			'AppVer' => '5.15.1.7',
 			'ProjectId' => $projectId,
@@ -143,7 +143,7 @@ class CollaboardAPIService {
 			'GuestPermission' => $guestPermission,
 			'GuestIdentificationRequired' => $guestIdentificationRequired,
 		];
-		if ($password) {
+		if ($password !== null) {
 			$params['Password'] = $password;
 		}
 		return $this->restRequest($userId, 'api/CollaborationHub/CreateProjectInvitationLink', $params, 'POST');
@@ -239,6 +239,7 @@ class CollaboardAPIService {
 			return [
 				'error' => 'Collaboard API client error',
 				'responseBody' => $responseBody,
+				'exception' => $e->getMessage(),
 			];
 		} catch (ServerException $e) {
 			$response = $e->getResponse();
@@ -251,6 +252,7 @@ class CollaboardAPIService {
 			return [
 				'error' => 'Collaboard API server error',
 				'responseBody' => $responseBody,
+				'exception' => $e->getMessage(),
 			];
 		}
 	}

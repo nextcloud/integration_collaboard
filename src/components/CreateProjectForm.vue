@@ -185,7 +185,7 @@ import { showError } from '@nextcloud/dialogs'
 import { fields } from '../fields.js'
 
 export default {
-	name: 'CreationForm',
+	name: 'CreateProjectForm',
 
 	components: {
 		CheckIcon,

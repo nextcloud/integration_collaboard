@@ -14,6 +14,28 @@
 				</h2>
 			</div>
 			<div class="links">
+				<div class="link">
+					<div class="leftPart">
+						<LinkVariantIcon :size="20" />
+						<label>
+							{{ t('integration_collaboard', 'Project personal link') }}
+						</label>
+					</div>
+					<div class="rightPart linkInputWrapper">
+						<input type="text" :readonly="true" :value="projectLink">
+						<a :href="projectLink" @click.prevent.stop="copyLink(false)">
+							<NcButton v-tooltip.bottom="{ content: t('integration_collaboard', 'Copy to clipboard') }">
+								<template #icon>
+									<CheckIcon v-if="projectLinkCopied"
+										class="copiedIcon"
+										:size="16" />
+									<ClippyIcon v-else
+										:size="16" />
+								</template>
+							</NcButton>
+						</a>
+					</div>
+				</div>
 				<div class="buttons">
 					<a :href="projectLink" target="_blank">
 						<NcButton>
@@ -35,28 +57,6 @@
 							:project="project"
 							@close="showTalkModal = false" />
 					</div-->
-				</div>
-				<div class="link">
-					<div class="leftPart">
-						<LinkVariantIcon :size="20" />
-						<label>
-							{{ t('integration_collaboard', 'Project link') }}
-						</label>
-					</div>
-					<div class="rightPart linkInputWrapper">
-						<input type="text" :readonly="true" :value="projectLink">
-						<a :href="projectLink" @click.prevent.stop="copyLink(false)">
-							<NcButton v-tooltip.bottom="{ content: t('integration_collaboard', 'Copy to clipboard') }">
-								<template #icon>
-									<CheckIcon v-if="projectLinkCopied"
-										class="copiedIcon"
-										:size="16" />
-									<ClippyIcon v-else
-										:size="16" />
-								</template>
-							</NcButton>
-						</a>
-					</div>
 				</div>
 			</div>
 			<div class="fields">
@@ -165,6 +165,9 @@
 						</label>
 					</div>
 				</div>
+				<hr>
+				<CreateLinkForm
+					:project="project" />
 			</div>
 		</div>
 	</div>
@@ -190,6 +193,8 @@ import ClippyIcon from './icons/ClippyIcon.vue'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar.js'
 
+import CreateLinkForm from './CreateLinkForm.vue'
+
 import { Timer } from '../utils.js'
 import { fields } from '../fields.js'
 import moment from '@nextcloud/moment'
@@ -202,6 +207,7 @@ export default {
 	name: 'ProjectDetails',
 
 	components: {
+		CreateLinkForm,
 		NcButton,
 		NcAvatar,
 		// SendModal,
@@ -297,7 +303,7 @@ export default {
 
 <style scoped lang="scss">
 .details-wrapper {
-	height: 100%;
+	margin: 24px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -314,12 +320,12 @@ export default {
 	// background-color: var(--color-primary-light);
 	box-shadow: 0 0 10px var(--color-box-shadow);
 	border-radius: var(--border-radius-large);
-	padding: 0 12px;
+	padding: 16px;
 	.header {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin: 12px 0;
+		margin-bottom: 12px;
 		h2 {
 			margin: 0 0 0 12px;
 		}
@@ -328,6 +334,11 @@ export default {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+
+		hr {
+			width: 100%;
+			margin-bottom: 24px;
+		}
 
 		.field {
 			display: flex;

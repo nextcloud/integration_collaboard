@@ -63,7 +63,7 @@
 		<NcModal v-if="creationModalOpen"
 			size="small"
 			@close="closeCreationModal">
-			<CreationForm
+			<CreateProjectForm
 				:loading="creating"
 				focus-on-field="name"
 				@ok-clicked="onCreationValidate"
@@ -86,7 +86,7 @@ import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 
 import ProjectList from './components/ProjectList.vue'
-import CreationForm from './components/CreationForm.vue'
+import CreateProjectForm from './components/CreateProjectForm.vue'
 import PersonalSettings from './components/PersonalSettings.vue'
 import ProjectDetails from './components/ProjectDetails.vue'
 
@@ -101,11 +101,11 @@ export default {
 	name: 'App',
 
 	components: {
+		CreateProjectForm,
 		ProjectDetails,
 		ProjectList,
 		CollaboardIcon,
 		PersonalSettings,
-		CreationForm,
 		CogIcon,
 		PlusIcon,
 		NcAppContent,

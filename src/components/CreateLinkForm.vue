@@ -18,7 +18,8 @@
 		<NcCheckboxRadioSwitch
 			:checked.sync="allowGuests"
 			type="switch"
-			class="ncradio">
+			class="ncradio"
+			@update:checked="allowGuestsChanged">
 			{{ t('integration_collaboard', 'Allow guests') }}
 		</NcCheckboxRadioSwitch>
 		<div class="field">
@@ -78,6 +79,19 @@
 			type="text"
 			class="link-input"
 			:readonly="true">
+		<div v-if="link && isTalkEnabled"
+			class="talk-button-wrapper">
+			<NcButton @click="showTalkModal = true">
+				<template #icon>
+					<TalkIcon :size="20" />
+				</template>
+				{{ t('integration_collaboard', 'Share link to a Talk conversation') }}
+			</NcButton>
+			<SendModal v-if="showTalkModal"
+				:project="project"
+				:project-link="link"
+				@close="showTalkModal = false" />
+		</div>
 	</div>
 </template>
 
@@ -86,6 +100,10 @@ import EyeOutlineIcon from 'vue-material-design-icons/EyeOutline.vue'
 import EyeOffOutlineIcon from 'vue-material-design-icons/EyeOffOutline.vue'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant.vue'
 import ArrowLeftIcon from 'vue-material-design-icons/ArrowLeft.vue'
+
+import TalkIcon from './talk/TalkIcon.vue'
+
+import SendModal from './talk/SendModal.vue'
 
 import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
@@ -166,7 +184,11 @@ export default {
 		LinkVariantIcon,
 		NcLoadingIcon,
 		ArrowLeftIcon,
+		TalkIcon,
+		SendModal,
 	},
+
+	inject: ['isTalkEnabled'],
 
 	props: {
 		project: {
@@ -177,6 +199,7 @@ export default {
 
 	data() {
 		return {
+			showTalkModal: false,
 			creatingLink: false,
 			permissions,
 			expirations,
@@ -206,6 +229,13 @@ export default {
 	},
 
 	methods: {
+		allowGuestsChanged(allowed) {
+			if (allowed) {
+				this.guestPermission = permissions.view
+			} else {
+				this.guestPermission = permissions.none
+			}
+		},
 		userPermissionChanged(newValue) {
 			if (newValue !== null) {
 				this.userPermission = newValue
@@ -288,6 +318,7 @@ export default {
 		}
 	}
 
+	.talk-button-wrapper,
 	.bottom-button {
 		align-self: end;
 	}

@@ -45,18 +45,6 @@
 							{{ t('integration_collaboard', 'Open in a new tab') }}
 						</NcButton>
 					</a>
-					<!--div v-if="talkEnabled"
-						class="talk-button-wrapper">
-						<NcButton @click="showTalkModal = true">
-							<template #icon>
-								<TalkIcon :size="20" />
-							</template>
-							{{ t('integration_collaboard', 'Share link to a Talk conversation') }}
-						</NcButton>
-						<SendModal v-if="showTalkModal"
-							:project="project"
-							@close="showTalkModal = false" />
-					</div-->
 				</div>
 			</div>
 			<div class="fields">
@@ -187,7 +175,6 @@ import EyeOffOutlineIcon from 'vue-material-design-icons/EyeOffOutline.vue'
 import DockWindowIcon from 'vue-material-design-icons/DockWindow.vue'
 import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
 
-// import TalkIcon from './talk/TalkIcon.vue'
 import ClippyIcon from './icons/ClippyIcon.vue'
 
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
@@ -201,7 +188,6 @@ import moment from '@nextcloud/moment'
 import { generateUrl } from '@nextcloud/router'
 
 import { showSuccess, showError } from '@nextcloud/dialogs'
-// import SendModal from './talk/SendModal.vue'
 
 export default {
 	name: 'ProjectDetails',
@@ -210,9 +196,7 @@ export default {
 		CreateLinkForm,
 		NcButton,
 		NcAvatar,
-		// SendModal,
 		ClippyIcon,
-		// TalkIcon,
 		LinkVariantIcon,
 		ShieldLinkVariantIcon,
 		ToggleSwitchIcon,
@@ -242,7 +226,6 @@ export default {
 		return {
 			fields,
 			projectLinkCopied: false,
-			showTalkModal: false,
 		}
 	},
 

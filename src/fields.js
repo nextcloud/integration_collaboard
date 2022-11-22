@@ -13,7 +13,7 @@ export const fields = {
 	},
 	created_at: {
 		icon: ClockOutlineIcon,
-		label: t('integration_miro', 'Created at'),
+		label: t('integration_collaboard', 'Created at'),
 		type: 'ncDatetime',
 		readonly: true,
 	},
@@ -25,7 +25,7 @@ export const fields = {
 	},
 	updated_at: {
 		icon: ClockOutlineIcon,
-		label: t('integration_miro', 'Updated at'),
+		label: t('integration_collaboard', 'Updated at'),
 		type: 'ncDatetime',
 		readonly: true,
 	},

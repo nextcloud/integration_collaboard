@@ -116,6 +116,10 @@ export default {
 		NcLoadingIcon,
 	},
 
+	provide: {
+		isTalkEnabled: loadState('integration_collaboard', 'collaboard-state')?.talk_enabled,
+	},
+
 	props: {
 	},
 

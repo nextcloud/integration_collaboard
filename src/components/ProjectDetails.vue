@@ -1,14 +1,23 @@
 <template>
 	<div class="details-wrapper">
 		<div class="projectDetails">
+			<NcButton
+				v-tooltip.top="{ content: t('integration_collaboard', 'Back to project list') }"
+				class="header-button left"
+				@click="$emit('back')">
+				<template #icon>
+					<ArrowLeftIcon :size="20" />
+				</template>
+			</NcButton>
+			<NcButton
+				v-tooltip.top="{ content: t('integration_collaboard', 'Delete project') }"
+				class="header-button right"
+				@click="$emit('delete-project', project.id)">
+				<template #icon>
+					<DeleteIcon :size="20" />
+				</template>
+			</NcButton>
 			<div class="header">
-				<NcButton
-					v-tooltip.top="{ content: t('integration_collaboard', 'Back to project list') }"
-					@click="$emit('back')">
-					<template #icon>
-						<ArrowLeftIcon :size="20" />
-					</template>
-				</NcButton>
 				<h2>
 					{{ project.name }}
 				</h2>
@@ -162,6 +171,7 @@
 </template>
 
 <script>
+import DeleteIcon from 'vue-material-design-icons/Delete.vue'
 import ArrowLeftIcon from 'vue-material-design-icons/ArrowLeft.vue'
 import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant.vue'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant.vue'
@@ -209,6 +219,7 @@ export default {
 		OpenInNewIcon,
 		DockWindowIcon,
 		ArrowLeftIcon,
+		DeleteIcon,
 	},
 
 	props: {
@@ -297,6 +308,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 	min-width: 550px;
 	max-width: 700px;
 	// background-color: var(--color-primary-element-lighter);
@@ -304,11 +316,23 @@ export default {
 	box-shadow: 0 0 10px var(--color-box-shadow);
 	border-radius: var(--border-radius-large);
 	padding: 16px;
+
+	.header-button {
+		position: absolute;
+		top: 12px;
+		&.left {
+			left: 12px;
+		}
+		&.right {
+			right: 12px;
+		}
+	}
+
 	.header {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: 12px;
+		margin-bottom: 32px;
 		h2 {
 			margin: 0 0 0 12px;
 		}

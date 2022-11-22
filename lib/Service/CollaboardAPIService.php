@@ -79,6 +79,7 @@ class CollaboardAPIService {
 		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
 			$remoteProjects = $projectsResult['Results'];
 			return array_map(static function(array $remoteProject) {
+				$remoteProject['trash'] = false;
 				$remoteProject['name'] = $remoteProject['Project']['Description'];
 				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
 				$remoteProject['created_at'] = $remoteProject['Project']['CreationDate'];

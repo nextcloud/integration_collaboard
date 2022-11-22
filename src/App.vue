@@ -8,7 +8,8 @@
 			<ProjectDetails v-if="selectedProject"
 				:project="selectedProject"
 				:talk-enabled="state.talk_enabled"
-				@back="selectedProjectId = ''" />
+				@back="selectedProjectId = ''"
+				@delete-project="onProjectDeleted" />
 			<div v-else-if="!connected">
 				<NcEmptyContent
 					:title="t('integration_collaboard', 'You are not connected to Collaboard')">
@@ -57,6 +58,7 @@
 					:projects="activeProjects"
 					@new-project="onCreateProjectClick"
 					@project-click="onProjectClicked"
+					@delete-project="onProjectDeleted"
 					@reload="reloadProjects" />
 			</div>
 		</NcAppContent>
@@ -94,6 +96,7 @@ import { generateUrl } from '@nextcloud/router'
 import { loadState } from '@nextcloud/initial-state'
 import axios from '@nextcloud/axios'
 import { showSuccess, showError, showUndo, showMessage } from '@nextcloud/dialogs'
+import moment from '@nextcloud/moment'
 
 import { Timer } from './utils.js'
 
@@ -139,7 +142,15 @@ export default {
 			return !!this.state.url && !!this.state.user_name && !!this.state.token
 		},
 		activeProjects() {
-			return this.state.project_list.filter((b) => !b.trash)
+			return this.state.project_list.filter((b) => !b.trash).sort((a, b) => {
+				const ta = moment(a.updated_at).unix()
+				const tb = moment(b.updated_at).unix()
+				return ta > tb
+					? 1
+					: ta < tb
+						? -1
+						: 0
+			})
 		},
 		activeProjectsById() {
 			return this.activeProjects.reduce((object, item) => {

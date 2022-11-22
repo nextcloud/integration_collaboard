@@ -3,7 +3,8 @@
 		<ProjectItem v-for="p in projects"
 			:key="p.id"
 			:project="p"
-			@click="$emit('project-click', p.id)" />
+			@click="$emit('project-click', p.id)"
+			@delete="$emit('delete-project', p.id)" />
 		<NewProjectItem @click="$emit('new-project')" />
 		<NcButton
 			v-tooltip.top="{ content: t('integration_collaboard', 'Reload project list from Collaboard') }"

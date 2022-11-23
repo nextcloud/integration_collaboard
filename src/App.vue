@@ -100,6 +100,8 @@ import moment from '@nextcloud/moment'
 
 import { Timer } from './utils.js'
 
+const state = loadState('integration_collaboard', 'collaboard-state')
+
 export default {
 	name: 'App',
 
@@ -120,7 +122,8 @@ export default {
 	},
 
 	provide: {
-		isTalkEnabled: loadState('integration_collaboard', 'collaboard-state')?.talk_enabled,
+		isTalkEnabled: state.talk_enabled,
+		isLicenseActive: state.licensing_info?.IsActive,
 	},
 
 	props: {
@@ -128,9 +131,9 @@ export default {
 
 	data() {
 		return {
+			state,
 			creationModalOpen: false,
 			selectedProjectId: '',
-			state: loadState('integration_collaboard', 'collaboard-state'),
 			configureUrl: generateUrl('/settings/user/connected-accounts'),
 			creating: false,
 			loadingProjects: false,
@@ -140,6 +143,9 @@ export default {
 	computed: {
 		connected() {
 			return !!this.state.url && !!this.state.user_name && !!this.state.token
+		},
+		isLicenseActive() {
+			return this.state.licensing_info?.IsActive
 		},
 		activeProjects() {
 			return this.state.project_list.filter((b) => !b.trash).sort((a, b) => {
@@ -172,7 +178,7 @@ export default {
 	},
 
 	beforeMount() {
-		console.debug('state', this.state)
+		// console.debug('state', this.state)
 	},
 
 	mounted() {
@@ -230,7 +236,7 @@ export default {
 					t('integration_collaboard', 'Failed to create new project')
 					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
 				)
-				if (!this.state.licensing_info?.IsActive) {
+				if (!this.isLicenseActive) {
 					showMessage(t('integration_collaboard', 'Free Collaboard plan is limited to 3 projects'))
 				}
 				console.debug(error)

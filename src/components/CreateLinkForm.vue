@@ -19,8 +19,9 @@
 			:checked.sync="allowGuests"
 			type="switch"
 			class="ncradio"
+			:disabled="!isLicenseActive"
 			@update:checked="allowGuestsChanged">
-			{{ t('integration_collaboard', 'Allow guests') }}
+			{{ isLicenseActive ? t('integration_collaboard', 'Allow guests') : t('integration_collaboard', 'Allow guests (paid license required)') }}
 		</NcCheckboxRadioSwitch>
 		<div class="field">
 			<label :class="{ 'disabled-text': !allowGuests }">
@@ -48,7 +49,7 @@
 		</div>
 		<div class="field">
 			<label>
-				{{ t('integration_collaboard', 'Registered users permission') }}
+				{{ t('integration_collaboard', 'Expires in') }}
 			</label>
 			<NcMultiselect
 				:value="validForMinutes"
@@ -188,7 +189,10 @@ export default {
 		SendModal,
 	},
 
-	inject: ['isTalkEnabled'],
+	inject: [
+		'isTalkEnabled',
+		'isLicenseActive',
+	],
 
 	props: {
 		project: {

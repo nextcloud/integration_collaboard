@@ -4,7 +4,7 @@
 	<name>Collaboard integration</name>
 	<summary>Integration of Collaboard</summary>
 	<description><![CDATA[Collaboard whiteboard service integration]]></description>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<licence>agpl</licence>
 	<author>Julien Veyssier</author>
 	<namespace>Collaboard</namespace>
@@ -18,7 +18,7 @@
 	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/master/img/screenshot1.jpg</screenshot>
 	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/master/img/screenshot2.jpg</screenshot>
 	<dependencies>
-		<nextcloud min-version="25" max-version="26"/>
+		<nextcloud min-version="25" max-version="27"/>
 	</dependencies>
 	<settings>
 		<admin>OCA\Collaboard\Settings\Admin</admin>

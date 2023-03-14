@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.1 – 2023-03-14
+* update npm pkgs
+* mention unsupported SSO
+* add NC 27 compat
+
 ## 1.0.0 – 2022-11-12
 ### Added
 * the app

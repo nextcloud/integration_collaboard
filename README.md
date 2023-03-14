@@ -1,5 +1,13 @@
 # Collaboard integration into Nextcloud
 
+This integration lets users list their Collaboard projects, create new ones and
+share public project links to Talk.
+
+2FA is supported.
+
+:warning: This integration only allows users to authenticate with classic login/password.
+The Collaboard SSO options are not supported.
+
 ## 🔧 Configuration
 
 ### User settings

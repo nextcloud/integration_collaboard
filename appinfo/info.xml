@@ -4,7 +4,7 @@
 	<name>Collaboard integration</name>
 	<summary>Integration of Collaboard</summary>
 	<description><![CDATA[Collaboard whiteboard service integration]]></description>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<licence>agpl</licence>
 	<author>Julien Veyssier</author>
 	<namespace>Collaboard</namespace>

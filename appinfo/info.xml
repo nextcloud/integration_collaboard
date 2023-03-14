@@ -15,8 +15,9 @@
 	<category>dashboard</category>
 	<website>https://github.com/julien-nc/integration_collaboard</website>
 	<bugs>https://github.com/julien-nc/integration_collaboard/issues</bugs>
-	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/master/img/screenshot1.jpg</screenshot>
-	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/master/img/screenshot2.jpg</screenshot>
+	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/main/img/screenshot1.jpg</screenshot>
+	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/main/img/screenshot2.jpg</screenshot>
+	<screenshot>https://github.com/julien-nc/integration_collaboard/raw/main/img/screenshot3.jpg</screenshot>
 	<dependencies>
 		<nextcloud min-version="25" max-version="27"/>
 	</dependencies>

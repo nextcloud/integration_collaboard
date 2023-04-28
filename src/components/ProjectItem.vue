@@ -59,7 +59,7 @@ export default {
 
 	computed: {
 		hasImage() {
-			return this.project.Project.Thumbnail !== null
+			return !!this.project.Project.Thumbnail
 		},
 		imgSrc() {
 			return 'data:image/png;base64,' + this.project.Project.Thumbnail

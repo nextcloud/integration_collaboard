@@ -66,6 +66,11 @@ class CollaboardAPIService {
 		];
 	}
 
+	/**
+	 * @param string $userId
+	 * @return array|string[]
+	 * @throws Exception
+	 */
 	public function getProjects(string $userId): array {
 		$params = [
 			'AppVer' => '5.16.520',
@@ -76,9 +81,15 @@ class CollaboardAPIService {
 		if (isset($projectsResult['error'])) {
 			return $projectsResult;
 		}
+		$thumbnailRequestOptions = [
+			'headers' => [
+				'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+			],
+		];
+		$client = $this->client;
 		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
 			$remoteProjects = $projectsResult['Results'];
-			return array_map(static function(array $remoteProject) {
+			return array_map(static function(array $remoteProject) use ($thumbnailRequestOptions, $client) {
 				$remoteProject['trash'] = false;
 				$remoteProject['name'] = $remoteProject['Project']['Description'];
 				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
@@ -88,6 +99,14 @@ class CollaboardAPIService {
 					'photoUrl' => $remoteProject['Owner']['PhotoUrl'] ?? null,
 				];
 				$remoteProject['updated_at'] = $remoteProject['Project']['LastUpdate'];
+				if (isset($remoteProject['ThumbnailUrl']) && $remoteProject['ThumbnailUrl']) {
+					try {
+						$response = $client->get($remoteProject['ThumbnailUrl'], $thumbnailRequestOptions);
+						$remoteProject['Project']['Thumbnail'] = base64_encode($response->getBody());
+					} catch (Exception | Throwable $e) {
+
+					}
+				}
 				return $remoteProject;
 			}, $remoteProjects);
 		}

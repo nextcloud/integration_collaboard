@@ -238,7 +238,7 @@ class CollaboardAPIService {
 				'exception' => $e->getMessage(),
 			]);
 			return [
-				'error' => 'Collaboard API client error',
+				'error' => $this->l10n->t('Collaboard API client error'),
 				'responseBody' => $responseBody,
 				'exception' => $e->getMessage(),
 			];

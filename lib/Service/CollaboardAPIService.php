@@ -68,11 +68,11 @@ class CollaboardAPIService {
 
 	public function getProjects(string $userId): array {
 		$params = [
-			'AppVer' => '5.15.1.7',
+			'AppVer' => '5.16.520',
 			'PageSize' => 100,
 			'PageNumber' => 1,
 		];
-		$projectsResult = $this->restRequest($userId, 'api/CollaborationHub/GetParticipatingProjecs', $params, 'POST');
+		$projectsResult = $this->restRequest($userId, 'api/CollaborationHub/GetParticipatingProjects', $params, 'POST');
 		if (isset($projectsResult['error'])) {
 			return $projectsResult;
 		}
@@ -96,7 +96,7 @@ class CollaboardAPIService {
 
 	public function createProject(string $userId, string $name): array {
 		$params = [
-			'AppVer' => '5.15.1.7',
+			'AppVer' => '5.16.520',
 			'Description' => $name,
 		];
 		return $this->restRequest($userId, 'api/CollaborationHub/CreateProject', $params, 'POST');
@@ -104,7 +104,7 @@ class CollaboardAPIService {
 
 	public function deleteProject(string $userId, int $projectId): array {
 		$params = [
-			'AppVer' => '5.15.1.7',
+			'AppVer' => '5.16.520',
 			'ProjectId' => $projectId,
 		];
 		return $this->restRequest($userId, 'api/CollaborationHub/DeleteProject', $params, 'POST');
@@ -126,7 +126,7 @@ class CollaboardAPIService {
 	 */
 	public function getUserLicenseInfo(string $userId): array {
 		$params = [
-			'AppVer' => '5.15.1.7',
+			'AppVer' => '5.16.520',
 			'ProductFamilyCode' => 'COLLABOARD',
 		];
 		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');
@@ -136,7 +136,7 @@ class CollaboardAPIService {
 										 string $invitationUrl, int $memberPermission, int $validForMinutes,
 										 bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): array {
 		$params = [
-			'AppVer' => '5.15.1.7',
+			'AppVer' => '5.16.520',
 			'ProjectId' => $projectId,
 			'InvitationUrl' => $invitationUrl,
 			'MemberPermission' => $memberPermission,

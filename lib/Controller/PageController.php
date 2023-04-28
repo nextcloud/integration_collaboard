@@ -81,7 +81,12 @@ class PageController extends Controller {
 			'project_list' => [],
 		];
 		if ($url !== '' && $token !== '' && $refreshToken !== '') {
-			$pageInitialState['project_list'] = $this->collaboardAPIService->getProjects($this->userId);
+			$projects = $this->collaboardAPIService->getProjects($this->userId);
+			if (isset($projects['error'])) {
+				$pageInitialState['project_list_error'] = $projects['error'];
+			} else {
+				$pageInitialState['project_list'] = $projects;
+			}
 		}
 		$this->initialStateService->provideInitialState('collaboard-state', $pageInitialState);
 		return new TemplateResponse(Application::APP_ID, 'main', []);

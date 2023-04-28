@@ -31,6 +31,13 @@
 					:show-title="false"
 					@connected="onConnected" />
 			</div>
+			<NcEmptyContent v-else-if="state.project_list_error"
+				:title="t('integration_collaboard', 'Failed to get the project list')"
+				:description="state.project_list_error">
+				<template #icon>
+					<CollaboardIcon />
+				</template>
+			</NcEmptyContent>
 			<NcEmptyContent v-else-if="activeProjectCount === 0 && loadingProjects"
 				:title="t('integration_collaboard', 'Loading project list')">
 				<template #icon>
@@ -148,6 +155,9 @@ export default {
 			return this.state.licensing_info?.IsActive
 		},
 		activeProjects() {
+			if (this.state.project_list_error) {
+				return []
+			}
 			return this.state.project_list.filter((b) => !b.trash).sort((a, b) => {
 				const ta = moment(a.updated_at).unix()
 				const tb = moment(b.updated_at).unix()

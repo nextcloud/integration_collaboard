@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- Fixed projects list loading (https://github.com/nextcloud/integration_collaboard/issues/1)
+- Fix projects list loading [#4](https://github.com/nextcloud/integration_collaboard/pull/4) @andrey18106 
+- Fix thumbnails [#6](https://github.com/nextcloud/integration_collaboard/pull/6) @julien-nc
 
 ### Updated
 

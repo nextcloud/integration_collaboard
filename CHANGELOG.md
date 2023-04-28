@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.4 - 2023-04-28
+
+### Added
+
+- Added displaying notice of API error [#5](https://github.com/nextcloud/integration_collaboard/pull/5) @julien-nc
+
+### Fixed
+
+- Fix projects list loading [#4](https://github.com/nextcloud/integration_collaboard/pull/4) @andrey18106 
+- Fix thumbnails [#6](https://github.com/nextcloud/integration_collaboard/pull/6) @julien-nc
+
+### Updated
+
+- Updated npm packages versions
+
 ## 1.0.3 – 2023-03-14
 * update npm pkgs
 * mention unsupported SSO

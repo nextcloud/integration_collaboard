@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Added displaying notice of API error
+- Added displaying notice of API error [#5](https://github.com/nextcloud/integration_collaboard/pull/5) @julien-nc
 
 ### Fixed
 

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.5 - 2023-07-13
+
+### Fixed
+
+- Fix wrong param when checking if Talk is enabled [#12](https://github.com/nextcloud/integration_collaboard/pull/12) @julien-nc
+
 ## 1.0.4 - 2023-04-28
 
 ### Added

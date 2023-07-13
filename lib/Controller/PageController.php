@@ -64,7 +64,7 @@ class PageController extends Controller {
 
 		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
 
-		$talkEnabled = $this->appManager->isEnabledForUser('spreed', $this->userId);
+		$talkEnabled = $this->appManager->isEnabledForUser('spreed');
 
 		$licensingInfo = $this->collaboardAPIService->getUserLicenseInfo($this->userId);
 

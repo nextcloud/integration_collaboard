@@ -73,7 +73,7 @@ class CollaboardAPIService {
 	 */
 	public function getProjects(string $userId): array {
 		$params = [
-			'AppVer' => '6.1.264',
+			'AppVer' => Application::COLLABOARD_APP_VER,
 			'PageSize' => 100,
 			'PageNumber' => 1,
 		];
@@ -115,7 +115,7 @@ class CollaboardAPIService {
 
 	public function createProject(string $userId, string $name): array {
 		$params = [
-			'AppVer' => '6.1.264',
+			'AppVer' => Application::COLLABOARD_APP_VER,
 			'Description' => $name,
 		];
 		return $this->restRequest($userId, 'api/CollaborationHub/CreateProject', $params, 'POST');
@@ -123,7 +123,7 @@ class CollaboardAPIService {
 
 	public function deleteProject(string $userId, int $projectId): array {
 		$params = [
-			'AppVer' => '6.1.264',
+			'AppVer' => Application::COLLABOARD_APP_VER,
 			'ProjectId' => $projectId,
 		];
 		return $this->restRequest($userId, 'api/CollaborationHub/DeleteProject', $params, 'POST');
@@ -145,7 +145,7 @@ class CollaboardAPIService {
 	 */
 	public function getUserLicenseInfo(string $userId): array {
 		$params = [
-			'AppVer' => '6.1.264',
+			'AppVer' => Application::COLLABOARD_APP_VER,
 			'ProductFamilyCode' => 'COLLABOARD',
 		];
 		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');

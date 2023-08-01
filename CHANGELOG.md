@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.6 - 2023-08-01
+
+### Updated
+
+- Updated collaboard APP API version
+
 ## 1.0.5 - 2023-07-13
 
 ### Fixed

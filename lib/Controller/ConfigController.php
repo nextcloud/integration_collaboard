@@ -78,6 +78,13 @@ class ConfigController extends Controller {
 	}
 
 	/**
+	 * TODO reimplement login flow
+	 * only show login field and submit button, on submit:
+	 * first check the configured auth method for the user with
+	 * curl https://api.collaboard.app/auth/api/Authorization/GetUserOptions -i -H "Content-Type: application/json" -X POST -d '{"username":"myuser@bla.com"}'
+	 * which returns {"AuthenticationMode":3,"Tenant":null,"IsBlacklisted":false,"ErrorCode":0}
+	 * Depending on the returned value, let the user enter a password or an OTP code or both
+	 *
 	 * @param string $login
 	 * @param string $password
 	 * @return DataResponse

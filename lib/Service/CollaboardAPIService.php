@@ -67,6 +67,9 @@ class CollaboardAPIService {
 	}
 
 	/**
+	 * TODO replace with
+	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
+	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/owned?pageSize=100&pageNumber=1"
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
@@ -113,6 +116,16 @@ class CollaboardAPIService {
 		return [];
 	}
 
+	/**
+	 * TODO replace with
+	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
+	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects" -X POST -d '{"Description":"desc"}'
+	 *
+	 * @param string $userId
+	 * @param string $name
+	 * @return string[]
+	 * @throws Exception
+	 */
 	public function createProject(string $userId, string $name): array {
 		$params = [
 			'AppVer' => Application::COLLABOARD_APP_VER,
@@ -121,6 +134,16 @@ class CollaboardAPIService {
 		return $this->restRequest($userId, 'api/CollaborationHub/CreateProject', $params, 'POST');
 	}
 
+	/**
+	 * TODO replace with
+	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" -X DELETE \
+	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/PROJECT_ID"
+	 *
+	 * @param string $userId
+	 * @param int $projectId
+	 * @return string[]
+	 * @throws Exception
+	 */
 	public function deleteProject(string $userId, int $projectId): array {
 		$params = [
 			'AppVer' => Application::COLLABOARD_APP_VER,
@@ -139,6 +162,10 @@ class CollaboardAPIService {
 	}
 
 	/**
+	 * TODO replace with
+	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
+	 *  https://api.collaboard.app/public/api/public/v2.0/collaborationhub/subscriptions/license
+	 *
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
@@ -151,6 +178,23 @@ class CollaboardAPIService {
 		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');
 	}
 
+	/**
+	 * TODO replace with
+	 *  curl https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/152270/invitationlink \
+	 *  -i -X POST -H "Content-Type: application/json" \
+	 *  -d '{"Email":"lala@lala.net","InvitationUrl":"https://web.collaboard.app/acceptProjectInvitation","MemberPermission":1,"GuestPermission":1,"ValidForMinutes":14400000,"GuestIdentificationRequired": false,"Password":""}'
+	 *
+	 * @param string $userId
+	 * @param int $projectId
+	 * @param string $invitationUrl
+	 * @param int $memberPermission
+	 * @param int $validForMinutes
+	 * @param bool $guestIdentificationRequired
+	 * @param int $guestPermission
+	 * @param string|null $password
+	 * @return string[]
+	 * @throws Exception
+	 */
 	public function createInvitationLink(string $userId, int $projectId,
 										 string $invitationUrl, int $memberPermission, int $validForMinutes,
 										 bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): array {

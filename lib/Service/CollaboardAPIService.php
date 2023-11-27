@@ -153,6 +153,9 @@ class CollaboardAPIService {
 	}
 
 	/**
+	 * TODO could be replaced by
+	 *  curl https://api.collaboard.app/public/api/public/v2.0/collaborationhub/auth/userinfo
+	 *
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception

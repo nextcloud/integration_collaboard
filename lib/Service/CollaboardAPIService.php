@@ -73,9 +73,6 @@ class CollaboardAPIService
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
-	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/owned?pageSize=100&pageNumber=1"
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
@@ -83,23 +80,24 @@ class CollaboardAPIService
 	public function getProjects(string $userId): array
 	{
 		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
-			'PageSize' => 100,
-			'PageNumber' => 1,
+			'pageSize' => 100,
+			'pageNumber' => 1,
 		];
-		$projectsResult = $this->restRequest($userId, 'api/CollaborationHub/GetParticipatingProjects', $params, 'POST');
+		$projectsResult = $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/owned', $params, 'GET');
 		if (isset($projectsResult['error'])) {
 			return $projectsResult;
 		}
 		$thumbnailRequestOptions = [
 			'headers' => [
-				'User-Agent' => Application::INTEGRATION_USER_AGENT,
+				'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+				'Authorization' => 'Bearer ' . $this->config->getUserValue($userId, Application::APP_ID, 'token'),
 			],
 		];
 		$client = $this->client;
 		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
 			$remoteProjects = $projectsResult['Results'];
-			return array_map(static function (array $remoteProject) use ($thumbnailRequestOptions, $client) {
+			$logger = $this->logger;
+			return array_map(static function(array $remoteProject) use ($thumbnailRequestOptions, $client, $logger) {
 				$remoteProject['trash'] = false;
 				$remoteProject['name'] = $remoteProject['Project']['Description'];
 				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
@@ -114,7 +112,7 @@ class CollaboardAPIService
 						$response = $client->get($remoteProject['ThumbnailUrl'], $thumbnailRequestOptions);
 						$remoteProject['Project']['Thumbnail'] = base64_encode($response->getBody());
 					} catch (Exception | Throwable $e) {
-
+						$logger->debug('Collaboard thumbnail error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
 					}
 				}
 				return $remoteProject;
@@ -124,9 +122,6 @@ class CollaboardAPIService
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
-	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects" -X POST -d '{"Description":"desc"}'
 	 *
 	 * @param string $userId
 	 * @param string $name
@@ -136,68 +131,42 @@ class CollaboardAPIService
 	public function createProject(string $userId, string $name): array
 	{
 		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
 			'Description' => $name,
 		];
-		return $this->restRequest($userId, 'api/CollaborationHub/CreateProject', $params, 'POST');
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects', $params, 'POST');
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" -X DELETE \
-	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/PROJECT_ID"
-	 *
 	 * @param string $userId
 	 * @param int $projectId
 	 * @return string[]
 	 * @throws Exception
 	 */
-	public function deleteProject(string $userId, int $projectId): array
-	{
-		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
-			'ProjectId' => $projectId,
-		];
-		return $this->restRequest($userId, 'api/CollaborationHub/DeleteProject', $params, 'POST');
+	public function deleteProject(string $userId, int $projectId): array {
+		$params = [];
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/' . $projectId, $params, 'DELETE');
 	}
 
 	/**
-	 * TODO could be replaced by
-	 *  curl https://api.collaboard.app/public/api/public/v2.0/collaborationhub/auth/userinfo
-	 *
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
 	 */
-	public function getUserInfo(string $userId): array
-	{
-		return $this->restRequest($userId, 'auth/api/Authorization/GetAuthenticatedUser');
+	public function getUserInfo(string $userId): array {
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/auth/userinfo');
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
-	 *  https://api.collaboard.app/public/api/public/v2.0/collaborationhub/subscriptions/license
-	 *
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
 	 */
-	public function getUserLicenseInfo(string $userId): array
-	{
-		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
-			'ProductFamilyCode' => 'COLLABOARD',
-		];
-		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');
+	public function getUserLicenseInfo(string $userId): array {
+		$params = [];
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/subscriptions/license', $params);
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/152270/invitationlink \
-	 *  -i -X POST -H "Content-Type: application/json" \
-	 *  -d '{"Email":"lala@lala.net","InvitationUrl":"https://web.collaboard.app/acceptProjectInvitation","MemberPermission":1,"GuestPermission":1,"ValidForMinutes":14400000,"GuestIdentificationRequired": false,"Password":""}'
-	 *
 	 * @param string $userId
 	 * @param int $projectId
 	 * @param string $invitationUrl
@@ -220,8 +189,6 @@ class CollaboardAPIService
 		?string $password = null
 	): array {
 		$params = [
-			'AppVer' => '6.1.264',
-			'ProjectId' => $projectId,
 			'InvitationUrl' => $invitationUrl,
 			'MemberPermission' => $memberPermission,
 			'ValidForMinutes' => $validForMinutes,
@@ -231,7 +198,7 @@ class CollaboardAPIService
 		if ($password !== null) {
 			$params['Password'] = $password;
 		}
-		return $this->restRequest($userId, 'api/CollaborationHub/CreateProjectInvitationLink', $params, 'POST');
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/'.$projectId.'/invitationlink', $params, 'POST');
 	}
 
 	/**

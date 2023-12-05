@@ -214,7 +214,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to get projects')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 			}).then(() => {
@@ -244,7 +244,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to create new project')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				if (!this.isLicenseActive) {
 					showMessage(t('integration_collaboard', 'Free Collaboard plan is limited to 3 projects'))
@@ -266,7 +266,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to delete the project')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 			})
@@ -294,7 +294,7 @@ export default {
 					deletionTimer.pause()
 					project.trash = false
 				},
-				{ timeout: 10000 }
+				{ timeout: 10000 },
 			)
 		},
 	},

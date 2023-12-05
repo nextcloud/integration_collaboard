@@ -225,7 +225,7 @@ export default {
 				Object.entries(this.fields)
 					.filter(([fieldId, field]) => {
 						return !field.readonly
-					})
+					}),
 			)
 		},
 	},

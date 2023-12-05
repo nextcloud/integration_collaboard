@@ -282,7 +282,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to create invitation link')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 			}).then(() => {

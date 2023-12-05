@@ -73,7 +73,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to save Collaboard admin options')
-					+ ': ' + (error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 			})

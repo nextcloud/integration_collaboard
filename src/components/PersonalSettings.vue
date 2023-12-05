@@ -1,40 +1,18 @@
 <template>
 	<div id="collaboard_prefs" class="section">
+		<PasswordModal v-if="showPasswordModal"
+			ref="passwordModal"
+			:auth-mode="authMode"
+			:login="login"
+			:password.sync="password"
+			:two-factor-code.sync="twoFactorCode"
+			@submit="connectWithCredentials"
+			@close="showPasswordModal = false" />
 		<h2 v-if="showTitle">
 			<CollaboardIcon class="icon" />
 			{{ t('integration_collaboard', 'Collaboard integration') }}
 		</h2>
 		<div id="collaboard-content">
-			<div v-show="showLoginPassword && !twoFactorRequired">
-				<br>
-				<p class="settings-hint">
-					<InformationOutlineIcon :size="24" class="icon" />
-					{{ t('integration_collaboard', 'You can ignore the "Preferred second factor" setting if you don\'t have "Two factor authentication" enabled in Collaboard') }}
-				</p>
-				<p class="settings-hint">
-					<InformationOutlineIcon :size="24" class="icon" />
-					{{ t('integration_collaboard', 'The "One Time Password" (OTP) can be used as a password or as a second factor depending on the authentication mode you chose in your Collaboard settings') }}
-				</p>
-				<div class="field">
-					<label for="collaboard-2fa-method">
-						<LockIcon :size="20" class="icon" />
-						{{ t('integration_collaboard', 'Preferred second factor') }}
-					</label>
-					<select id="collaboard-2fa-method"
-						v-model="state.sfa_method"
-						@change="on2FAMethodChange">
-						<option value="otp">
-							{{ t('integration_collaboard', 'OTP client app') }}
-						</option>
-						<option value="email">
-							{{ t('integration_collaboard', 'Email') }}
-						</option>
-						<!--option value="sms">
-							{{ t('integration_collaboard', 'SMS') }}
-						</option-->
-					</select>
-				</div>
-			</div>
 			<div class="field">
 				<label for="collaboard-url">
 					<EarthIcon :size="20" class="icon" />
@@ -47,58 +25,25 @@
 					:placeholder="t('integration_collaboard', 'Collaboard instance address')"
 					@input="onInput">
 			</div>
-			<div v-show="showLoginPassword" class="field">
+			<div v-show="showLogin" class="field">
 				<label for="collaboard-login">
 					<AccountIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Login') }}
+					{{ t('integration_collaboard', 'Username (e-mail)') }}
 				</label>
 				<input id="collaboard-login"
 					v-model="login"
 					type="text"
 					:placeholder="t('integration_collaboard', 'Collaboard login')"
-					@keyup.enter="onConnectClick">
-				<NcButton v-if="login && state.sfa_method === 'email' && !twoFactorRequired"
-					id="collaboard-ask-email-2fa"
-					@click="onAsk2FAClick">
+					@keyup.enter="onLoginClick">
+				<NcButton id="collaboard-connect"
+					type="primary"
+					@click="onLoginClick">
 					<template #icon>
-						<LockIcon />
+						<OpenInNewIcon />
 					</template>
-					{{ t('integration_collaboard', 'Send OTP code via email') }}
+					{{ t('integration_collaboard', 'Login') }}
 				</NcButton>
 			</div>
-			<div v-show="showLoginPassword" class="field">
-				<label for="collaboard-password">
-					<LockIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Password or OTP Code') }}
-				</label>
-				<input id="collaboard-password"
-					v-model="password"
-					type="password"
-					:placeholder="t('integration_collaboard', 'Collaboard password')"
-					@keyup.enter="onConnectClick">
-			</div>
-			<div v-show="showLoginPassword && twoFactorRequired" class="field">
-				<label for="collaboard-2fa">
-					<LockIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Second authentication factor') }}
-				</label>
-				<input id="collaboard-2fa"
-					ref="sfa_input"
-					v-model="twoFactorCode"
-					type="text"
-					placeholder="xxxxxx"
-					@keyup.enter="onConnectClick">
-			</div>
-			<NcButton v-if="!connected"
-				id="collaboard-connect"
-				:disabled="loading === true || !(login && password)"
-				:class="{ loading, field: true }"
-				@click="onConnectClick">
-				<template #icon>
-					<OpenInNewIcon />
-				</template>
-				{{ t('integration_collaboard', 'Connect to Collaboard') }}
-			</NcButton>
 			<div v-if="connected" class="field">
 				<label class="collaboard-connected">
 					<a class="icon icon-checkmark-color" />
@@ -118,13 +63,13 @@
 
 <script>
 import EarthIcon from 'vue-material-design-icons/Earth.vue'
-import LockIcon from 'vue-material-design-icons/Lock.vue'
 import AccountIcon from 'vue-material-design-icons/Account.vue'
 import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
 import CloseIcon from 'vue-material-design-icons/Close.vue'
-import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
 
 import CollaboardIcon from './icons/CollaboardIcon.vue'
+
+import PasswordModal from './PasswordModal.vue'
 
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 
@@ -144,8 +89,7 @@ export default {
 		CloseIcon,
 		EarthIcon,
 		AccountIcon,
-		LockIcon,
-		InformationOutlineIcon,
+		PasswordModal,
 	},
 
 	props: {
@@ -161,8 +105,9 @@ export default {
 			loading: false,
 			login: '',
 			password: '',
-			twoFactorRequired: false,
 			twoFactorCode: '',
+			authMode: -1,
+			showPasswordModal: false,
 		}
 	},
 
@@ -173,7 +118,7 @@ export default {
 		connectedDisplayName() {
 			return this.state.user_displayname + ' (' + this.state.user_name + ')'
 		},
-		showLoginPassword() {
+		showLogin() {
 			return !this.connected
 		},
 	},
@@ -211,73 +156,69 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_collaboard/config')
 			axios.put(url, req).then((response) => {
-				if (response.data.user_name !== undefined) {
-					this.state.user_name = response.data.user_name
-					if (this.login && this.password && response.data.user_name === '') {
-						if (response.data.two_factor_required) {
-							this.twoFactorRequired = true
-							this.$nextTick(() => {
-								this.$refs.sfa_input.focus()
-							})
-							showError(t('integration_collaboard', 'Collaboard second factor is required'))
-						} else {
-							if (this.twoFactorRequired) {
-								showError(t('integration_collaboard', 'Invalid login/password or second factor'))
-							} else {
-								showError(t('integration_collaboard', 'Invalid login/password'))
-							}
-						}
-					} else if (response.data.user_name) {
-						showSuccess(t('integration_collaboard', 'Successfully connected to Collaboard!'))
-						this.state.user_name = response.data.user_name
-						this.state.user_displayname = response.data.user_displayname
-						this.state.token = 'dumdum'
-						this.twoFactorCode = ''
-						this.twoFactorRequired = false
-						this.$emit('connected', this.state.user_name, this.state.url)
+				if (this.login && this.password && response.data?.user_name === undefined) {
+					if (response.data?.error !== undefined) {
+						showError(t('integration_collaboard', 'Failed to login to Collaboard: ') + response.data.error)
+					} else {
+						showError(t('integration_collaboard', 'Failed to login to Collaboard'))
 					}
+				} else if (response.data?.user_name !== undefined) {
+					this.state.user_name = response.data.user_name
+					showSuccess(t('integration_collaboard', 'Successfully connected to Collaboard!'))
+					this.state.user_displayname = response.data.user_displayname
+					this.state.token = 'dumdum'
+					this.twoFactorCode = ''
+					this.twoFactorRequired = false
+					this.$emit('connected', this.state.user_name, this.state.url)
 				} else {
 					showSuccess(t('integration_collaboard', 'Collaboard options saved'))
 				}
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to save Collaboard options')
-					+ ': ' + (error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.request?.responseText ?? ''),
 				)
 				console.error(error)
 			}).then(() => {
 				this.loading = false
 			})
 		},
-		onConnectClick() {
-			if (this.login && this.password) {
-				this.connectWithCredentials()
-			}
-		},
-		connectWithCredentials() {
-			this.loading = true
-			this.saveOptions({
-				login: this.login,
-				password: this.password,
-				url: this.state.url,
-				two_factor_code: this.twoFactorCode,
-			})
-		},
-		onAsk2FAClick() {
-			const url = generateUrl('/apps/integration_collaboard/email-2fa-password')
+		getAuthMode() {
+			const url = generateUrl('/apps/integration_collaboard/auth-mode')
 			const params = {
 				params: {
 					login: this.login,
 				},
 			}
 			axios.get(url, params).then((response) => {
-				showSuccess(t('integration_collaboard', 'Collaboard OTP code sent via email'))
+				this.authMode = parseInt(response.data)
 			}).catch((error) => {
 				showError(
-					t('integration_collaboard', 'Failed to ask OTP password code by email')
-					+ ': ' + (error.response?.request?.responseText ?? '')
+					t('integration_collaboard', 'Failed to get Collaboard authentication mode')
+					+ ': ' + (error.response?.request?.responseText ?? ''),
 				)
 				console.error(error)
+			})
+		},
+		onLoginClick() {
+			if (this.login !== '') {
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+				if (!emailRegex.test(this.login)) {
+					showError(t('integration_collaboard', 'Invalid email address'))
+					return
+				}
+				this.getAuthMode()
+				this.showPasswordModal = true
+			}
+		},
+		connectWithCredentials() {
+			this.showPasswordModal = false
+			this.loading = true
+			this.saveOptions({
+				login: this.login,
+				password: this.password,
+				url: this.state.url,
+				two_factor_code: this.twoFactorCode,
 			})
 		},
 	},
@@ -302,6 +243,10 @@ export default {
 		label {
 			display: flex;
 			align-items: center;
+		}
+
+		button {
+			margin-left: 24px;
 		}
 
 		.icon {

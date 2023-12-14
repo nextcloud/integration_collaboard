@@ -90,7 +90,6 @@ class ConfigController extends Controller
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token_expires_at');
 		}
 
-		$this->logger->warning('Result: ' . print_r($result, true));
 		return new DataResponse($result);
 	}
 	/*

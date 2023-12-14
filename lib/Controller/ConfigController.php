@@ -69,6 +69,11 @@ class ConfigController extends Controller
 		}
 
 		foreach ($values as $key => $value) {
+			// Do not store sensitive data
+			if (in_array($key, ['password', 'two_factor_code'])) {
+				continue;
+			}
+
 			$this->config->setUserValue($this->userId, Application::APP_ID, $key, $value);
 		}
 

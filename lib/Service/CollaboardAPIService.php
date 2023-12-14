@@ -90,7 +90,6 @@ class CollaboardAPIService
 		$thumbnailRequestOptions = [
 			'headers' => [
 				'User-Agent'  => Application::INTEGRATION_USER_AGENT,
-				'Authorization' => 'Bearer ' . $this->config->getUserValue($userId, Application::APP_ID, 'token'),
 			],
 		];
 		$client = $this->client;

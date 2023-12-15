@@ -24,9 +24,13 @@ class Admin implements ISettings {
 	 */
 	public function getForm(): TemplateResponse {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
+		$adminInviteUrl = $this->config->getAppValue(Application::APP_ID, 'admin_invite_url', Application::DEFAULT_COLLABOARD_INVITE_URL) ?: Application::DEFAULT_COLLABOARD_INVITE_URL;
 
 		$adminConfig = [
 			'admin_instance_url' => $adminUrl,
+			'admin_invite_url' => $adminInviteUrl,
+			'default_instance_url' => Application::DEFAULT_COLLABOARD_URL,
+			'default_invite_url' => Application::DEFAULT_COLLABOARD_INVITE_URL,
 		];
 		$this->initialStateService->provideInitialState('admin-config', $adminConfig);
 		return new TemplateResponse(Application::APP_ID, 'adminSettings');

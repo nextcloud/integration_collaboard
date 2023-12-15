@@ -423,7 +423,6 @@ class CollaboardAPIService
 						$tokenExpireAt = $nowTs + (int) ($authResp['ExpiresIn']);
 						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
 						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $login);
-						$this->config->setUserValue($userId, Application::APP_ID, 'password', $password);
 						$this->config->setUserValue($userId, Application::APP_ID, 'url', $baseUrl);
 						$this->config->setUserValue($userId, Application::APP_ID, 'authentication_mode', $authResp['AuthenticationMode']);
 					} else

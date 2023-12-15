@@ -1,12 +1,13 @@
 <?php
+
 namespace OCA\Collaboard\Settings;
 
+use OCA\Collaboard\AppInfo\Application;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\IConfig;
-use OCP\Settings\ISettings;
 
-use OCA\Collaboard\AppInfo\Application;
+use OCP\Settings\ISettings;
 
 class Admin implements ISettings {
 
@@ -14,7 +15,7 @@ class Admin implements ISettings {
 	private IInitialState $initialStateService;
 
 	public function __construct(IConfig       $config,
-								IInitialState $initialStateService) {
+		IInitialState $initialStateService) {
 		$this->config = $config;
 		$this->initialStateService = $initialStateService;
 	}

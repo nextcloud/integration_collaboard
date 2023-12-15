@@ -6,7 +6,7 @@
  * later. See the COPYING file.
  *
  * @author Julien Veyssier
-* @author Sami Finnilä <sami.finnila@gmail.com>
+ * @author Sami Finnilä <sami.finnila@gmail.com>
  * @copyright Julien Veyssier 2022
  */
 
@@ -19,15 +19,14 @@ use GuzzleHttp\Exception\ServerException;
 use OCA\Collaboard\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\Http\Client\IClient;
+use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\PreConditionNotMetException;
 use Psr\Log\LoggerInterface;
-use OCP\Http\Client\IClientService;
 use Throwable;
 
-class CollaboardAPIService
-{
+class CollaboardAPIService {
 	private LoggerInterface $logger;
 	private IL10N $l10n;
 	private IConfig $config;
@@ -52,8 +51,7 @@ class CollaboardAPIService
 		$this->config = $config;
 	}
 
-	public function isUserConnected(string $userId): bool
-	{
+	public function isUserConnected(string $userId): bool {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$url = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 
@@ -63,8 +61,7 @@ class CollaboardAPIService
 		return $url && $userName && $token && $refreshToken;
 	}
 
-	public function getImage(string $url): array
-	{
+	public function getImage(string $url): array {
 		$response = $this->client->get($url);
 		return [
 			'body' => $response->getBody(),
@@ -77,8 +74,7 @@ class CollaboardAPIService
 	 * @return array|string[]
 	 * @throws Exception
 	 */
-	public function getProjects(string $userId): array
-	{
+	public function getProjects(string $userId): array {
 		$params = [
 			'pageSize' => 100,
 			'pageNumber' => 1,
@@ -89,14 +85,14 @@ class CollaboardAPIService
 		}
 		$thumbnailRequestOptions = [
 			'headers' => [
-				'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+				'User-Agent' => Application::INTEGRATION_USER_AGENT,
 			],
 		];
 		$client = $this->client;
 		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
 			$remoteProjects = $projectsResult['Results'];
 			$logger = $this->logger;
-			return array_map(static function(array $remoteProject) use ($thumbnailRequestOptions, $client, $logger) {
+			return array_map(static function (array $remoteProject) use ($thumbnailRequestOptions, $client, $logger) {
 				$remoteProject['trash'] = false;
 				$remoteProject['name'] = $remoteProject['Project']['Description'];
 				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
@@ -127,8 +123,7 @@ class CollaboardAPIService
 	 * @return string[]
 	 * @throws Exception
 	 */
-	public function createProject(string $userId, string $name): array
-	{
+	public function createProject(string $userId, string $name): array {
 		$params = [
 			'Description' => $name,
 		];
@@ -256,11 +251,11 @@ class CollaboardAPIService
 
 			if ($method === 'GET') {
 				$response = $this->client->get($url, $options);
-			} else if ($method === 'POST') {
+			} elseif ($method === 'POST') {
 				$response = $this->client->post($url, $options);
-			} else if ($method === 'PUT') {
+			} elseif ($method === 'PUT') {
 				$response = $this->client->put($url, $options);
-			} else if ($method === 'DELETE') {
+			} elseif ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
 			} else {
 				return ['error' => $this->l10n->t('Bad HTTP method')];
@@ -319,8 +314,7 @@ class CollaboardAPIService
 	 * @param string $login
 	 * @return int
 	 */
-	public function getAuthenticationMode(string $userId, string $login): int
-	{
+	public function getAuthenticationMode(string $userId, string $login): int {
 		$params = ['username' => $login];
 
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
@@ -367,18 +361,17 @@ class CollaboardAPIService
 
 	/**
 	 * Login and retrieve user options
-	 * 
+	 *
 	 * Returns an array with user_name and user_displayname if successful.
 	 * Otherwise, returns an array with an error key explaining the error.
-	 * 
+	 *
 	 * @param string $userId
 	 * @param string $login
 	 * @param string $password
 	 * @param string|null $secondFactor
 	 * @return array
 	 */
-	public function login(string $userId, string $login, string $password, ?string $secondFactor = null): array
-	{
+	public function login(string $userId, string $login, string $password, ?string $secondFactor = null): array {
 		$params = ['username' => $login];
 
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
@@ -425,8 +418,9 @@ class CollaboardAPIService
 						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $login);
 						$this->config->setUserValue($userId, Application::APP_ID, 'url', $baseUrl);
 						$this->config->setUserValue($userId, Application::APP_ID, 'authentication_mode', $authResp['AuthenticationMode']);
-					} else
+					} else {
 						throw new Exception('Response is missing required keys');
+					}
 				} catch (Exception | Throwable $e) {
 					$this->logger->warning('Collaboard login error : Invalid response. Error: ' . $e->getMessage(), ['app' => Application::APP_ID]);
 					return ['error' => $this->l10n->t('Invalid response')];
@@ -486,9 +480,9 @@ class CollaboardAPIService
 					$userInfoResp = json_decode($body, true);
 					if (
 						isset(
-						$userInfoResp['Result']['UserName'],
-						$userInfoResp['Result']['FirstName'],
-						$userInfoResp['Result']['LastName'])
+							$userInfoResp['Result']['UserName'],
+							$userInfoResp['Result']['FirstName'],
+							$userInfoResp['Result']['LastName'])
 					) {
 						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $userInfoResp['Result']['UserName']);
 						$displayName = $userInfoResp['Result']['FirstName'] . ' ' . $userInfoResp['Result']['LastName'];
@@ -498,8 +492,9 @@ class CollaboardAPIService
 							'user_name' => $userInfoResp['Result']['UserName'],
 							'user_displayname' => $displayName,
 						];
-					} else
+					} else {
 						throw new Exception('Invalid response');
+					}
 				} catch (Exception | Throwable $e) {
 					$this->logger->warning('Collaboard login error : Invalid response', ['app' => Application::APP_ID]);
 					return ['error' => $this->l10n->t('Invalid response')];
@@ -526,8 +521,7 @@ class CollaboardAPIService
 	 * @param string $secondFactor
 	 * @return array
 	 */
-	private function validate2FA(string $userId, string $secondFactor): array
-	{
+	private function validate2FA(string $userId, string $secondFactor): array {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
@@ -586,8 +580,7 @@ class CollaboardAPIService
 	 * @param string|null $sfaMethod
 	 * @return array|string[]
 	 */
-	public function sendUserOtpToken(string $userId, string $collaboardUserName, ?string $sfaMethod = null): array
-	{
+	public function sendUserOtpToken(string $userId, string $collaboardUserName, ?string $sfaMethod = null): array {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
@@ -648,8 +641,7 @@ class CollaboardAPIService
 	 * @return bool true if the token is still valid or we managed to refresh it, false if there was an issue
 	 * @throws PreConditionNotMetException
 	 */
-	public function checkTokenExpiration(string $userId): bool
-	{
+	public function checkTokenExpiration(string $userId): bool {
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
 		$expireAt = $this->config->getUserValue($userId, Application::APP_ID, 'token_expires_at');
 		if ($refreshToken !== '' && $expireAt !== '') {
@@ -664,8 +656,7 @@ class CollaboardAPIService
 		return false;
 	}
 
-	public function refreshToken(string $userId): bool
-	{
+	public function refreshToken(string $userId): bool {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');

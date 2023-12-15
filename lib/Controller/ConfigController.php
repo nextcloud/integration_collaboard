@@ -12,19 +12,17 @@
 
 namespace OCA\Collaboard\Controller;
 
-use DateTime;
-use OCP\IConfig;
-use OCP\IRequest;
-use OCP\AppFramework\Http\DataResponse;
+use OCA\Collaboard\AppInfo\Application;
+use OCA\Collaboard\Service\CollaboardAPIService;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\DataResponse;
+use OCP\IConfig;
+
+use OCP\IRequest;
+use OCP\PreConditionNotMetException;
 use Psr\Log\LoggerInterface;
 
-use OCA\Collaboard\Service\CollaboardAPIService;
-use OCA\Collaboard\AppInfo\Application;
-use OCP\PreConditionNotMetException;
-
-class ConfigController extends Controller
-{
+class ConfigController extends Controller {
 
 	private IConfig $config;
 	private CollaboardAPIService $collaboardAPIService;
@@ -54,8 +52,7 @@ class ConfigController extends Controller
 	 * @return DataResponse
 	 * @throws PreConditionNotMetException
 	 */
-	public function setConfig(array $values): DataResponse
-	{
+	public function setConfig(array $values): DataResponse {
 
 		$result = [];
 		if (isset($values['url'], $values['login'], $values['password'])) {
@@ -97,8 +94,7 @@ class ConfigController extends Controller
 	 * @param string $login
 	 * @return DataResponse
 	 */
-	public function getAuthenticationMode(string $login): DataResponse
-	{
+	public function getAuthenticationMode(string $login): DataResponse {
 		$result = $this->collaboardAPIService->getAuthenticationMode($this->userId, $login);
 		return new DataResponse($result);
 	}
@@ -109,8 +105,7 @@ class ConfigController extends Controller
 	 * @param string $login
 	 * @return DataResponse
 	 */
-	public function sendUserOtpPasswordCode(string $login): DataResponse
-	{
+	public function sendUserOtpPasswordCode(string $login): DataResponse {
 		$result = $this->collaboardAPIService->sendUserOtpToken($this->userId, $login);
 		return new DataResponse([
 			'send_user_otp_token_result' => $result,
@@ -123,8 +118,7 @@ class ConfigController extends Controller
 	 * @param array $values
 	 * @return DataResponse
 	 */
-	public function setAdminConfig(array $values): DataResponse
-	{
+	public function setAdminConfig(array $values): DataResponse {
 		foreach ($values as $key => $value) {
 			$this->config->setAppValue(Application::APP_ID, $key, $value);
 		}

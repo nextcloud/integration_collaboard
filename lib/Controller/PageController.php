@@ -11,16 +11,16 @@
 
 namespace OCA\Collaboard\Controller;
 
+use OCA\Collaboard\AppInfo\Application;
 use OCA\Collaboard\Service\CollaboardAPIService;
 use OCP\App\IAppManager;
-use OCP\AppFramework\Services\IInitialState;
-use OCP\IConfig;
-use Psr\Log\LoggerInterface;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Services\IInitialState;
+use OCP\IConfig;
 use OCP\IRequest;
 
-use OCA\Collaboard\AppInfo\Application;
+use Psr\Log\LoggerInterface;
 
 class PageController extends Controller {
 
@@ -32,13 +32,13 @@ class PageController extends Controller {
 	private ?string $userId;
 
 	public function __construct(string               $appName,
-								IRequest             $request,
-								IConfig              $config,
-								IAppManager          $appManager,
-								IInitialState        $initialStateService,
-								LoggerInterface      $logger,
-								CollaboardAPIService $collaboardAPIService,
-								?string              $userId) {
+		IRequest             $request,
+		IConfig              $config,
+		IAppManager          $appManager,
+		IInitialState        $initialStateService,
+		LoggerInterface      $logger,
+		CollaboardAPIService $collaboardAPIService,
+		?string              $userId) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->appManager = $appManager;

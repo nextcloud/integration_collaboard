@@ -22,10 +22,12 @@
 						{{ t('integration_collaboard', 'Password:') }}
 					</label>
 					<NcTextField id="password-field"
+						ref="passwordField"
 						class="input-box"
 						:value.sync="password"
 						type="password"
-						placeholder="Password" />
+						placeholder="Password"
+						@keyup.enter="submitPassword" />
 				</div>
 				<div v-if="authMode === 3" class="input-wrapper">
 					<!-- authMode 3 => username+password+2FA -->
@@ -34,10 +36,12 @@
 						{{ t('integration_collaboard', 'Second factor:') }}
 					</label>
 					<NcTextField id="second-factor-field"
+						ref="secondFactorField"
 						class="input-box"
 						:value.sync="twoFactorCode"
 						type="text"
-						placeholder="Second factor code" />
+						placeholder="Second factor code"
+						@keyup.enter="submitPassword" />
 				</div>
 				<NcButton v-if="showOtpRequestButton" @click="onAsk2FAClick">
 					{{ authMode === 2 ? t('integration_collaboard', 'Send OTP via email') : t('integration_collaboard', 'Send second factor code via email') }}
@@ -106,6 +110,17 @@ export default {
 			this.$emit('close')
 		},
 		submitPassword() {
+			if (this.password === '') {
+				showError(t('integration_collaboard', 'Please enter a password'))
+				this.$refs.passwordField.focus()
+				return
+			}
+			if (this.authMode === 3 && this.twoFactorCode === '') {
+				showError(t('integration_collaboard', 'Please enter a second factor code'))
+				this.$refs.secondFactorField.focus()
+				return
+			}
+
 			// Sync the password with the parent component using rsync
 			this.$emit('update:password', this.password)
 			this.$emit('update:twoFactorCode', this.twoFactorCode)

@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Updated
+
+- Use public API endpoints where possible @MB-Finski
+- Login flow now matches that of the Collaboard website @MB-Finski
+
+### Fixed
+
+- Login no longer possible through all endpoints, use Authenticate instead @MB-Finski
+
 ## 1.0.6 - 2023-08-01
 
 ### Updated

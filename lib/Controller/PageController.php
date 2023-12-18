@@ -11,16 +11,16 @@
 
 namespace OCA\Collaboard\Controller;
 
+use OCA\Collaboard\AppInfo\Application;
 use OCA\Collaboard\Service\CollaboardAPIService;
 use OCP\App\IAppManager;
-use OCP\AppFramework\Services\IInitialState;
-use OCP\IConfig;
-use Psr\Log\LoggerInterface;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Services\IInitialState;
+use OCP\IConfig;
 use OCP\IRequest;
 
-use OCA\Collaboard\AppInfo\Application;
+use Psr\Log\LoggerInterface;
 
 class PageController extends Controller {
 
@@ -32,13 +32,13 @@ class PageController extends Controller {
 	private ?string $userId;
 
 	public function __construct(string               $appName,
-								IRequest             $request,
-								IConfig              $config,
-								IAppManager          $appManager,
-								IInitialState        $initialStateService,
-								LoggerInterface      $logger,
-								CollaboardAPIService $collaboardAPIService,
-								?string              $userId) {
+		IRequest             $request,
+		IConfig              $config,
+		IAppManager          $appManager,
+		IInitialState        $initialStateService,
+		LoggerInterface      $logger,
+		CollaboardAPIService $collaboardAPIService,
+		?string              $userId) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->appManager = $appManager;
@@ -59,8 +59,12 @@ class PageController extends Controller {
 		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
+		
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$url = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+		
+		$adminInviteUrl = $this->config->getAppValue(Application::APP_ID, 'admin_invite_url', Application::DEFAULT_COLLABOARD_INVITE_URL) ?: Application::DEFAULT_COLLABOARD_INVITE_URL;
+		$inviteUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'invite_url', $adminInviteUrl) ?: $adminInviteUrl;
 
 		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
 
@@ -79,7 +83,9 @@ class PageController extends Controller {
 
 			'talk_enabled' => $talkEnabled,
 			'project_list' => [],
+			'invite_url' => $inviteUrl,
 		];
+		
 		if ($url !== '' && $token !== '' && $refreshToken !== '') {
 			$projects = $this->collaboardAPIService->getProjects($this->userId);
 			if (isset($projects['error'])) {

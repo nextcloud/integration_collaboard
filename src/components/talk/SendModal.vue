@@ -323,7 +323,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to join')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 				this.sending = false
@@ -344,7 +344,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to join')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 				this.sending = false
@@ -367,7 +367,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to send link')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 			}).then(() => {

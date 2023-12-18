@@ -6,6 +6,7 @@
  * later. See the COPYING file.
  *
  * @author Julien Veyssier
+ * @author Sami Finnilä <sami.finnila@gmail.com>
  * @copyright Julien Veyssier 2022
  */
 
@@ -18,11 +19,11 @@ use GuzzleHttp\Exception\ServerException;
 use OCA\Collaboard\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\Http\Client\IClient;
+use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\PreConditionNotMetException;
 use Psr\Log\LoggerInterface;
-use OCP\Http\Client\IClientService;
 use Throwable;
 
 class CollaboardAPIService {
@@ -35,12 +36,14 @@ class CollaboardAPIService {
 	/**
 	 * Service to make requests to Collaboard API
 	 */
-	public function __construct (string $appName,
-								LoggerInterface $logger,
-								IL10N $l10n,
-								IConfig $config,
-								IAppManager $appManager,
-								IClientService $clientService) {
+	public function __construct(
+		string $appName,
+		LoggerInterface $logger,
+		IL10N $l10n,
+		IConfig $config,
+		IAppManager $appManager,
+		IClientService $clientService
+	) {
 		$this->client = $clientService->newClient();
 		$this->appVersion = $appManager->getAppVersion(Application::APP_ID);
 		$this->logger = $logger;
@@ -67,32 +70,29 @@ class CollaboardAPIService {
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
-	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/owned?pageSize=100&pageNumber=1"
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
 	 */
 	public function getProjects(string $userId): array {
 		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
-			'PageSize' => 100,
-			'PageNumber' => 1,
+			'pageSize' => 100,
+			'pageNumber' => 1,
 		];
-		$projectsResult = $this->restRequest($userId, 'api/CollaborationHub/GetParticipatingProjects', $params, 'POST');
+		$projectsResult = $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/owned', $params, 'GET');
 		if (isset($projectsResult['error'])) {
 			return $projectsResult;
 		}
 		$thumbnailRequestOptions = [
 			'headers' => [
-				'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+				'User-Agent' => Application::INTEGRATION_USER_AGENT,
 			],
 		];
 		$client = $this->client;
 		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
 			$remoteProjects = $projectsResult['Results'];
-			return array_map(static function(array $remoteProject) use ($thumbnailRequestOptions, $client) {
+			$logger = $this->logger;
+			return array_map(static function (array $remoteProject) use ($thumbnailRequestOptions, $client, $logger) {
 				$remoteProject['trash'] = false;
 				$remoteProject['name'] = $remoteProject['Project']['Description'];
 				$remoteProject['id'] = $remoteProject['Project']['ProjectId'];
@@ -107,7 +107,7 @@ class CollaboardAPIService {
 						$response = $client->get($remoteProject['ThumbnailUrl'], $thumbnailRequestOptions);
 						$remoteProject['Project']['Thumbnail'] = base64_encode($response->getBody());
 					} catch (Exception | Throwable $e) {
-
+						$logger->debug('Collaboard thumbnail error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
 					}
 				}
 				return $remoteProject;
@@ -117,9 +117,6 @@ class CollaboardAPIService {
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
-	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects" -X POST -d '{"Description":"desc"}'
 	 *
 	 * @param string $userId
 	 * @param string $name
@@ -128,28 +125,20 @@ class CollaboardAPIService {
 	 */
 	public function createProject(string $userId, string $name): array {
 		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
 			'Description' => $name,
 		];
-		return $this->restRequest($userId, 'api/CollaborationHub/CreateProject', $params, 'POST');
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects', $params, 'POST');
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" -X DELETE \
-	 *  "https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/PROJECT_ID"
-	 *
 	 * @param string $userId
 	 * @param int $projectId
 	 * @return string[]
 	 * @throws Exception
 	 */
 	public function deleteProject(string $userId, int $projectId): array {
-		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
-			'ProjectId' => $projectId,
-		];
-		return $this->restRequest($userId, 'api/CollaborationHub/DeleteProject', $params, 'POST');
+		$params = [];
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/' . $projectId, $params, 'DELETE');
 	}
 
 	/**
@@ -161,32 +150,20 @@ class CollaboardAPIService {
 	 * @throws Exception
 	 */
 	public function getUserInfo(string $userId): array {
-		return $this->restRequest($userId, 'auth/api/Authorization/GetAuthenticatedUser');
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/auth/userinfo');
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl -H "Authorization: Bearer {AUTH_TOKEN}" \
-	 *  https://api.collaboard.app/public/api/public/v2.0/collaborationhub/subscriptions/license
-	 *
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
 	 */
 	public function getUserLicenseInfo(string $userId): array {
-		$params = [
-			'AppVer' => Application::COLLABOARD_APP_VER,
-			'ProductFamilyCode' => 'COLLABOARD',
-		];
-		return $this->restRequest($userId, 'api/CollaborationHub/GetLicenseInfo', $params, 'POST');
+		$params = [];
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/subscriptions/license', $params);
 	}
 
 	/**
-	 * TODO replace with
-	 *  curl https://api.collaboard.app/public/api/public/v2.0/collaborationhub/projects/152270/invitationlink \
-	 *  -i -X POST -H "Content-Type: application/json" \
-	 *  -d '{"Email":"lala@lala.net","InvitationUrl":"https://web.collaboard.app/acceptProjectInvitation","MemberPermission":1,"GuestPermission":1,"ValidForMinutes":14400000,"GuestIdentificationRequired": false,"Password":""}'
-	 *
 	 * @param string $userId
 	 * @param int $projectId
 	 * @param string $invitationUrl
@@ -198,12 +175,17 @@ class CollaboardAPIService {
 	 * @return string[]
 	 * @throws Exception
 	 */
-	public function createInvitationLink(string $userId, int $projectId,
-										 string $invitationUrl, int $memberPermission, int $validForMinutes,
-										 bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): array {
+	public function createInvitationLink(
+		string $userId,
+		int $projectId,
+		string $invitationUrl,
+		int $memberPermission,
+		int $validForMinutes,
+		bool $guestIdentificationRequired,
+		int $guestPermission,
+		?string $password = null
+	): array {
 		$params = [
-			'AppVer' => '6.1.264',
-			'ProjectId' => $projectId,
 			'InvitationUrl' => $invitationUrl,
 			'MemberPermission' => $memberPermission,
 			'ValidForMinutes' => $validForMinutes,
@@ -213,7 +195,7 @@ class CollaboardAPIService {
 		if ($password !== null) {
 			$params['Password'] = $password;
 		}
-		return $this->restRequest($userId, 'api/CollaborationHub/CreateProjectInvitationLink', $params, 'POST');
+		return $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/'.$projectId.'/invitationlink', $params, 'POST');
 	}
 
 	/**
@@ -225,8 +207,13 @@ class CollaboardAPIService {
 	 * @return array|mixed|resource|string|string[]
 	 * @throws Exception
 	 */
-	public function restRequest(string $userId, string $endPoint, array $params = [], string $method = 'GET',
-								bool $jsonResponse = true): array {
+	public function restRequest(
+		string $userId,
+		string $endPoint,
+		array $params = [],
+		string $method = 'GET',
+		bool $jsonResponse = true
+	): array {
 		$tokenIsOk = $this->checkTokenExpiration($userId);
 		if (!$tokenIsOk) {
 			return ['error' => $this->l10n->t('Your Collaboard session has expired, please re-authenticate in your user settings.')];
@@ -238,7 +225,7 @@ class CollaboardAPIService {
 			$url = $url . '/' . $endPoint;
 			$options = [
 				'headers' => [
-					'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
 					'Authorization' => 'Bearer ' . $accessToken,
 					'Content-Type' => 'application/json',
 				],
@@ -267,11 +254,11 @@ class CollaboardAPIService {
 
 			if ($method === 'GET') {
 				$response = $this->client->get($url, $options);
-			} else if ($method === 'POST') {
+			} elseif ($method === 'POST') {
 				$response = $this->client->post($url, $options);
-			} else if ($method === 'PUT') {
+			} elseif ($method === 'PUT') {
 				$response = $this->client->put($url, $options);
-			} else if ($method === 'DELETE') {
+			} elseif ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
 			} else {
 				return ['error' => $this->l10n->t('Bad HTTP method')];
@@ -325,23 +312,85 @@ class CollaboardAPIService {
 	}
 
 	/**
+	 * Get authentication mode for a login
+	 * @param string $userId
+	 * @param string $login
+	 * @return int
+	 */
+	public function getAuthenticationMode(string $userId, string $login): int {
+		$params = ['username' => $login];
+
+		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
+		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+		try {
+			// The public API docs detail a GetAuthorizationMode endpoint, but it returns a 404
+			// So we use this one instead (reverse engineered from the frontend of the collaboard.app website)
+			$url = $baseUrl . '/auth/api/Authorization/GetUserOptions';
+			$options = [
+				'headers' => [
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
+					'Content-Type' => 'application/json',
+				],
+				'body' => json_encode($params),
+			];
+			$response = $this->client->post($url, $options);
+			$body = $response->getBody();
+			$respCode = $response->getStatusCode();
+
+			if ($respCode >= 400) {
+				return 0;
+			} else {
+				try {
+					$res = json_decode($body, true);
+					if (isset($res['AuthenticationMode'])) {
+						return (int) $res['AuthenticationMode'];
+					}
+				} catch (Exception | Throwable $e) {
+				}
+				$this->logger->warning('Collaboard login server error : Invalid response', ['app' => Application::APP_ID]);
+				return 0;
+			}
+		} catch (ServerException $e) {
+			$response = $e->getResponse();
+			$body = $response->getBody();
+			$this->logger->warning('Collaboard login server error : ' . $body, ['app' => Application::APP_ID]);
+			return 0;
+		} catch (Exception | Throwable $e) {
+			$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
+			return 0;
+		}
+	}
+
+
+	/**
+	 * Login and retrieve user options
+	 *
+	 * Returns an array with user_name and user_displayname if successful.
+	 * Otherwise, returns an array with an error key explaining the error.
+	 *
 	 * @param string $userId
 	 * @param string $login
 	 * @param string $password
+	 * @param string|null $secondFactor
 	 * @return array
 	 */
-	public function login(string $userId, string $login, string $password): array {
+	public function login(string $userId, string $login, string $password, ?string $secondFactor = null): array {
+		$params = ['username' => $login];
+
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+
+		// First, call the authentication endpoint to get the token
 		try {
 			$url = $baseUrl . '/auth/api/Authorization/Authenticate';
 			$options = [
 				'headers' => [
 					'Authorization' => 'Basic ' . base64_encode($login . ':' . $password),
-					'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
 					'Content-Type' => 'application/json',
 				],
 			];
+
 			$response = $this->client->post($url, $options);
 			$body = $response->getBody();
 			$respCode = $response->getStatusCode();
@@ -350,11 +399,109 @@ class CollaboardAPIService {
 				return ['error' => $this->l10n->t('Invalid credentials')];
 			} else {
 				try {
-					return json_decode($body, true);
+					$authResp = json_decode($body, true);
+
+					if (isset($authResp['AuthorizationToken'], $authResp['ExpiresIn'], $authResp['AuthenticationMode'])) {
+
+						// Sensibility check
+						if ($authResp['AuthenticationMode'] > 3 || $authResp['AuthenticationMode'] < 0) {
+							return ['error' => $this->l10n->t('Unsupported authentication mode requested from server')];
+						}
+
+						$this->config->setUserValue($userId, Application::APP_ID, 'token', $authResp['AuthorizationToken']);
+
+						if (isset($authResp['RefreshToken'])) {
+							// Refresh token is not set if the user has 2FA enabled
+							$this->config->setUserValue($userId, Application::APP_ID, 'refresh_token', $authResp['RefreshToken']);
+						}
+
+						$nowTs = (new DateTime())->getTimestamp();
+						$tokenExpireAt = $nowTs + (int) ($authResp['ExpiresIn']);
+						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $login);
+						$this->config->setUserValue($userId, Application::APP_ID, 'url', $baseUrl);
+						$this->config->setUserValue($userId, Application::APP_ID, 'authentication_mode', $authResp['AuthenticationMode']);
+					} else {
+						throw new Exception('Response is missing required keys');
+					}
 				} catch (Exception | Throwable $e) {
+					$this->logger->warning('Collaboard login error : Invalid response. Error: ' . $e->getMessage(), ['app' => Application::APP_ID]);
+					return ['error' => $this->l10n->t('Invalid response')];
 				}
-				$this->logger->warning('Collaboard login error : Invalid response', ['app' => Application::APP_ID]);
-				return ['error' => $this->l10n->t('Invalid response')];
+			}
+		} catch (ServerException $e) {
+			$response = $e->getResponse();
+			$body = $response->getBody();
+			$this->logger->warning('Collaboard login server error : ' . $body, ['app' => Application::APP_ID]);
+			return ['error' => $this->l10n->t('Login server error')];
+		} catch (Exception | Throwable $e) {
+			$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
+			return [
+				'error' => $this->l10n->t('Login error'),
+				'exception' => $e->getMessage(),
+			];
+		}
+
+
+		if ($authResp['AuthenticationMode'] === 3) {
+			// 2FA is required
+			if ($secondFactor === null || $secondFactor === '') {
+				return ['error' => $this->l10n->t('Second factor required')];
+			}
+
+			$secondFactorResult = $this->validate2FA($userId, $secondFactor);
+
+			if (isset($secondFactorResult['error'])) {
+				return $secondFactorResult;
+			}
+			$authenticatedToken = $secondFactorResult['token'];
+		} else {
+			$authenticatedToken = $authResp['AuthorizationToken'];
+		}
+
+		// Ok, now we are authenticated, let's get the user info and return that to the frontend:
+		// We could use the User object returned by the 'Authenticate' endpoint, but the returning of the User object
+		// is undocumented behaviour so let's not rely on that:
+		try {
+			$url = $baseUrl . '/auth/api/Authorization/GetAuthenticatedUser';
+			$options = [
+				'headers' => [
+					'Authorization' => 'Bearer ' . $authenticatedToken,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
+					'Content-Type' => 'application/json',
+				],
+				//'body' => json_encode($params),
+			];
+			$response = $this->client->get($url, $options);
+			$body = $response->getBody();
+			$respCode = $response->getStatusCode();
+
+			if ($respCode >= 400) {
+				return ['error' => $this->l10n->t('Could not retrieve user info')];
+			} else {
+				try {
+					$userInfoResp = json_decode($body, true);
+					if (
+						isset(
+							$userInfoResp['Result']['UserName'],
+							$userInfoResp['Result']['FirstName'],
+							$userInfoResp['Result']['LastName'])
+					) {
+						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $userInfoResp['Result']['UserName']);
+						$displayName = $userInfoResp['Result']['FirstName'] . ' ' . $userInfoResp['Result']['LastName'];
+						$this->config->setUserValue($userId, Application::APP_ID, 'user_displayname', $displayName);
+
+						return [
+							'user_name' => $userInfoResp['Result']['UserName'],
+							'user_displayname' => $displayName,
+						];
+					} else {
+						throw new Exception('Invalid response');
+					}
+				} catch (Exception | Throwable $e) {
+					$this->logger->warning('Collaboard login error : Invalid response', ['app' => Application::APP_ID]);
+					return ['error' => $this->l10n->t('Invalid response')];
+				}
 			}
 		} catch (ServerException $e) {
 			$response = $e->getResponse();
@@ -370,7 +517,14 @@ class CollaboardAPIService {
 		}
 	}
 
-	public function validate2FA(string $userId, string $secondFactor): array {
+	/**
+	 * Will return an array with the 'error' key if there was an issue.
+	 * Otherwise will set an array with the 'toke' key set to the new token.
+	 * @param string $userId
+	 * @param string $secondFactor
+	 * @return array
+	 */
+	private function validate2FA(string $userId, string $secondFactor): array {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
@@ -379,7 +533,7 @@ class CollaboardAPIService {
 			$options = [
 				'headers' => [
 					'Authorization' => 'Bearer ' . $accessToken,
-					'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
 					'Content-Type' => 'application/json',
 				],
 				'body' => json_encode([
@@ -394,7 +548,16 @@ class CollaboardAPIService {
 				return ['error' => $this->l10n->t('Invalid second factor')];
 			} else {
 				try {
-					return json_decode($body, true);
+					$validationResp = json_decode($body, true);
+					if (isset($validationResp['AuthorizationToken'], $validationResp['RefreshToken'], $validationResp['ExpiresIn'], $validationResp['AuthenticationMode'])) {
+						$this->config->setUserValue($userId, Application::APP_ID, 'token', $validationResp['AuthorizationToken']);
+						$this->config->setUserValue($userId, Application::APP_ID, 'refresh_token', $validationResp['RefreshToken']);
+
+						$nowTs = (new DateTime())->getTimestamp();
+						$tokenExpireAt = $nowTs + (int) ($validationResp['ExpiresIn']);
+						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+						return ['token' => $validationResp['AuthorizationToken']];
+					}
 				} catch (Exception | Throwable $e) {
 				}
 				$this->logger->warning('Collaboard ValidateUser2FA error : Invalid response', ['app' => Application::APP_ID]);
@@ -432,11 +595,12 @@ class CollaboardAPIService {
 					'Content-Type' => 'application/json',
 				],
 				'body' => json_encode([
-					'User' => $collaboardUserName,
+					'UserName' => $collaboardUserName,
 					// that's what the API doc says, does not work
 					// 'MessagingPlatform' => $sfaMethod === 'email' ? 'Email' : 'SMS',
 					// here is what the frontend actually does, retro-engineering is always the best
 					'MessageTheme' => 'default',
+
 				]),
 			];
 
@@ -504,7 +668,7 @@ class CollaboardAPIService {
 			$options = [
 				'headers' => [
 					'Authorization' => 'Bearer ' . $refreshToken,
-					'User-Agent'  => Application::INTEGRATION_USER_AGENT,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
 				],
 			];
 			$response = $this->client->get($url, $options);
@@ -521,7 +685,7 @@ class CollaboardAPIService {
 						$this->config->setUserValue($userId, Application::APP_ID, 'refresh_token', $res['RefreshToken']);
 
 						$nowTs = (new DateTime())->getTimestamp();
-						$tokenExpireAt = $nowTs + (int)($res['ExpiresIn']);
+						$tokenExpireAt = $nowTs + (int) ($res['ExpiresIn']);
 						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
 						return true;
 					}

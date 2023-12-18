@@ -12,17 +12,17 @@
 namespace OCA\Collaboard\Controller;
 
 use Exception;
+use OCA\Collaboard\AppInfo\Application;
+use OCA\Collaboard\Service\CollaboardAPIService;
+use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataDisplayResponse;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\Response;
+
 use OCP\IConfig;
 use OCP\IRequest;
-use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Controller;
-
-use OCA\Collaboard\Service\CollaboardAPIService;
-use OCA\Collaboard\AppInfo\Application;
 use OCP\IURLGenerator;
 
 class CollaboardAPIController extends Controller {
@@ -33,11 +33,11 @@ class CollaboardAPIController extends Controller {
 	private IURLGenerator $urlGenerator;
 
 	public function __construct(string               $appName,
-								IRequest             $request,
-								IConfig              $config,
-								CollaboardAPIService $collaboardAPIService,
-								IURLGenerator        $urlGenerator,
-								?string              $userId) {
+		IRequest             $request,
+		IConfig              $config,
+		CollaboardAPIService $collaboardAPIService,
+		IURLGenerator        $urlGenerator,
+		?string              $userId) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->collaboardAPIService = $collaboardAPIService;
@@ -137,8 +137,8 @@ class CollaboardAPIController extends Controller {
 	 * @return DataResponse
 	 */
 	public function createInvitationLink(int $projectId,
-										string $invitationUrl, int $memberPermission, int $validForMinutes,
-										bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): DataResponse {
+		string $invitationUrl, int $memberPermission, int $validForMinutes,
+		bool $guestIdentificationRequired, int $guestPermission, ?string $password = null): DataResponse {
 		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
 			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
 		}

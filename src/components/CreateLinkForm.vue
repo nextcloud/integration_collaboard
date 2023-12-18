@@ -115,6 +115,8 @@ import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 
+import { loadState } from '@nextcloud/initial-state'
+
 const permissions = {
 	none: {
 		label: t('integration_collaboard', 'No access'),
@@ -203,6 +205,7 @@ export default {
 
 	data() {
 		return {
+			state: loadState('integration_collaboard', 'collaboard-state'),
 			showTalkModal: false,
 			creatingLink: false,
 			permissions,
@@ -268,7 +271,7 @@ export default {
 			this.creatingLink = true
 			const req = {
 				projectId: this.project.id,
-				invitationUrl: 'https://web.collaboard.app/acceptProjectInvitation',
+				invitationUrl: this.state.invite_url,
 				memberPermission: this.userPermission.value,
 				password: this.password ? this.password : undefined,
 				validForMinutes: this.validForMinutes.value,
@@ -282,7 +285,7 @@ export default {
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to create invitation link')
-					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? '')
+					+ ': ' + (error.response?.data?.error ?? error.response?.request?.responseText ?? ''),
 				)
 				console.debug(error)
 			}).then(() => {

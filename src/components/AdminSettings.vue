@@ -12,7 +12,7 @@
 				</label>
 				<input id="collaboard-instance"
 					v-model="state.admin_instance_url"
-					:class="{ 'greyed-out-text': !usingCustomInstanceUrl, 'invalid-url': !isValidUrl(state.admin_instance_url) }"
+					:class="{ 'greyed-out-text': !usingCustomInstanceUrl, 'invalid-url': !isInstanceUrlValid }"
 					type="text"
 					placeholder="https://..."
 					@input="onInput"
@@ -33,7 +33,7 @@
 				</label>
 				<input id="collaboard-instance"
 					v-model="state.admin_invite_url"
-					:class="{ 'greyed-out-text': !usingCustomInviteUrl, 'invalid-url': !isValidUrl(state.admin_invite_url) }"
+					:class="{ 'greyed-out-text': !usingCustomInviteUrl, 'invalid-url': !isInviteUrlValid }"
 					type="text"
 					placeholder="https://..."
 					@input="onInput"
@@ -83,6 +83,12 @@ export default {
 	},
 
 	computed: {
+		isInstanceUrlValid() {
+			return this.isValidUrl(this.state.admin_instance_url)
+		},
+		isInviteUrlValid() {
+			return this.isValidUrl(this.state.admin_invite_url)
+		},
 		usingCustomUrls() {
 			return this.usingCustomInviteUrl || this.usingCustomInstanceUrl
 		},

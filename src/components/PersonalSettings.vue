@@ -28,7 +28,7 @@
 				</label>
 				<input id="collaboard-url"
 					v-model="state.url"
-					:class="{ 'greyed-out-text': !usingCustomInstanceUrl, 'invalid-url': !isValidUrl(state.url) }"
+					:class="{ 'greyed-out-text': !usingCustomInstanceUrl, 'invalid-url': !isInstanceUrlValid }"
 					type="text"
 					:disabled="connected === true"
 					:placeholder="t('integration_collaboard', 'Collaboard instance address')"
@@ -50,7 +50,7 @@
 				</label>
 				<input id="collaboard-invite-url"
 					v-model="state.invite_url"
-					:class="{ 'greyed-out-text': !usingCustomInviteUrl, 'invalid-url': !isValidUrl(state.invite_url) }"
+					:class="{ 'greyed-out-text': !usingCustomInviteUrl, 'invalid-url': !isInviteUrlValid }"
 					type="text"
 					:disabled="connected === true"
 					:placeholder="t('integration_collaboard', 'Collaboard invite address')"
@@ -156,6 +156,12 @@ export default {
 	},
 
 	computed: {
+		isInstanceUrlValid() {
+			return this.isValidUrl(this.state.url)
+		},
+		isInviteUrlValid() {
+			return this.isValidUrl(this.state.invite_url)
+		},
 		connected() {
 			return !!this.state.token && !!this.state.url && !!this.state.user_name
 		},

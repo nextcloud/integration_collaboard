@@ -69,6 +69,23 @@ class CollaboardAPIService {
 		];
 	}
 
+	public function getProjectOwner(string $userId, string $projectId): array {
+		$params = [
+			'PageSize' => 100,
+			'PageNumber' => 1,
+		];
+		$response = $this->restRequest($userId, 'public/api/public/v2.0/collaborationhub/projects/' . urlencode($projectId) . '/users', $params);
+		if (isset($response['error']) || !isset($response['Results']) || !is_array($response['Results'])) {
+			return [];
+		}
+		foreach ($response['Results'] as $participant) {
+			if (is_array($participant) && isset($participant['ParticipationType']) && $participant['ParticipationType'] === 1) {
+				return $participant['User'];
+			}
+		}
+		return [];
+	}
+
 	/**
 	 * @param string $userId
 	 * @return array|string[]
@@ -90,7 +107,11 @@ class CollaboardAPIService {
 		];
 		$client = $this->client;
 		if (isset($projectsResult['Results']) && is_array($projectsResult['Results'])) {
-			$remoteProjects = $projectsResult['Results'];
+			// the owner info used to be included in the project list, now we need to get it from the project participant list
+			$remoteProjects = array_map(function (array $remoteProject) use ($userId) {
+				$remoteProject['Owner'] = $this->getProjectOwner($userId, $remoteProject['Project']['ProjectId']);
+				return $remoteProject;
+			}, $projectsResult['Results']);
 			$logger = $this->logger;
 			return array_map(static function (array $remoteProject) use ($thumbnailRequestOptions, $client, $logger) {
 				$remoteProject['trash'] = false;

@@ -8,7 +8,7 @@
 			<label>
 				{{ t('integration_collaboard', 'Registered users permissions') }}
 			</label>
-			<NcMultiselect
+			<NcSelect
 				:value="userPermission"
 				:options="permissionList"
 				label="label"
@@ -27,7 +27,7 @@
 			<label :class="{ 'disabled-text': !allowGuests }">
 				{{ t('integration_collaboard', 'Guest permissions') }}
 			</label>
-			<NcMultiselect
+			<NcSelect
 				:value="guestPermission"
 				:options="permissionList"
 				:disabled="!allowGuests"
@@ -51,7 +51,7 @@
 			<label>
 				{{ t('integration_collaboard', 'Expires in') }}
 			</label>
-			<NcMultiselect
+			<NcSelect
 				:value="validForMinutes"
 				:options="expirations"
 				label="label"
@@ -108,7 +108,7 @@ import SendModal from './talk/SendModal.vue'
 
 import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect.js'
+import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
 
 import { generateUrl } from '@nextcloud/router'
@@ -179,7 +179,7 @@ export default {
 	name: 'CreateLinkForm',
 
 	components: {
-		NcMultiselect,
+		NcSelect,
 		EyeOutlineIcon,
 		EyeOffOutlineIcon,
 		NcCheckboxRadioSwitch,

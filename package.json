@@ -34,12 +34,12 @@
 	"dependencies": {
 		"@nextcloud/auth": "^2.0.0",
 		"@nextcloud/axios": "^2.0.0",
-		"@nextcloud/dialogs": "^4.0.1",
+		"@nextcloud/dialogs": "^5.0.3",
 		"@nextcloud/initial-state": "^2.0.0",
 		"@nextcloud/l10n": "^2.0.1",
 		"@nextcloud/moment": "^1.1.1",
 		"@nextcloud/router": "^2.0.0",
-		"@nextcloud/vue": "^7.0.0",
+		"@nextcloud/vue": "^8.3.0",
 		"@nextcloud/vue-dashboard": "^2.0.1",
 		"vue": "^2.6.14",
 		"vue-clipboard2": "^0.3.3",
@@ -51,10 +51,10 @@
 	},
 	"devDependencies": {
 		"@nextcloud/babel-config": "^1.0.0",
-		"@nextcloud/browserslist-config": "^2.2.0",
+		"@nextcloud/browserslist-config": "^3.0.0",
 		"@nextcloud/eslint-config": "^8.0.0",
 		"@nextcloud/stylelint-config": "^2.1.2",
-		"@nextcloud/webpack-vue-config": "^5.1.0",
+		"@nextcloud/webpack-vue-config": "^6.0.0",
 		"eslint-webpack-plugin": "^4.0.0",
 		"stylelint-webpack-plugin": "^4.0.0"
 	}

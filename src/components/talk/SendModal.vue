@@ -23,7 +23,7 @@
 					<ul>
 						<NcListItem v-for="c in conversationsToShow"
 							:key="'conv-' + c.id"
-							:title="c.displayName"
+							:name="c.displayName"
 							:active="selectedRoom && selectedRoom.id === c.id"
 							:bold="selectedRoom && selectedRoom.id === c.id"
 							@click="selectedRoom = c">
@@ -49,7 +49,7 @@
 					<ul>
 						<NcListItem v-for="c in usersToShow"
 							:key="'user-' + c.id"
-							:title="c.displayName"
+							:name="c.displayName"
 							:active="selectedRoom && selectedRoom.id === c.id"
 							:bold="selectedRoom && selectedRoom.id === c.id"
 							@click="selectedRoom = c">
@@ -69,7 +69,7 @@
 					<ul>
 						<NcListItem v-for="c in groupsToShow"
 							:key="'group-' + c.id"
-							:title="c.displayName"
+							:name="c.displayName"
 							:active="selectedRoom && selectedRoom.id === c.id"
 							:bold="selectedRoom && selectedRoom.id === c.id"
 							@click="selectedRoom = c">

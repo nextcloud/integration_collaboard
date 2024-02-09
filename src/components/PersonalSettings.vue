@@ -66,6 +66,26 @@
 				</transition>
 			</div>
 			<div v-show="showLogin" class="field">
+				<label for="collaboard-apikey">
+					<AccountIcon :size="20" class="icon" />
+					{{ t('integration_collaboard', 'API key') }}
+				</label>
+				<input id="collaboard-apikey"
+					v-model="apiKey"
+					type="text"
+					:placeholder="t('integration_collaboard', 'Collaboard API key')"
+					@keyup.enter="onApiKeyLoginClick">
+				<NcButton
+					type="primary"
+					@click="onApiKeyLoginClick">
+					<template #icon>
+						<NcLoadingIcon v-if="loading" />
+						<OpenInNewIcon v-else />
+					</template>
+					{{ t('integration_collaboard', 'Connect') }}
+				</NcButton>
+			</div>
+			<div v-show="showLogin" class="field">
 				<label for="collaboard-login">
 					<AccountIcon :size="20" class="icon" />
 					{{ t('integration_collaboard', 'Username (e-mail)') }}
@@ -79,7 +99,8 @@
 					type="primary"
 					@click="onLoginClick">
 					<template #icon>
-						<OpenInNewIcon />
+						<NcLoadingIcon v-if="loading" />
+						<OpenInNewIcon v-else />
 					</template>
 					{{ t('integration_collaboard', 'Login') }}
 				</NcButton>
@@ -112,6 +133,7 @@ import CollaboardIcon from './icons/CollaboardIcon.vue'
 
 import PasswordModal from './PasswordModal.vue'
 
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 
 import { loadState } from '@nextcloud/initial-state'
@@ -125,6 +147,7 @@ export default {
 
 	components: {
 		CollaboardIcon,
+		NcLoadingIcon,
 		NcButton,
 		OpenInNewIcon,
 		CloseIcon,
@@ -145,6 +168,7 @@ export default {
 		return {
 			state: loadState('integration_collaboard', 'collaboard-state'),
 			loading: false,
+			apiKey: '',
 			login: '',
 			password: '',
 			twoFactorCode: '',
@@ -163,6 +187,7 @@ export default {
 			return this.isValidUrl(this.state.invite_url)
 		},
 		connected() {
+			console.debug('aaaaaa state', this.state)
 			return !!this.state.token && !!this.state.url && !!this.state.user_name
 		},
 		connectedDisplayName() {
@@ -193,6 +218,7 @@ export default {
 	methods: {
 		onLogoutClick() {
 			this.state.token = ''
+			this.apiKey = ''
 			this.login = ''
 			this.password = ''
 			this.twoFactorCode = ''
@@ -281,6 +307,13 @@ export default {
 					+ ': ' + (error.response?.request?.responseText ?? ''),
 				)
 				console.error(error)
+			})
+		},
+		onApiKeyLoginClick() {
+			this.loading = true
+			this.saveOptions({
+				url: this.state.url,
+				api_key: this.apiKey,
 			})
 		},
 		onLoginClick() {

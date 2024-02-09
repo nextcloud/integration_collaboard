@@ -56,7 +56,6 @@ class PageController extends Controller {
 	 */
 	public function index(): TemplateResponse {
 		$token = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
-		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
 
@@ -74,7 +73,7 @@ class PageController extends Controller {
 
 		$pageInitialState = [
 			// we consider the token is not valid until there is also a refresh token
-			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
+			'token' => $token ? 'dummyTokenContent' : '',
 			'url' => $url,
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
@@ -86,7 +85,7 @@ class PageController extends Controller {
 			'invite_url' => $inviteUrl,
 		];
 
-		if ($url !== '' && $token !== '' && $refreshToken !== '') {
+		if ($url !== '' && $token !== '') {
 			$projects = $this->collaboardAPIService->getProjects($this->userId);
 			if (isset($projects['error'])) {
 				$pageInitialState['project_list_error'] = $projects['error'];

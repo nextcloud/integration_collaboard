@@ -163,9 +163,6 @@ class CollaboardAPIService {
 	}
 
 	/**
-	 * TODO could be replaced by
-	 *  curl https://api.collaboard.app/public/api/public/v2.0/collaborationhub/auth/userinfo
-	 *
 	 * @param string $userId
 	 * @return array|string[]
 	 * @throws Exception
@@ -379,6 +376,124 @@ class CollaboardAPIService {
 		} catch (Exception | Throwable $e) {
 			$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
 			return 0;
+		}
+	}
+
+	/**
+	 *  API token auth
+	 *  curl https://test-api.collaboard.app/public/api/public/v2.0/collaborationhub/auth/token -H "Authorization: Bearer APIKEY"
+	 *
+	 * @param string $userId
+	 * @param string $apiKey
+	 * @return array
+	 */
+	public function loginWithApiKey(string $userId, string $apiKey): array {
+		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
+		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+
+		// First, call the authentication endpoint to get the token
+		try {
+			$url = $baseUrl . '/public/api/public/v2.0/collaborationhub/auth/token';
+			$options = [
+				'headers' => [
+					'Authorization' => 'Bearer ' . $apiKey,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
+				],
+			];
+
+			$response = $this->client->get($url, $options);
+			$body = $response->getBody();
+			$respCode = $response->getStatusCode();
+
+			if ($respCode >= 400) {
+				return ['error' => $this->l10n->t('Invalid credentials')];
+			} else {
+				try {
+					$authResp = json_decode($body, true);
+
+					if (isset($authResp['AuthorizationToken'], $authResp['ExpiresIn'])) {
+						$this->config->setUserValue($userId, Application::APP_ID, 'token', $authResp['AuthorizationToken']);
+
+						$nowTs = (new DateTime())->getTimestamp();
+						$tokenExpireAt = $nowTs + (int) ($authResp['ExpiresIn']);
+						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+//						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $login);
+						$this->config->setUserValue($userId, Application::APP_ID, 'url', $baseUrl);
+					} else {
+						throw new Exception('Response is missing required keys');
+					}
+				} catch (Exception | Throwable $e) {
+					$this->logger->warning('Collaboard login with API key error : Invalid response. Error: ' . $e->getMessage(), ['app' => Application::APP_ID]);
+					return ['error' => $this->l10n->t('Invalid response')];
+				}
+			}
+		} catch (ServerException $e) {
+			$response = $e->getResponse();
+			$body = $response->getBody();
+			$this->logger->warning('Collaboard login server error : ' . $body, ['app' => Application::APP_ID]);
+			return ['error' => $this->l10n->t('Login server error')];
+		} catch (Exception | Throwable $e) {
+			$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
+			return [
+				'error' => $this->l10n->t('Login error'),
+				'exception' => $e->getMessage(),
+			];
+		}
+
+
+		// Ok, now we are authenticated, let's get the user info and return that to the frontend
+		$authToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
+		try {
+			$url = $baseUrl . '/public/api/public/v2.0/collaborationhub/auth/userinfo';
+			$options = [
+				'headers' => [
+					'Authorization' => 'Bearer ' . $authToken,
+					'User-Agent' => Application::INTEGRATION_USER_AGENT,
+					'Content-Type' => 'application/json',
+				],
+			];
+			$response = $this->client->get($url, $options);
+			$body = $response->getBody();
+			$respCode = $response->getStatusCode();
+
+			if ($respCode >= 400) {
+				return ['error' => $this->l10n->t('Could not retrieve user info')];
+			} else {
+				try {
+					$userInfoResp = json_decode($body, true);
+					if (
+						isset(
+							$userInfoResp['Result']['UserName'],
+							$userInfoResp['Result']['FirstName'],
+							$userInfoResp['Result']['LastName'])
+					) {
+						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $userInfoResp['Result']['UserName']);
+						$displayName = $userInfoResp['Result']['FirstName'] . ' ' . $userInfoResp['Result']['LastName'];
+						$this->config->setUserValue($userId, Application::APP_ID, 'user_displayname', $displayName);
+
+						return [
+							'user_name' => $userInfoResp['Result']['UserName'],
+							'user_displayname' => $displayName,
+						];
+					} else {
+						throw new Exception('Invalid response');
+					}
+				} catch (Exception | Throwable $e) {
+					$this->logger->warning('Collaboard login error : Invalid response', ['app' => Application::APP_ID]);
+					return ['error' => $this->l10n->t('Invalid response')];
+				}
+			}
+		} catch (ServerException $e) {
+			$response = $e->getResponse();
+			$body = $response->getBody();
+			$this->logger->warning('Collaboard login server error : ' . $body, ['app' => Application::APP_ID]);
+			return ['error' => $this->l10n->t('Login server error')];
+		} catch (Exception | Throwable $e) {
+			$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
+			return [
+				'error' => $this->l10n->t('Login error'),
+				'exception' => $e->getMessage(),
+			];
 		}
 	}
 
@@ -665,9 +780,10 @@ class CollaboardAPIService {
 	 * @throws PreConditionNotMetException
 	 */
 	public function checkTokenExpiration(string $userId): bool {
+		$apiKey = $this->config->getUserValue($userId, Application::APP_ID, 'api_key');
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
 		$expireAt = $this->config->getUserValue($userId, Application::APP_ID, 'token_expires_at');
-		if ($refreshToken !== '' && $expireAt !== '') {
+		if (($apiKey !== '' || $refreshToken !== '') && $expireAt !== '') {
 			$nowTs = (new Datetime())->getTimestamp();
 			$expireAt = (int) $expireAt;
 			// if token expires in less than a minute or is already expired
@@ -683,6 +799,51 @@ class CollaboardAPIService {
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$baseUrl = $this->config->getUserValue($userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
+		$apiKey = $this->config->getUserValue($userId, Application::APP_ID, 'api_key');
+		if ($apiKey !== '') {
+			try {
+				$url = $baseUrl . '/public/api/public/v2.0/collaborationhub/auth/token';
+				$options = [
+					'headers' => [
+						'Authorization' => 'Bearer ' . $apiKey,
+						'User-Agent' => Application::INTEGRATION_USER_AGENT,
+					],
+				];
+
+				$response = $this->client->get($url, $options);
+				$body = $response->getBody();
+				$respCode = $response->getStatusCode();
+
+				if ($respCode >= 400) {
+					return false;
+				} else {
+					try {
+						$authResp = json_decode($body, true);
+						if (isset($authResp['AuthorizationToken'], $authResp['ExpiresIn'])) {
+							$this->config->setUserValue($userId, Application::APP_ID, 'token', $authResp['AuthorizationToken']);
+
+							$nowTs = (new DateTime())->getTimestamp();
+							$tokenExpireAt = $nowTs + (int) ($authResp['ExpiresIn']);
+							$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+							return true;
+						} else {
+							throw new Exception('Response is missing required keys');
+						}
+					} catch (Exception | Throwable $e) {
+						$this->logger->warning('Collaboard login with API key error : Invalid response. Error: ' . $e->getMessage(), ['app' => Application::APP_ID]);
+					}
+					return false;
+				}
+			} catch (ServerException $e) {
+				$response = $e->getResponse();
+				$body = $response->getBody();
+				$this->logger->warning('Collaboard login server error : ' . $body, ['app' => Application::APP_ID]);
+				return false;
+			} catch (Exception | Throwable $e) {
+				$this->logger->warning('Collaboard login error : ' . $e->getMessage(), ['app' => Application::APP_ID]);
+				return false;
+			}
+		}
 		try {
 			$url = $baseUrl . '/auth/api/Authorization/RefreshToken';
 			$options = [

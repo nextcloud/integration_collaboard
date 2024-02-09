@@ -55,7 +55,12 @@ class ConfigController extends Controller {
 	public function setConfig(array $values): DataResponse {
 
 		$result = [];
-		if (isset($values['url'], $values['login'], $values['password'])) {
+		if (isset($values['url'], $values['api_key'])) {
+			$this->config->setUserValue($this->userId, Application::APP_ID, 'url', $values['url']);
+			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'refresh_token');
+			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token_expires_at');
+			$result = $this->collaboardAPIService->loginWithApiKey($this->userId, $values['api_key']);
+		} elseif (isset($values['url'], $values['login'], $values['password'])) {
 			$this->config->setUserValue($this->userId, Application::APP_ID, 'url', $values['url']);
 			$secondFactor = ($values['two_factor_code'] ?? null) ?: null;
 
@@ -76,9 +81,14 @@ class ConfigController extends Controller {
 
 		if (isset($values['token'])) {
 			if ($values['token'] === '') {
+				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'login');
+				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'api_key');
 				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'user_name');
 				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'user_displayname');
 				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token');
+				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'sfa_method');
+				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'two_factor_code');
+				$this->config->deleteUserValue($this->userId, Application::APP_ID, 'authentication_mode');
 				$result['user_name'] = '';
 				$result['user_displayname'] = '';
 			}

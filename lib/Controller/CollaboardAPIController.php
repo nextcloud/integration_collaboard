@@ -32,12 +32,14 @@ class CollaboardAPIController extends Controller {
 	private ?string $userId;
 	private IURLGenerator $urlGenerator;
 
-	public function __construct(string               $appName,
+	public function __construct(
+		string               $appName,
 		IRequest             $request,
 		IConfig              $config,
 		CollaboardAPIService $collaboardAPIService,
 		IURLGenerator        $urlGenerator,
-		?string              $userId) {
+		?string              $userId
+	) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->collaboardAPIService = $collaboardAPIService;
@@ -48,7 +50,7 @@ class CollaboardAPIController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
-	 * @return DataResponse
+	 * @return Response
 	 * @throws Exception
 	 */
 	public function getUserPhoto(string $url, string $userName): Response {
@@ -59,7 +61,7 @@ class CollaboardAPIController extends Controller {
 		$collaboardUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
 		if (substr($url, 0, strlen($collaboardUrl)) === $collaboardUrl) {
 			$image = $this->collaboardAPIService->getImage($url);
-			if ($image !== null && isset($image['body'], $image['headers'])) {
+			if (isset($image['body'], $image['headers'])) {
 				$response = new DataDisplayResponse(
 					$image['body'],
 					Http::STATUS_OK,

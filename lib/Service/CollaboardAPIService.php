@@ -12,7 +12,7 @@
 
 namespace OCA\Collaboard\Service;
 
-use Datetime;
+use DateTime;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
@@ -58,7 +58,7 @@ class CollaboardAPIService {
 		$userName = $this->config->getUserValue($userId, Application::APP_ID, 'user_name');
 		$token = $this->config->getUserValue($userId, Application::APP_ID, 'token');
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
-		return $url && $userName && $token && $refreshToken;
+		return $url !== '' && $userName && $token && $refreshToken;
 	}
 
 	public function getImage(string $url): array {
@@ -225,8 +225,8 @@ class CollaboardAPIService {
 	 * @param array $params
 	 * @param string $method
 	 * @param bool $jsonResponse
-	 * @return array|mixed|resource|string|string[]
-	 * @throws Exception
+	 * @return array
+	 * @throws PreConditionNotMetException
 	 */
 	public function restRequest(
 		string $userId,
@@ -382,7 +382,6 @@ class CollaboardAPIService {
 		}
 	}
 
-
 	/**
 	 * Login and retrieve user options
 	 *
@@ -438,7 +437,7 @@ class CollaboardAPIService {
 
 						$nowTs = (new DateTime())->getTimestamp();
 						$tokenExpireAt = $nowTs + (int) ($authResp['ExpiresIn']);
-						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', (string)$tokenExpireAt);
 						$this->config->setUserValue($userId, Application::APP_ID, 'user_name', $login);
 						$this->config->setUserValue($userId, Application::APP_ID, 'url', $baseUrl);
 						$this->config->setUserValue($userId, Application::APP_ID, 'authentication_mode', $authResp['AuthenticationMode']);
@@ -576,7 +575,7 @@ class CollaboardAPIService {
 
 						$nowTs = (new DateTime())->getTimestamp();
 						$tokenExpireAt = $nowTs + (int) ($validationResp['ExpiresIn']);
-						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', (string)$tokenExpireAt);
 						return ['token' => $validationResp['AuthorizationToken']];
 					}
 				} catch (Exception | Throwable $e) {
@@ -707,7 +706,7 @@ class CollaboardAPIService {
 
 						$nowTs = (new DateTime())->getTimestamp();
 						$tokenExpireAt = $nowTs + (int) ($res['ExpiresIn']);
-						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $tokenExpireAt);
+						$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', (string)$tokenExpireAt);
 						return true;
 					}
 				} catch (Exception | Throwable $e) {

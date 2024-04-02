@@ -56,7 +56,6 @@ class PageController extends Controller {
 	 */
 	public function index(): TemplateResponse {
 		$token = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
-		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
 		

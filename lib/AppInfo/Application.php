@@ -14,11 +14,6 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-/**
- * Class Application
- *
- * @package OCA\Collaboard\AppInfo
- */
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'integration_collaboard';
 	public const INTEGRATION_USER_AGENT = 'Nextcloud Collaboard integration';

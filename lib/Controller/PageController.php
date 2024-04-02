@@ -56,12 +56,13 @@ class PageController extends Controller {
 	 */
 	public function index(): TemplateResponse {
 		$token = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
+		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
-		
+
 		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
 		$url = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
-		
+
 		$adminInviteUrl = $this->config->getAppValue(Application::APP_ID, 'admin_invite_url', Application::DEFAULT_COLLABOARD_INVITE_URL) ?: Application::DEFAULT_COLLABOARD_INVITE_URL;
 		$inviteUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'invite_url', $adminInviteUrl) ?: $adminInviteUrl;
 
@@ -84,7 +85,7 @@ class PageController extends Controller {
 			'project_list' => [],
 			'invite_url' => $inviteUrl,
 		];
-		
+
 		if ($url !== '' && $token !== '' && $refreshToken !== '') {
 			$projects = $this->collaboardAPIService->getProjects($this->userId);
 			if (isset($projects['error'])) {

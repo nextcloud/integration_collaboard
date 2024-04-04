@@ -48,8 +48,7 @@ class Personal implements ISettings {
 		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
 
 		$userConfig = [
-			// we consider the token is not valid until there is also a refresh token
-			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
+			'token' => $token ? 'dummyTokenContent' : '',
 			'url' => $url,
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,

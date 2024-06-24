@@ -106,7 +106,7 @@ class ConfigController extends Controller {
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token_expires_at');
 		}
 
-		$this->logger->debug('setConfig' , [
+		$this->logger->info('setConfig' , [
 				'app' => Application::APP_ID,
 				'values' => $values,
 				'result' => $result,
@@ -142,7 +142,7 @@ class ConfigController extends Controller {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
 		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
 
-		$this->logger->debug('oauthRedirect' , [
+		$this->logger->info('oauthRedirect' , [
 			'code' => $code,
 			'clientID' => $clientID,
 			'clientSecret' => $clientSecret,
@@ -161,7 +161,7 @@ class ConfigController extends Controller {
 				'grant_type' => 'authorization_code'
 			], 'POST');
 
-			$this->logger->debug('requestOAuthAccessToken' , [
+			$this->logger->info('requestOAuthAccessToken' , [
 				'app' => Application::APP_ID,
 				'result' => $result,
 			]);
@@ -216,8 +216,7 @@ class ConfigController extends Controller {
 	 */
 	private function storeUserInfo(): array {
 		$info = $this->collaboardAPIService->getUserInfo($this->userId);
-		$this->logger->debug('storeUserInfo' , [
-				'app' => Application::APP_ID,
+		$this->logger->info('storeUserInfo' , [
 				'info' => $info,
 			]);
 

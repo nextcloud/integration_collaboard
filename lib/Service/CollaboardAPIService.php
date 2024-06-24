@@ -95,7 +95,7 @@ class CollaboardAPIService {
 			'pageSize' => 100,
 			'pageNumber' => 1,
 		];
-		$projectsResult = $this->request($userId, 'public/api/public/v2.0/collaborationhub/projects/owned', $params, 'GET');
+		$projectsResult = $this->request($userId, 'public/api/public/v2.0/collaborationhub/projects/participating', $params, 'GET');
 		if (isset($projectsResult['error'])) {
 			return $projectsResult;
 		}
@@ -434,7 +434,10 @@ class CollaboardAPIService {
 	public function revokeToken(string $userId): bool {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
 		$token = $this->config->getUserValue($userId, Application::APP_ID, 'token');
-		$revokeResponse = $this->request($userId, '/auth/oauth2/revoke?client_id=' . $clientID . '&token=' . $token, [], 'POST', false);
+		$revokeResponse = $this->request($userId, 'auth/oauth2/revoke', [
+			'client_id' => $clientID,
+			'token' => $token,
+		], 'POST', false);
 		return $revokeResponse === '';
 	}
 }

@@ -5,44 +5,90 @@
 			{{ t('integration_collaboard', 'Collaboard integration') }}
 		</h2>
 		<div class="collaboard-content">
+			<p class="settings-hint">
+				{{ t('integration_collaboard', 'If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret.') }}
+			</p>
+			<br>
+			<p class="settings-hint">
+				<InformationVariantIcon :size="24" class="icon" />
+				{{ t('integration_collaboard', 'Make sure you provide the "Redirect URI" to Collaboard Support') }}
+				&nbsp;<b> {{ redirect_uri }} </b>
+			</p>
+			<br>
+			<p class="settings-hint">
+				{{ t('integration_collaboard', 'Put the "Application ID" and "Application secret" below. Your Nextcloud users will then see a "Connect to Collaboard" button in their personal settings.') }}
+			</p>
+			<div class="field">
+				<label for="collaboard-client-id">
+					<KeyIcon :size="20" class="icon" />
+					{{ t('integration_collaboard', 'Application ID') }}
+				</label>
+				<input id="collaboard-client-id"
+					v-model="state.client_id"
+					type="password"
+					:readonly="readonly"
+					:placeholder="t('integration_collaboard', 'ID of your Collaboard application')"
+					@input="onInput"
+					@focus="readonly = false">
+			</div>
+			<div class="field">
+				<label for="collaboard-client-secret">
+					<KeyIcon :size="20" class="icon" />
+					{{ t('integration_collaboard', 'Application secret') }}
+				</label>
+				<input id="collaboard-client-secret"
+					v-model="state.client_secret"
+					type="password"
+					:readonly="readonly"
+					:placeholder="t('integration_collaboard', 'Client secret of your Collaboard application')"
+					@focus="readonly = false"
+					@input="onInput">
+			</div>
+			<!-- <NcCheckboxRadioSwitch
+				class="field"
+				:checked.sync="state.use_popup"
+				@update:checked="onUsePopupChanged">
+				{{ t('integration_collaboard', 'Use a popup to authenticate') }}
+			</NcCheckboxRadioSwitch> -->
+
 			<div class="field">
 				<label for="collaboard-instance">
 					<EarthIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Default Collaboard server') }}
+					{{ t('integration_collaboard', 'Default Collaboard API server') }}
 				</label>
 				<input id="collaboard-instance"
-					v-model="state.admin_instance_url"
-					:class="{ 'greyed-out-text': !usingCustomInstanceUrl, 'invalid-url': !isInstanceUrlValid }"
+					v-model="state.admin_api_url"
+					:class="{ 'greyed-out-text': !usingCustomApiUrl, 'invalid-url': !isApiUrlValid }"
 					type="text"
 					placeholder="https://..."
 					@input="onInput"
 					@blur="fillEmptyUrls">
 				<transition name="fade">
-					<div v-if="usingCustomInviteUrl && !usingCustomInstanceUrl" class="custom-address-notice">
+					<div v-if="usingCustomDomainUrl && !usingCustomApiUrl" class="custom-address-notice">
 						<InformationOutlineIcon :size="20" class="icon" />
 						<span class="notice-text">
-							{{ t('integration_collaboard', 'You have specified a custom invite address. Did you forget to specify a custom instance address?') }}
+							{{ t('integration_collaboard', 'You have specified a custom domain address. Did you forget to specify a custom API address?') }}
 						</span>
 					</div>
 				</transition>
 			</div>
 			<div class="field">
-				<label for="collaboard-invite-url">
+				<label for="collaboard-domain-url">
 					<EarthIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Default Collaboard invite url') }}
+					{{ t('integration_collaboard', 'Default Collaboard domain url') }}
 				</label>
 				<input id="collaboard-instance"
-					v-model="state.admin_invite_url"
-					:class="{ 'greyed-out-text': !usingCustomInviteUrl, 'invalid-url': !isInviteUrlValid }"
+					v-model="state.admin_domain_url"
+					:class="{ 'greyed-out-text': !usingCustomDomainUrl, 'invalid-url': !isDomainUrlValid }"
 					type="text"
 					placeholder="https://..."
 					@input="onInput"
 					@blur="fillEmptyUrls">
 				<transition name="fade">
-					<div v-if="usingCustomInstanceUrl && !usingCustomInviteUrl" class="custom-address-notice">
+					<div v-if="usingCustomApiUrl && !usingCustomDomainUrl" class="custom-address-notice">
 						<InformationOutlineIcon :size="20" class="icon" />
 						<span class="notice-text">
-							{{ t('integration_collaboard', 'You have specified a custom instance address. Did you forget to specify a custom invite address?') }}
+							{{ t('integration_collaboard', 'You have specified a custom API address. Did you forget to specify a custom domain address?') }}
 						</span>
 					</div>
 				</transition>
@@ -57,11 +103,11 @@ import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline
 
 import CollaboardIcon from './icons/CollaboardIcon.vue'
 
+import axios from '@nextcloud/axios'
+import { showError, showSuccess } from '@nextcloud/dialogs'
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
-import axios from '@nextcloud/axios'
 import { delay } from '../utils.js'
-import { showSuccess, showError } from '@nextcloud/dialogs'
 
 export default {
 	name: 'AdminSettings',
@@ -79,24 +125,25 @@ export default {
 			state: loadState('integration_collaboard', 'admin-config'),
 			// to prevent some browsers to fill fields with remembered passwords
 			readonly: true,
+			redirect_uri: window.location.protocol + '//' + window.location.host + generateUrl('/apps/integration_collaboard/oauth-redirect'),
 		}
 	},
 
 	computed: {
-		isInstanceUrlValid() {
-			return this.isValidUrl(this.state.admin_instance_url)
+		isApiUrlValid() {
+			return this.isValidUrl(this.state.admin_api_url)
 		},
-		isInviteUrlValid() {
-			return this.isValidUrl(this.state.admin_invite_url)
+		isDomainUrlValid() {
+			return this.isValidUrl(this.state.admin_domain_url)
 		},
 		usingCustomUrls() {
-			return this.usingCustomInviteUrl || this.usingCustomInstanceUrl
+			return this.usingCustomDomainUrl || this.usingCustomApiUrl
 		},
-		usingCustomInviteUrl() {
-			return this.state.admin_invite_url !== this.state.default_invite_url && this.state.admin_invite_url !== ''
+		usingCustomDomainUrl() {
+			return this.state.admin_domain_url !== this.state.default_domain_url && this.state.admin_domain_url !== ''
 		},
-		usingCustomInstanceUrl() {
-			return this.state.admin_instance_url !== this.state.default_instance_url && this.state.admin_instance_url !== ''
+		usingCustomApiUrl() {
+			return this.state.admin_api_url !== this.state.default_api_url && this.state.admin_api_url !== ''
 		},
 	},
 
@@ -107,20 +154,26 @@ export default {
 	},
 
 	methods: {
+		onUsePopupChanged(newValue) {
+			this.saveOptions({ use_popup: newValue ? '1' : '0' })
+		},
 		onInput() {
 			delay(() => {
 				this.saveOptions({
-					admin_instance_url: this.state.admin_instance_url === '' ? this.default_instance_url : this.state.admin_instance_url,
-					admin_invite_url: this.state.admin_invite_url === '' ? this.default_invite_url : this.state.admin_invite_url,
+					client_id: this.state.client_id,
+					client_secret: this.state.client_secret,
+
+					admin_api_url: this.state.admin_api_url === '' ? this.default_api_url : this.state.admin_api_url,
+					admin_domain_url: this.state.admin_domain_url === '' ? this.default_domain_url : this.state.admin_domain_url,
 				})
 			}, 2000)()
 		},
 		fillEmptyUrls() {
-			if (this.state.admin_instance_url === '') {
-				this.state.admin_instance_url = this.state.default_instance_url
+			if (this.state.admin_api_url === '') {
+				this.state.admin_api_url = this.state.default_api_url
 			}
-			if (this.state.admin_invite_url === '') {
-				this.state.admin_invite_url = this.state.default_invite_url
+			if (this.state.admin_domain_url === '') {
+				this.state.admin_domain_url = this.state.default_domain_url
 			}
 		},
 		isValidUrl(url) {
@@ -129,7 +182,7 @@ export default {
 		},
 		saveOptions(values) {
 			// Validate the urls, the error is shown in the border color of the input
-			if (!this.isValidUrl(values.admin_instance_url) || !this.isValidUrl(values.admin_invite_url)) {
+			if (!this.isValidUrl(values.admin_api_url) || !this.isValidUrl(values.admin_domain_url)) {
 				return
 			}
 
@@ -137,14 +190,14 @@ export default {
 				values,
 			}
 			const url = generateUrl('/apps/integration_collaboard/admin-config')
-			axios.put(url, req).then((response) => {
+			axios.put(url, req).then(() => {
 				showSuccess(t('integration_collaboard', 'Collaboard admin options saved'))
 			}).catch((error) => {
 				showError(
 					t('integration_collaboard', 'Failed to save Collaboard admin options')
 					+ ': ' + (error.response?.request?.responseText ?? ''),
 				)
-				console.debug(error)
+				console.error(error)
 			})
 		},
 	},

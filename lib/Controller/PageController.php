@@ -60,13 +60,10 @@ class PageController extends Controller {
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
 
-		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
-		$url = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+		$url = $this->config->getAppValue(Application::APP_ID, 'admin_api_url', Application::DEFAULT_COLLABOARD_API) ?: Application::DEFAULT_COLLABOARD_API;
 
-		$adminInviteUrl = $this->config->getAppValue(Application::APP_ID, 'admin_invite_url', Application::DEFAULT_COLLABOARD_INVITE_URL) ?: Application::DEFAULT_COLLABOARD_INVITE_URL;
-		$inviteUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'invite_url', $adminInviteUrl) ?: $adminInviteUrl;
-
-		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
+		$adminDomainUrl = $this->config->getAppValue(Application::APP_ID, 'admin_domain_url', Application::DEFAULT_COLLABOARD_DOMAIN) ?: Application::DEFAULT_COLLABOARD_DOMAIN;
+		$inviteUrl = $adminDomainUrl . '/acceptProjectInvitation';
 
 		$talkEnabled = $this->appManager->isEnabledForUser('spreed');
 
@@ -78,7 +75,6 @@ class PageController extends Controller {
 			'url' => $url,
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
-			'sfa_method' => $sfaMethod,
 			'licensing_info' => $licensingInfo,
 
 			'talk_enabled' => $talkEnabled,

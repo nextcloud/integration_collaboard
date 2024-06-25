@@ -149,7 +149,7 @@ export default {
 
 	computed: {
 		connected() {
-			return !!this.state.url && !!this.state.user_name && !!this.state.token
+			return !!this.state.user_name && !!this.state.token
 		},
 		isLicenseActive() {
 			return this.state.licensing_info?.IsActive
@@ -192,7 +192,7 @@ export default {
 
 	methods: {
 		onConnected(userName, baseUrl) {
-			this.state.url = baseUrl
+			this.state.admin_api_url = baseUrl
 			this.state.user_name = userName
 			this.state.token = 'plop'
 			// window.location.reload()

@@ -27,11 +27,18 @@ use OCA\Collaboard\AppInfo\Application;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
+use OCP\IConfig;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
 class AddContentSecurityPolicyListener implements IEventListener {
 
-	public function __construct() {
+	/**
+	 * @var IConfig
+	 */
+	protected $config;
+
+	public function __construct(IConfig $config) {
+		$this->config = $config;
 	}
 
 	public function handle(Event $event): void {
@@ -39,10 +46,12 @@ class AddContentSecurityPolicyListener implements IEventListener {
 			return;
 		}
 
+		$adminDomainUrl = $this->config->getAppValue(Application::APP_ID, 'admin_domain_url', Application::DEFAULT_COLLABOARD_DOMAIN) ?: Application::DEFAULT_COLLABOARD_DOMAIN;
+
 		$csp = new ContentSecurityPolicy();
 		$csp->addAllowedFrameDomain('\'self\'');
 		$csp->addAllowedFrameAncestorDomain('\'self\'');
-		$csp->addAllowedFrameDomain(Application::DEFAULT_COLLABOARD_DOMAIN);
+		$csp->addAllowedFrameDomain($adminDomainUrl);
 
 		$event->addPolicy($csp);
 	}

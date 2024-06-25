@@ -57,10 +57,14 @@ class PageController extends Controller {
 	public function index(): TemplateResponse {
 		$token = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
 		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
+		// don't expose the client secret to users
+		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret') !== '';
+		
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
 
-		$url = $this->config->getAppValue(Application::APP_ID, 'admin_api_url', Application::DEFAULT_COLLABOARD_API) ?: Application::DEFAULT_COLLABOARD_API;
+		$adminApiUrl = $this->config->getAppValue(Application::APP_ID, 'admin_api_url', Application::DEFAULT_COLLABOARD_API) ?: Application::DEFAULT_COLLABOARD_API;
 
 		$adminDomainUrl = $this->config->getAppValue(Application::APP_ID, 'admin_domain_url', Application::DEFAULT_COLLABOARD_DOMAIN) ?: Application::DEFAULT_COLLABOARD_DOMAIN;
 		$inviteUrl = $adminDomainUrl . '/acceptProjectInvitation';
@@ -72,7 +76,12 @@ class PageController extends Controller {
 		$pageInitialState = [
 			// we consider the token is not valid until there is also a refresh token
 			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
-			'url' => $url,
+			'client_id' => $clientID,
+			'client_secret' => $clientSecret,
+
+			'admin_api_url' => $adminApiUrl,
+			'admin_domain_url' => $adminDomainUrl,
+
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
 			'licensing_info' => $licensingInfo,
@@ -82,7 +91,7 @@ class PageController extends Controller {
 			'invite_url' => $inviteUrl,
 		];
 
-		if ($url !== '' && $token !== '' && $refreshToken !== '') {
+		if ($token !== '' && $refreshToken !== '') {
 			$projects = $this->collaboardAPIService->getProjects($this->userId);
 			if (isset($projects['error'])) {
 				$pageInitialState['project_list_error'] = $projects['error'];

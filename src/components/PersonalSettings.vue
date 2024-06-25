@@ -112,13 +112,12 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_collaboard/config')
 			axios.put(url, req).then((response) => {
-				console.debug(response.data)
 				if (response.data?.user_name !== undefined) {
 					this.state.user_name = response.data.user_name
 					showSuccess(t('integration_collaboard', 'Successfully connected to Collaboard!'))
 					this.state.user_displayname = response.data.user_displayname
 					this.state.token = 'dumdum'
-					this.$emit('connected', this.state.user_name, this.state.url)
+					this.$emit('connected', this.state.user_name, this.state.admin_api_url)
 				} else {
 					showSuccess(t('integration_collaboard', 'Collaboard options saved'))
 				}

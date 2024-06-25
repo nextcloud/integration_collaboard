@@ -117,6 +117,13 @@
 					</div>
 				</div>
 			</div>
+
+			<NcCheckboxRadioSwitch
+				class="field"
+				:checked.sync="state.override_link_click"
+				@update:checked="onOverrideChanged">
+				{{ t('integration_collaboard', 'Open Collaboard board links in Nextcloud') }}
+			</NcCheckboxRadioSwitch>
 		</div>
 	</div>
 </template>
@@ -206,6 +213,9 @@ export default {
 	methods: {
 		onUsePopupChanged(newValue) {
 			this.saveOptions({ use_popup: newValue ? '1' : '0' })
+		},
+		onOverrideChanged(newValue) {
+			this.saveOptions({ override_link_click: newValue ? '1' : '0' })
 		},
 		onInput() {
 			delay(() => {

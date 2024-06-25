@@ -434,7 +434,7 @@ class CollaboardAPIService {
 	public function revokeToken(string $userId): bool {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
 		$token = $this->config->getUserValue($userId, Application::APP_ID, 'token');
-		$revokeResponse = $this->request($userId, 'auth/oauth2/revoke', [
+		$revokeResponse = $this->request($userId, 'auth/oauth2/token/revoke', [
 			'client_id' => $clientID,
 			'token' => $token,
 		], 'POST', false);

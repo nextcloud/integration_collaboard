@@ -1,0 +1,430 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: lokalise.com\n"
+"Project-Id-Version: Nextcloud\n"
+"PO-Revision-Date: 2024-06-25 11:27\n"
+"Last-Translator: lokalise.com\n"
+"Language-Team: lokalise.com\n\n"
+"Language: sv\n"
+
+#, fuzzy
+msgid "Error getting OAuth access token. "
+msgstr ""
+
+#, fuzzy
+msgid "Error during OAuth exchanges"
+msgstr ""
+
+#, fuzzy
+msgid "Your Collaboard session has expired, please re-authenticate in your user settings."
+msgstr ""
+
+#, fuzzy
+msgid "Bad HTTP method"
+msgstr ""
+
+#, fuzzy
+msgid "Bad credentials"
+msgstr ""
+
+#, fuzzy
+msgid "Collaboard API client error"
+msgstr ""
+
+#, fuzzy
+msgid "OAuth access token refused"
+msgstr ""
+
+#, fuzzy
+msgid "Connected accounts"
+msgstr ""
+
+#, fuzzy
+msgid "Collaboard integration"
+msgstr ""
+
+#, fuzzy
+msgid "Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Integration of Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Collaboard whiteboard service integration"
+msgstr ""
+
+#, fuzzy
+msgid "You are not connected to Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Configure Collaboard integration"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to get the project list"
+msgstr ""
+
+#, fuzzy
+msgid "Loading project list"
+msgstr ""
+
+#, fuzzy
+msgid "You haven't created any project yet"
+msgstr ""
+
+#, fuzzy
+msgid "Create a project"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to get projects"
+msgstr ""
+
+#, fuzzy
+msgid "New project was created in Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to create new project"
+msgstr ""
+
+#, fuzzy
+msgid "Free Collaboard plan is limited to 3 projects"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to delete the project"
+msgstr ""
+
+#, fuzzy
+msgid "{name} deleted"
+msgstr ""
+
+#, fuzzy
+msgid "If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret."
+msgstr ""
+
+#, fuzzy
+msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
+msgstr ""
+
+#, fuzzy
+msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
+msgstr ""
+
+#, fuzzy
+msgid "Application ID"
+msgstr ""
+
+#, fuzzy
+msgid "ID of your Collaboard application"
+msgstr ""
+
+#, fuzzy
+msgid "Application secret"
+msgstr ""
+
+#, fuzzy
+msgid "Client secret of your Collaboard application"
+msgstr ""
+
+#, fuzzy
+msgid "Use a popup to authenticate"
+msgstr ""
+
+#, fuzzy
+msgid "Default Collaboard API server"
+msgstr ""
+
+#, fuzzy
+msgid "You have specified a custom domain address. Did you forget to specify a custom API address?"
+msgstr ""
+
+#, fuzzy
+msgid "Default Collaboard domain url"
+msgstr ""
+
+#, fuzzy
+msgid "You have specified a custom API address. Did you forget to specify a custom domain address?"
+msgstr ""
+
+#, fuzzy
+msgid "Collaboard admin options saved"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to save Collaboard admin options"
+msgstr ""
+
+#, fuzzy
+msgid "Invitation link"
+msgstr ""
+
+#, fuzzy
+msgid "Registered users permissions"
+msgstr ""
+
+#, fuzzy
+msgid "Allow guests"
+msgstr ""
+
+#, fuzzy
+msgid "Allow guests (paid license required)"
+msgstr ""
+
+#, fuzzy
+msgid "Guest permissions"
+msgstr ""
+
+#, fuzzy
+msgid "Password (optional)"
+msgstr ""
+
+#, fuzzy
+msgid "no password"
+msgstr ""
+
+#, fuzzy
+msgid "Expires in"
+msgstr ""
+
+#, fuzzy
+msgid "Create another link"
+msgstr ""
+
+#, fuzzy
+msgid "Create link"
+msgstr ""
+
+#, fuzzy
+msgid "Share link to a Talk conversation"
+msgstr ""
+
+#, fuzzy
+msgid "No access"
+msgstr ""
+
+#, fuzzy
+msgid "Can view"
+msgstr ""
+
+#, fuzzy
+msgid "Can edit"
+msgstr ""
+
+#, fuzzy
+msgid "Never"
+msgstr ""
+
+#, fuzzy
+msgid "1 hour"
+msgstr ""
+
+#, fuzzy
+msgid "4 hours"
+msgstr ""
+
+#, fuzzy
+msgid "12 hours"
+msgstr ""
+
+#, fuzzy
+msgid "1 day"
+msgstr ""
+
+#, fuzzy
+msgid "2 days"
+msgstr ""
+
+#, fuzzy
+msgid "5 days"
+msgstr ""
+
+#, fuzzy
+msgid "10 days"
+msgstr ""
+
+#, fuzzy
+msgid "30 days"
+msgstr ""
+
+#, fuzzy
+msgid "60 days"
+msgstr ""
+
+#, fuzzy
+msgid "Invitation link was created"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to create invitation link"
+msgstr ""
+
+#, fuzzy
+msgid "Choose color"
+msgstr ""
+
+#, fuzzy
+msgid "Cancel"
+msgstr ""
+
+#, fuzzy
+msgid "Create"
+msgstr ""
+
+#, fuzzy
+msgid "Field \"{name}\" is missing"
+msgstr ""
+
+#, fuzzy
+msgid "Create a new project"
+msgstr ""
+
+#, fuzzy
+msgid "Ask your administrator to configure the Collaboard integration in Nextcloud."
+msgstr ""
+
+#, fuzzy
+msgid "Connect to Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Connected as {user}"
+msgstr ""
+
+#, fuzzy
+msgid "Disconnect from Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Successfully connected to Collaboard!"
+msgstr ""
+
+#, fuzzy
+msgid "Error connecting to Collaboard:"
+msgstr ""
+
+#, fuzzy
+msgid "Collaboard options saved"
+msgstr ""
+
+#, fuzzy
+msgid "Failed to save Collaboard options"
+msgstr ""
+
+#, fuzzy
+msgid "Back to project list"
+msgstr ""
+
+#, fuzzy
+msgid "Delete project"
+msgstr ""
+
+#, fuzzy
+msgid "Project personal link"
+msgstr ""
+
+#, fuzzy
+msgid "Copy to clipboard"
+msgstr ""
+
+#, fuzzy
+msgid "Open in a new tab"
+msgstr ""
+
+#, fuzzy
+msgid "Enabled"
+msgstr ""
+
+#, fuzzy
+msgid "Disabled"
+msgstr ""
+
+#, fuzzy
+msgid "Project link copied!"
+msgstr ""
+
+#, fuzzy
+msgid "Link could not be copied to clipboard"
+msgstr ""
+
+#, fuzzy
+msgid "Updated: {date}"
+msgstr ""
+
+#, fuzzy
+msgid "Owner: {user}"
+msgstr ""
+
+#, fuzzy
+msgid "Reload project list from Collaboard"
+msgstr ""
+
+#, fuzzy
+msgid "Send link to a Talk room"
+msgstr ""
+
+#, fuzzy
+msgid "Search for users, groups or conversations"
+msgstr ""
+
+#, fuzzy
+msgid "Conversations"
+msgstr ""
+
+#, fuzzy
+msgid "Users"
+msgstr ""
+
+#, fuzzy
+msgid "Groups"
+msgstr ""
+
+#, fuzzy
+msgid "Send"
+msgstr ""
+
+msgid "You created a conversation with {name}"
+msgstr ""
+
+msgid "Failed to join"
+msgstr ""
+
+msgid "You joined {name}"
+msgstr ""
+
+msgid "Collaboard project \"{name}\": {link}"
+msgstr ""
+
+msgid "Link sent to {name}"
+msgstr ""
+
+msgid "Failed to send link"
+msgstr ""
+
+msgid "Project name"
+msgstr ""
+
+msgid "New Project"
+msgstr ""
+
+msgid "Created at"
+msgstr ""
+
+msgid "Created by"
+msgstr ""
+
+msgid "Updated at"
+msgstr "Uppdaterad kl"
+
+msgid "Sign in with Collaboard"
+msgstr "Logga in med Collaboard"
+
+msgid "Failed to save Collaboard OAuth state"
+msgstr "Misslyckades med att spara Collaboard OAuth-status"

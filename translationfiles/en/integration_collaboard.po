@@ -1,0 +1,336 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nextcloud 3.14159\n"
+"Report-Msgid-Bugs-To: translations\@example.com\n"
+"POT-Creation-Date: 2024-06-24 16:26+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Error getting OAuth access token. "
+msgstr "Error getting OAuth access token. "
+
+msgid "Error during OAuth exchanges"
+msgstr "Error during OAuth exchanges"
+
+msgid "Your Collaboard session has expired, please re-authenticate in your user settings."
+msgstr "Your Collaboard session has expired, please re-authenticate in your user settings."
+
+msgid "Bad HTTP method"
+msgstr "Bad HTTP method"
+
+msgid "Bad credentials"
+msgstr "Bad credentials"
+
+msgid "Collaboard API client error"
+msgstr "Collaboard API client error"
+
+msgid "OAuth access token refused"
+msgstr "OAuth access token refused"
+
+msgid "Connected accounts"
+msgstr "Connected accounts"
+
+msgid "Collaboard integration"
+msgstr "Collaboard integration"
+
+msgid "Collaboard"
+msgstr "Collaboard"
+
+msgid "Integration of Collaboard"
+msgstr "Integration of Collaboard"
+
+msgid "Collaboard whiteboard service integration"
+msgstr "Collaboard whiteboard service integration"
+
+msgid "You are not connected to Collaboard"
+msgstr "You are not connected to Collaboard"
+
+msgid "Configure Collaboard integration"
+msgstr "Configure Collaboard integration"
+
+msgid "Failed to get the project list"
+msgstr "Failed to get the project list"
+
+msgid "Loading project list"
+msgstr "Loading project list"
+
+msgid "You haven't created any project yet"
+msgstr "You haven't created any project yet"
+
+msgid "Create a project"
+msgstr "Create a project"
+
+msgid "Failed to get projects"
+msgstr "Failed to get projects"
+
+msgid "New project was created in Collaboard"
+msgstr "New project was created in Collaboard"
+
+msgid "Failed to create new project"
+msgstr "Failed to create new project"
+
+msgid "Free Collaboard plan is limited to 3 projects"
+msgstr "Free Collaboard plan is limited to 3 projects"
+
+msgid "Failed to delete the project"
+msgstr "Failed to delete the project"
+
+msgid "{name} deleted"
+msgstr "{name} deleted"
+
+msgid "If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret."
+msgstr "If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret."
+
+msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
+msgstr "Make sure you provide the \"Redirect URI\" to Collaboard Support"
+
+msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
+msgstr "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
+
+msgid "Application ID"
+msgstr "Application ID"
+
+msgid "ID of your Collaboard application"
+msgstr "ID of your Collaboard application"
+
+msgid "Application secret"
+msgstr "Application secret"
+
+msgid "Client secret of your Collaboard application"
+msgstr "Client secret of your Collaboard application"
+
+msgid "Use a popup to authenticate"
+msgstr "Use a popup to authenticate"
+
+msgid "Default Collaboard API server"
+msgstr "Default Collaboard API server"
+
+msgid "You have specified a custom domain address. Did you forget to specify a custom API address?"
+msgstr "You have specified a custom domain address. Did you forget to specify a custom API address?"
+
+msgid "Default Collaboard domain url"
+msgstr "Default Collaboard domain url"
+
+msgid "You have specified a custom API address. Did you forget to specify a custom domain address?"
+msgstr "You have specified a custom API address. Did you forget to specify a custom domain address?"
+
+msgid "Collaboard admin options saved"
+msgstr "Collaboard admin options saved"
+
+msgid "Failed to save Collaboard admin options"
+msgstr "Failed to save Collaboard admin options"
+
+msgid "Invitation link"
+msgstr "Invitation link"
+
+msgid "Registered users permissions"
+msgstr "Registered users permissions"
+
+msgid "Allow guests"
+msgstr "Allow guests"
+
+msgid "Allow guests (paid license required)"
+msgstr "Allow guests (paid license required)"
+
+msgid "Guest permissions"
+msgstr "Guest permissions"
+
+msgid "Password (optional)"
+msgstr "Password (optional)"
+
+msgid "no password"
+msgstr "no password"
+
+msgid "Expires in"
+msgstr "Expires in"
+
+msgid "Create another link"
+msgstr "Create another link"
+
+msgid "Create link"
+msgstr "Create link"
+
+msgid "Share link to a Talk conversation"
+msgstr "Share link to a Talk conversation"
+
+msgid "No access"
+msgstr "No access"
+
+msgid "Can view"
+msgstr "Can view"
+
+msgid "Can edit"
+msgstr "Can edit"
+
+msgid "Never"
+msgstr "Never"
+
+msgid "1 hour"
+msgstr "1 hour"
+
+msgid "4 hours"
+msgstr "4 hours"
+
+msgid "12 hours"
+msgstr "12 hours"
+
+msgid "1 day"
+msgstr "1 day"
+
+msgid "2 days"
+msgstr "2 days"
+
+msgid "5 days"
+msgstr "5 days"
+
+msgid "10 days"
+msgstr "10 days"
+
+msgid "30 days"
+msgstr "30 days"
+
+msgid "60 days"
+msgstr "60 days"
+
+msgid "Invitation link was created"
+msgstr "Invitation link was created"
+
+msgid "Failed to create invitation link"
+msgstr "Failed to create invitation link"
+
+msgid "Choose color"
+msgstr "Choose color"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Field \"{name}\" is missing"
+msgstr "Field \"{name}\" is missing"
+
+msgid "Create a new project"
+msgstr "Create a new project"
+
+msgid "Ask your administrator to configure the Collaboard integration in Nextcloud."
+msgstr "Ask your administrator to configure the Collaboard integration in Nextcloud."
+
+msgid "Connect to Collaboard"
+msgstr "Connect to Collaboard"
+
+msgid "Connected as {user}"
+msgstr "Connected as {user}"
+
+msgid "Disconnect from Collaboard"
+msgstr "Disconnect from Collaboard"
+
+msgid "Successfully connected to Collaboard!"
+msgstr "Successfully connected to Collaboard!"
+
+msgid "Error connecting to Collaboard:"
+msgstr "Error connecting to Collaboard:"
+
+msgid "Collaboard options saved"
+msgstr "Collaboard options saved"
+
+msgid "Failed to save Collaboard options"
+msgstr "Failed to save Collaboard options"
+
+msgid "Back to project list"
+msgstr "Back to project list"
+
+msgid "Delete project"
+msgstr "Delete project"
+
+msgid "Project personal link"
+msgstr "Project personal link"
+
+msgid "Copy to clipboard"
+msgstr "Copy to clipboard"
+
+msgid "Open in a new tab"
+msgstr "Open in a new tab"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Project link copied!"
+msgstr "Project link copied!"
+
+msgid "Link could not be copied to clipboard"
+msgstr "Link could not be copied to clipboard"
+
+msgid "Updated: {date}"
+msgstr "Updated: {date}"
+
+msgid "Owner: {user}"
+msgstr "Owner: {user}"
+
+msgid "Reload project list from Collaboard"
+msgstr "Reload project list from Collaboard"
+
+msgid "Send link to a Talk room"
+msgstr "Send link to a Talk room"
+
+msgid "Search for users, groups or conversations"
+msgstr "Search for users, groups or conversations"
+
+msgid "Conversations"
+msgstr "Conversations"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Groups"
+msgstr "Groups"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "You created a conversation with {name}"
+msgstr "You created a conversation with {name}"
+
+msgid "Failed to join"
+msgstr "Failed to join"
+
+msgid "You joined {name}"
+msgstr "You joined {name}"
+
+msgid "Collaboard project \"{name}\": {link}"
+msgstr "Collaboard project \"{name}\": {link}"
+
+msgid "Link sent to {name}"
+msgstr "Link sent to {name}"
+
+msgid "Failed to send link"
+msgstr "Failed to send link"
+
+msgid "Project name"
+msgstr "Project name"
+
+msgid "New Project"
+msgstr "New Project"
+
+msgid "Created at"
+msgstr "Created at"
+
+msgid "Created by"
+msgstr "Created by"
+
+msgid "Updated at"
+msgstr "Updated at"
+
+msgid "Sign in with Collaboard"
+msgstr "Sign in with Collaboard"
+
+msgid "Failed to save Collaboard OAuth state"
+msgstr "Failed to save Collaboard OAuth state"

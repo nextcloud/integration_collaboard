@@ -122,6 +122,10 @@ class ConfigController extends Controller {
 	 * @return DataResponse
 	 */
 	public function setAdminConfig(array $values): DataResponse {
+		$this->logger->info('setAdminConfig' , [
+			'values' => $values,
+		]);
+
 		foreach ($values as $key => $value) {
 			$this->config->setAppValue(Application::APP_ID, $key, $value);
 		}

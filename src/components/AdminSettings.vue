@@ -51,47 +51,71 @@
 				{{ t('integration_collaboard', 'Use a popup to authenticate') }}
 			</NcCheckboxRadioSwitch> -->
 
-			<div class="field">
-				<label for="collaboard-instance">
-					<EarthIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Default Collaboard API server') }}
-				</label>
-				<input id="collaboard-instance"
-					v-model="state.admin_api_url"
-					:class="{ 'greyed-out-text': !usingCustomApiUrl, 'invalid-url': !isApiUrlValid }"
-					type="text"
-					placeholder="https://..."
-					@input="onInput"
-					@blur="fillEmptyUrls">
-				<transition name="fade">
-					<div v-if="usingCustomDomainUrl && !usingCustomApiUrl" class="custom-address-notice">
-						<InformationOutlineIcon :size="20" class="icon" />
-						<span class="notice-text">
-							{{ t('integration_collaboard', 'You have specified a custom domain address. Did you forget to specify a custom API address?') }}
-						</span>
+			<div class="env-fields">
+				<div class="field">
+					<label for="environment">
+						<EarthIcon :size="20" class="icon" />
+						{{ t('integration_collaboard', 'Environment') }}
+					</label>
+					<select id="environment" v-model="selectedOption" @change="onInput">
+						<option value="WEB">
+							WEB
+						</option>
+						<option value="CH">
+							CH
+						</option>
+						<option value="DE">
+							DE
+						</option>
+						<option value="PREMISE">
+							On-premise
+						</option>
+					</select>
+				</div>
+				<div v-if="selectedOption === 'PREMISE'">
+					<div class="field">
+						<label for="collaboard-instance">
+							<EarthIcon :size="20" class="icon" />
+							{{ t('integration_collaboard', 'Default Collaboard API server') }}
+						</label>
+						<input id="collaboard-instance"
+							v-model="state.admin_api_url"
+							:class="{ 'greyed-out-text': !usingCustomApiUrl, 'invalid-url': !isApiUrlValid }"
+							type="text"
+							placeholder="https://..."
+							@input="onInput"
+							@blur="fillEmptyUrls">
+						<transition name="fade">
+							<div v-if="usingCustomDomainUrl && !usingCustomApiUrl" class="custom-address-notice">
+								<InformationOutlineIcon :size="20" class="icon" />
+								<span class="notice-text">
+									{{ t('integration_collaboard', 'You have specified a custom domain address. Did you forget to specify a custom API address?') }}
+								</span>
+							</div>
+						</transition>
 					</div>
-				</transition>
-			</div>
-			<div class="field">
-				<label for="collaboard-domain-url">
-					<EarthIcon :size="20" class="icon" />
-					{{ t('integration_collaboard', 'Default Collaboard domain url') }}
-				</label>
-				<input id="collaboard-instance"
-					v-model="state.admin_domain_url"
-					:class="{ 'greyed-out-text': !usingCustomDomainUrl, 'invalid-url': !isDomainUrlValid }"
-					type="text"
-					placeholder="https://..."
-					@input="onInput"
-					@blur="fillEmptyUrls">
-				<transition name="fade">
-					<div v-if="usingCustomApiUrl && !usingCustomDomainUrl" class="custom-address-notice">
-						<InformationOutlineIcon :size="20" class="icon" />
-						<span class="notice-text">
-							{{ t('integration_collaboard', 'You have specified a custom API address. Did you forget to specify a custom domain address?') }}
-						</span>
+					<div class="field">
+						<label for="collaboard-domain-url">
+							<EarthIcon :size="20" class="icon" />
+							{{ t('integration_collaboard', 'Default Collaboard domain url') }}
+						</label>
+						<input id="collaboard-instance"
+							v-model="state.admin_domain_url"
+							:class="{ 'greyed-out-text': !usingCustomDomainUrl, 'invalid-url': !isDomainUrlValid }"
+							type="text"
+							placeholder="https://..."
+							@input="onInput"
+							@blur="fillEmptyUrls">
+						<transition name="fade">
+							<div v-if="usingCustomApiUrl && !usingCustomDomainUrl" class="custom-address-notice">
+								<InformationOutlineIcon :size="20" class="icon" />
+								<span class="notice-text">
+									{{ t('integration_collaboard', 'You have specified a custom API address. Did you forget to specify a custom domain address?') }}
+								</span>
+							</div>
+						</transition>
 					</div>
-				</transition>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -100,8 +124,12 @@
 <script>
 import EarthIcon from 'vue-material-design-icons/Earth.vue'
 import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
+import InformationVariantIcon from 'vue-material-design-icons/InformationVariant.vue'
+import KeyIcon from 'vue-material-design-icons/Key.vue'
 
 import CollaboardIcon from './icons/CollaboardIcon.vue'
+
+import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
 
 import axios from '@nextcloud/axios'
 import { showError, showSuccess } from '@nextcloud/dialogs'
@@ -109,23 +137,45 @@ import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import { delay } from '../utils.js'
 
+const ENVS = {
+	WEB: {
+		adminDomainUrl: 'https://web.collaboard.app',
+		adminApiUrl: 'https://api.collaboard.app',
+	},
+	CH: {
+		adminDomainUrl: 'https://ch.collaboard.app',
+		adminApiUrl: 'https://ch-api.collaboard.app',
+	},
+	DE: {
+		adminDomainUrl: 'https://de.collaboard.app',
+		adminApiUrl: 'https://de.collaboard.app/server',
+	},
+}
+
 export default {
 	name: 'AdminSettings',
 
 	components: {
 		CollaboardIcon,
 		EarthIcon,
+		NcCheckboxRadioSwitch,
 		InformationOutlineIcon,
+		InformationVariantIcon,
+		KeyIcon,
 	},
 
 	props: [],
 
 	data() {
+		const state = loadState('integration_collaboard', 'admin-config')
+		const selectedOption = Object.entries(ENVS).find(env => env[1].adminApiUrl === state.admin_api_url)[0] || 'PREMISE'
+
 		return {
-			state: loadState('integration_collaboard', 'admin-config'),
+			state,
 			// to prevent some browsers to fill fields with remembered passwords
 			readonly: true,
 			redirect_uri: window.location.protocol + '//' + window.location.host + generateUrl('/apps/integration_collaboard/oauth-redirect'),
+			selectedOption,
 		}
 	},
 
@@ -159,12 +209,23 @@ export default {
 		},
 		onInput() {
 			delay(() => {
+				let adminApiUrl = ''
+				let adminDomainUrl = ''
+
+				if (Object.keys(ENVS).includes(this.selectedOption)) {
+					adminApiUrl = ENVS[this.selectedOption].adminApiUrl
+					adminDomainUrl = ENVS[this.selectedOption].adminDomainUrl
+				} else {
+					adminApiUrl = this.state.admin_api_url
+					adminDomainUrl = this.state.admin_domain_url
+				}
+
 				this.saveOptions({
 					client_id: this.state.client_id,
 					client_secret: this.state.client_secret,
 
-					admin_api_url: this.state.admin_api_url === '' ? this.default_api_url : this.state.admin_api_url,
-					admin_domain_url: this.state.admin_domain_url === '' ? this.default_domain_url : this.state.admin_domain_url,
+					admin_api_url: adminApiUrl === '' ? this.default_api_url : adminApiUrl,
+					admin_domain_url: adminDomainUrl === '' ? this.default_domain_url : adminDomainUrl,
 				})
 			}, 2000)()
 		},
@@ -277,6 +338,10 @@ export default {
 		.icon {
 			margin-right: 12px;
 		}
+	}
+
+	.env-fields {
+		margin: 2rem 0;
 	}
 }
 </style>

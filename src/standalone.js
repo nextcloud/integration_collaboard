@@ -1,26 +1,26 @@
 import { loadState } from '@nextcloud/initial-state'
 import Vue from 'vue'
 import './bootstrap.js'
-import ExcalidrawModalWrapper from './components/CollaboardModalWrapper.vue'
+import CollaboardModalWrapper from './components/CollaboardModalWrapper.vue'
 
 function init() {
-	if (!OCA.Excalidraw) {
+	if (!OCA.Collaboard) {
 		/**
 		 * @namespace
 		 */
-		OCA.Excalidraw = {}
+		OCA.Collaboard = {}
 	}
 
-	const wrapperId = 'excalidrawModalWrapper'
+	const wrapperId = 'collaboardModalWrapper'
 	const wrapperElement = document.createElement('div')
 	wrapperElement.id = wrapperId
 	document.body.append(wrapperElement)
 
-	const View = Vue.extend(ExcalidrawModalWrapper)
-	OCA.Excalidraw.ExcalidrawModalWrapperVue = new View().$mount('#' + wrapperId)
+	const View = Vue.extend(CollaboardModalWrapper)
+	OCA.Collaboard.CollaboardModalWrapperVue = new View().$mount('#' + wrapperId)
 
-	OCA.Excalidraw.openModal = (roomUrl) => {
-		OCA.Excalidraw.ExcalidrawModalWrapperVue.openOn(roomUrl)
+	OCA.Collaboard.openModal = (roomUrl) => {
+		OCA.Collaboard.CollaboardModalWrapperVue.openOn(roomUrl)
 	}
 }
 
@@ -40,21 +40,21 @@ function listen(baseUrl) {
 			if (href.startsWith(baseUrl + '/')) {
 				e.preventDefault()
 				e.stopPropagation()
-				OCA.Excalidraw.openModal(href)
+				OCA.Collaboard.openModal(href)
 			}
 		}
 	})
 }
 
-const baseUrl = loadState('integration_excalidraw', 'base_url')
-const overrideLinkClick = loadState('integration_excalidraw', 'override_link_click')
+const baseUrl = loadState('integration_collaboard', 'admin_domain_url')
+const overrideLinkClick = loadState('integration_collaboard', 'override_link_click')
 if (baseUrl) {
 	init()
-	console.debug('!!! Excalidraw standalone modal is ready', baseUrl)
+	console.debug('!!! Collaboard standalone modal is ready', baseUrl)
 	if (overrideLinkClick) {
-		console.debug('Excalidraw will handle clicks on links')
+		console.debug('Collaboard will handle clicks on links')
 		listen(baseUrl)
 	}
 } else {
-	console.debug('!!! Excalidraw standalone: disabled')
+	console.debug('!!! Collaboard standalone: disabled')
 }

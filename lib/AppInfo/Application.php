@@ -45,6 +45,9 @@ class Application extends App implements IBootstrap {
 		) {
 			$overrideClick = $config->getAppValue(Application::APP_ID, 'override_link_click', '0') === '1';
 
+			$initialState->provideLazyInitialState('admin_domain_url', function () use ($config) {
+				return $config->getAppValue(self::APP_ID, 'admin_domain_url', self::DEFAULT_COLLABOARD_DOMAIN) ?: self::DEFAULT_COLLABOARD_DOMAIN;
+			});
 			$initialState->provideInitialState('override_link_click', $overrideClick);
 			Util::addScript(self::APP_ID, self::APP_ID . '-standalone');
 		});

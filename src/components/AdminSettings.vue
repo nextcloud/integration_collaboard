@@ -118,6 +118,9 @@
 				</div>
 			</div>
 
+			<p class="settings-hint">
+				{{ t('integration_collaboard', 'If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain.') }}
+			</p>
 			<NcCheckboxRadioSwitch
 				class="field"
 				:checked.sync="state.override_link_click"
@@ -175,7 +178,8 @@ export default {
 
 	data() {
 		const state = loadState('integration_collaboard', 'admin-config')
-		const selectedOption = Object.entries(ENVS).find(env => env[1].adminApiUrl === state.admin_api_url)[0] || 'PREMISE'
+		const selectedEnv = Object.entries(ENVS).find(env => env[1].adminApiUrl === state.admin_api_url)
+		const selectedOption = selectedEnv ? selectedEnv[0] : 'PREMISE'
 
 		return {
 			state,
@@ -253,7 +257,7 @@ export default {
 		},
 		saveOptions(values) {
 			// Validate the urls, the error is shown in the border color of the input
-			if (!this.isValidUrl(values.admin_api_url) || !this.isValidUrl(values.admin_domain_url)) {
+			if ((values.admin_api_url && !this.isValidUrl(values.admin_api_url)) || (values.admin_domain_url && !this.isValidUrl(values.admin_domain_url))) {
 				return
 			}
 

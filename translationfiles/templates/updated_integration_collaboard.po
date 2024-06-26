@@ -8,7 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nextcloud 3.14159\n"
 "Report-Msgid-Bugs-To: translations\\@example.com\n"
-"POT-Creation-Date: 2024-06-24 16:26+0200\n"
+"POT-Creation-Date: 2024-06-25 16:02+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: Nextcloud 3.14159\n"
+"Report-Msgid-Bugs-To: translations\\@example.com\n"
+"POT-Creation-Date: 2024-06-25 16:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +27,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/lib/Controller/ConfigController.php:204
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/lib/Controller/ConfigController.php:208
 msgid "Error getting OAuth access token. "
 msgstr "Error getting OAuth access token. "
 
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/lib/Controller/ConfigController.php:206
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/lib/Controller/ConfigController.php:210
 msgid "Error during OAuth exchanges"
 msgstr "Error during OAuth exchanges"
 
@@ -30,6 +40,8 @@ msgid ""
 "Your Collaboard session has expired, please re-authenticate in your user "
 "settings."
 msgstr ""
+"Your Collaboard session has expired, please re-authenticate in your user "
+"settings."
 
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/lib/Service/CollaboardAPIService.php:283
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/lib/Service/CollaboardAPIService.php:418
@@ -57,7 +69,7 @@ msgstr "Connected accounts"
 #. TRANSLATORS src/components/PersonalSettings.vue:5
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialAppInfoFakeDummyForL10nScript.php:2
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:26
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:124
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:128
 msgid "Collaboard integration"
 msgstr "Collaboard integration"
 
@@ -101,7 +113,7 @@ msgstr "You haven't created any project yet"
 #. TRANSLATORS src/App.vue:59
 #. TRANSLATORS src/components/CreateProjectForm.vue:4
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:12
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:112
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:116
 msgid "Create a project"
 msgstr "Create a project"
 
@@ -141,6 +153,8 @@ msgid ""
 "If you want to allow your Nextcloud users to connect to Collaboard via "
 "OAuth, get in touch with Collaboard Support to get the ID and secret."
 msgstr ""
+"If you want to allow your Nextcloud users to connect to Collaboard via "
+"OAuth, get in touch with Collaboard Support to get the ID and secret."
 
 #. TRANSLATORS src/components/AdminSettings.vue:14
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:30
@@ -183,13 +197,18 @@ msgstr "Client secret of your Collaboard application"
 msgid "Use a popup to authenticate"
 msgstr "Use a popup to authenticate"
 
-#. TRANSLATORS src/components/AdminSettings.vue:57
+#. TRANSLATORS src/components/AdminSettings.vue:58
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:44
+msgid "Environment"
+msgstr "Environment"
+
+#. TRANSLATORS src/components/AdminSettings.vue:79
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:46
 msgid "Default Collaboard API server"
 msgstr "Default Collaboard API server"
 
-#. TRANSLATORS src/components/AdminSettings.vue:70
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:46
+#. TRANSLATORS src/components/AdminSettings.vue:92
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:48
 msgid ""
 "You have specified a custom domain address. Did you forget to specify a "
 "custom API address?"
@@ -197,13 +216,13 @@ msgstr ""
 "You have specified a custom domain address. Did you forget to specify a "
 "custom API address?"
 
-#. TRANSLATORS src/components/AdminSettings.vue:78
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:48
+#. TRANSLATORS src/components/AdminSettings.vue:100
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:50
 msgid "Default Collaboard domain url"
 msgstr "Default Collaboard domain url"
 
-#. TRANSLATORS src/components/AdminSettings.vue:91
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:50
+#. TRANSLATORS src/components/AdminSettings.vue:113
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:52
 msgid ""
 "You have specified a custom API address. Did you forget to specify a custom "
 "domain address?"
@@ -211,342 +230,352 @@ msgstr ""
 "You have specified a custom API address. Did you forget to specify a custom "
 "domain address?"
 
-#. TRANSLATORS src/components/AdminSettings.vue:194
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:52
+#. TRANSLATORS src/components/AdminSettings.vue:125
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:54
+msgid "Open Collaboard board links in Nextcloud"
+msgstr "Open Collaboard board links in Nextcloud"
+
+#. TRANSLATORS src/components/AdminSettings.vue:265
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:56
 msgid "Collaboard admin options saved"
 msgstr "Collaboard admin options saved"
 
-#. TRANSLATORS src/components/AdminSettings.vue:197
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:54
+#. TRANSLATORS src/components/AdminSettings.vue:268
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:58
 msgid "Failed to save Collaboard admin options"
 msgstr "Failed to save Collaboard admin options"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:5
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:56
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:60
 msgid "Invitation link"
 msgstr "Invitation link"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:9
 #. TRANSLATORS src/components/CreateLinkForm.vue:15
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:58
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:60
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:62
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:64
 msgid "Registered users permissions"
 msgstr "Registered users permissions"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:24
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:62
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:66
 msgid "Allow guests"
 msgstr "Allow guests"
 
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:62
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:66
 msgid "Allow guests (paid license required)"
 msgstr "Allow guests (paid license required)"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:28
 #. TRANSLATORS src/components/CreateLinkForm.vue:35
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:64
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:66
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:68
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:70
 msgid "Guest permissions"
 msgstr "Guest permissions"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:40
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:68
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:72
 msgid "Password (optional)"
 msgstr "Password (optional)"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:45
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:70
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:74
 msgid "no password"
 msgstr "no password"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:52
 #. TRANSLATORS src/components/CreateLinkForm.vue:58
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:72
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:74
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:76
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:78
 msgid "Expires in"
 msgstr "Expires in"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:67
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:76
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:80
 msgid "Create another link"
 msgstr "Create another link"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:76
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:78
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:82
 msgid "Create link"
 msgstr "Create link"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:89
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:80
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:84
 msgid "Share link to a Talk conversation"
 msgstr "Share link to a Talk conversation"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:122
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:82
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:86
 msgid "No access"
 msgstr "No access"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:126
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:84
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:88
 msgid "Can view"
 msgstr "Can view"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:130
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:86
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:90
 msgid "Can edit"
 msgstr "Can edit"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:137
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:88
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:92
 msgid "Never"
 msgstr "Never"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:141
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:90
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:94
 msgid "1 hour"
 msgstr "1 hour"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:145
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:92
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:96
 msgid "4 hours"
 msgstr "4 hours"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:149
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:94
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:98
 msgid "12 hours"
 msgstr "12 hours"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:153
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:96
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:100
 msgid "1 day"
 msgstr "1 day"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:157
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:98
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:102
 msgid "2 days"
 msgstr "2 days"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:161
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:100
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:104
 msgid "5 days"
 msgstr "5 days"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:165
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:102
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:106
 msgid "10 days"
 msgstr "10 days"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:169
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:104
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:108
 msgid "30 days"
 msgstr "30 days"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:173
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:106
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:110
 msgid "60 days"
 msgstr "60 days"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:283
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:108
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:112
 msgid "Invitation link was created"
 msgstr "Invitation link was created"
 
 #. TRANSLATORS src/components/CreateLinkForm.vue:287
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:110
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:114
 msgid "Failed to create invitation link"
 msgstr "Failed to create invitation link"
 
 #. TRANSLATORS src/components/CreateProjectForm.vue:70
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:114
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:118
 msgid "Choose color"
 msgstr "Choose color"
 
 #. TRANSLATORS src/components/CreateProjectForm.vue:159
 #. TRANSLATORS src/components/talk/SendModal.vue:89
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:116
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:180
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:120
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:186
 msgid "Cancel"
 msgstr "Cancel"
 
 #. TRANSLATORS src/components/CreateProjectForm.vue:165
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:118
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:122
 msgid "Create"
 msgstr "Create"
 
 #. TRANSLATORS src/components/CreateProjectForm.vue:266
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:120
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:124
 msgid "Field \"{name}\" is missing"
 msgstr "Field \"{name}\" is missing"
 
 #. TRANSLATORS src/components/NewProjectItem.vue:5
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:122
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:126
 msgid "Create a new project"
 msgstr "Create a new project"
 
 #. TRANSLATORS src/components/PersonalSettings.vue:8
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:126
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:130
 msgid ""
 "Ask your administrator to configure the Collaboard integration in Nextcloud."
 msgstr ""
 "Ask your administrator to configure the Collaboard integration in Nextcloud."
 
 #. TRANSLATORS src/components/PersonalSettings.vue:20
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:128
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:132
 msgid "Connect to Collaboard"
 msgstr "Connect to Collaboard"
 
 #. TRANSLATORS src/components/PersonalSettings.vue:25
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:130
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:134
 msgid "Connected as {user}"
 msgstr "Connected as {user}"
 
 #. TRANSLATORS src/components/PersonalSettings.vue:31
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:132
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:136
 msgid "Disconnect from Collaboard"
 msgstr "Disconnect from Collaboard"
 
 #. TRANSLATORS src/components/PersonalSettings.vue:98
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:134
 #: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:138
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:142
 msgid "Successfully connected to Collaboard!"
 msgstr "Successfully connected to Collaboard!"
 
 #. TRANSLATORS src/components/PersonalSettings.vue:100
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:136
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:140
 msgid "Error connecting to Collaboard:"
 msgstr "Error connecting to Collaboard:"
 
-#. TRANSLATORS src/components/PersonalSettings.vue:123
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:140
+#. TRANSLATORS src/components/PersonalSettings.vue:122
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:144
 msgid "Collaboard options saved"
 msgstr "Collaboard options saved"
 
-#. TRANSLATORS src/components/PersonalSettings.vue:127
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:142
+#. TRANSLATORS src/components/PersonalSettings.vue:126
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:146
 msgid "Failed to save Collaboard options"
 msgstr "Failed to save Collaboard options"
 
 #. TRANSLATORS src/components/ProjectDetails.vue:5
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:144
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:148
 msgid "Back to project list"
 msgstr "Back to project list"
 
 #. TRANSLATORS src/components/ProjectDetails.vue:13
 #. TRANSLATORS src/components/ProjectItem.vue:21
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:146
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:166
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:150
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:172
 msgid "Delete project"
 msgstr "Delete project"
 
 #. TRANSLATORS src/components/ProjectDetails.vue:30
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:148
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:152
 msgid "Project personal link"
 msgstr "Project personal link"
 
 #. TRANSLATORS src/components/ProjectDetails.vue:36
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:150
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:154
 msgid "Copy to clipboard"
 msgstr "Copy to clipboard"
 
 #. TRANSLATORS src/components/ProjectDetails.vue:54
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:152
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:156
+msgid "Open here"
+msgstr "Open here"
+
+#. TRANSLATORS src/components/ProjectDetails.vue:65
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:158
 msgid "Open in a new tab"
 msgstr "Open in a new tab"
 
-#. TRANSLATORS src/components/ProjectDetails.vue:84
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:154
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:156
+#. TRANSLATORS src/components/ProjectDetails.vue:95
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:160
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:162
 msgid "Enabled"
 msgstr "Enabled"
 
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:154
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:156
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:160
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:162
 msgid "Disabled"
 msgstr "Disabled"
 
-#. TRANSLATORS src/components/ProjectDetails.vue:272
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:158
+#. TRANSLATORS src/components/ProjectDetails.vue:288
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:164
 msgid "Project link copied!"
 msgstr "Project link copied!"
 
-#. TRANSLATORS src/components/ProjectDetails.vue:279
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:160
+#. TRANSLATORS src/components/ProjectDetails.vue:295
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:166
 msgid "Link could not be copied to clipboard"
 msgstr "Link could not be copied to clipboard"
 
 #. TRANSLATORS src/components/ProjectItem.vue:10
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:162
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:168
 msgid "Updated: {date}"
 msgstr "Updated: {date}"
 
 #. TRANSLATORS src/components/ProjectItem.vue:13
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:164
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:170
 msgid "Owner: {user}"
 msgstr "Owner: {user}"
 
 #. TRANSLATORS src/components/ProjectList.vue:5
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:168
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:174
 msgid "Reload project list from Collaboard"
 msgstr "Reload project list from Collaboard"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:8
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:170
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:176
 msgid "Send link to a Talk room"
 msgstr "Send link to a Talk room"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:14
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:172
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:178
 msgid "Search for users, groups or conversations"
 msgstr "Search for users, groups or conversations"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:21
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:174
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:180
 msgid "Conversations"
 msgstr "Conversations"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:47
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:176
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:182
 msgid "Users"
 msgstr "Users"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:67
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:178
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:184
 msgid "Groups"
 msgstr "Groups"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:97
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:182
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:188
 msgid "Send"
 msgstr "Send"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:320
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:184
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:190
 msgid "You created a conversation with {name}"
 msgstr "You created a conversation with {name}"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:325
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:186
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:190
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:192
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:196
 msgid "Failed to join"
 msgstr "Failed to join"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:342
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:188
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:194
 msgid "You joined {name}"
 msgstr "You joined {name}"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:357
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:192
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:198
 msgid "Collaboard project \"{name}\": {link}"
 msgstr "Collaboard project \"{name}\": {link}"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:365
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:194
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:200
 msgid "Link sent to {name}"
 msgstr "Link sent to {name}"
 
 #. TRANSLATORS src/components/talk/SendModal.vue:369
-#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:196
+#: /Users/jiayihu/Desktop/Repo/integration_collaboard/specialVueFakeDummyForL10nScript.js:202
 msgid "Failed to send link"
 msgstr "Failed to send link"
 

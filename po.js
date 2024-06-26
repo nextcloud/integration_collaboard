@@ -18,16 +18,50 @@ function writePoFile(filePath, lines) {
 const poLines = readPoFile(newPoFilePath)
 
 // Process the lines to update msgstr with msgid if msgstr is empty
-const updatedLines = []
-let msgid = ''
-for (const line of poLines) {
-	if (line.startsWith('msgid ')) {
-		msgid = line
+let updatedLines = []
+let msgid = []
+let isMultilineMsgid = false
+
+poLines.forEach(line => {
+	let pushCurrLine = true
+
+	if (line.startsWith('msgid ""')) {
+		isMultilineMsgid = true
+		msgid.push(line)
+	} else if (isMultilineMsgid && line.startsWith('"')) {
+		msgid.push(line)
+	} else if (line.startsWith('msgid ')) {
+		msgid.push(line)
+		isMultilineMsgid = false
 	} else if (line.startsWith('msgstr ""')) {
-		updatedLines.push('msgstr ' + msgid.slice(6))
-		continue
+		pushCurrLine = false
+
+		if (msgid.length > 0) {
+			if (msgid.length > 1) {
+				updatedLines.push('msgstr ""')
+				for (let i = 1; i < msgid.length; i++) {
+					updatedLines.push(msgid[i])
+				}
+			} else {
+				updatedLines.push('msgstr ' + msgid[0].slice(6))
+			}
+
+			msgid = []
+		}
+	} else {
+		if (msgid.length > 0) {
+			updatedLines = updatedLines.concat(msgid)
+			msgid = []
+			isMultilineMsgid = false
+		}
 	}
-	updatedLines.push(line)
+
+	pushCurrLine && updatedLines.push(line)
+})
+
+// Add remaining msgid to the updated lines if any
+if (msgid.length > 0) {
+	updatedLines = updatedLines.concat(msgid)
 }
 
 // Save the updated content to a new .po file

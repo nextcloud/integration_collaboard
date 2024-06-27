@@ -1,3 +1,8 @@
+/**
+ * This is a script that takes the .pot file created by `translationtool.phar create-pot-files`
+ * and returns the same file but with `msgstr` using `msgid` as default translation text.
+ */
+
 const fs = require('fs')
 
 // Define the new file paths

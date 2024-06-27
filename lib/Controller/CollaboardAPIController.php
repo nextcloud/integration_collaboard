@@ -57,9 +57,8 @@ class CollaboardAPIController extends Controller {
 		if (!$this->collaboardAPIService->isUserConnected($this->userId)) {
 			return new DataResponse('not connected', Http::STATUS_BAD_REQUEST);
 		}
-		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
-		$collaboardUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
-		if (substr($url, 0, strlen($collaboardUrl)) === $collaboardUrl) {
+		$apiUrl = $this->config->getAppValue(Application::APP_ID, 'admin_api_url', Application::DEFAULT_COLLABOARD_API) ?: Application::DEFAULT_COLLABOARD_API;
+		if (substr($url, 0, strlen($apiUrl)) === $apiUrl) {
 			$image = $this->collaboardAPIService->getImage($url);
 			if (isset($image['body'], $image['headers'])) {
 				$response = new DataDisplayResponse(

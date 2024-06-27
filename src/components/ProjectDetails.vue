@@ -46,6 +46,17 @@
 					</div>
 				</div>
 				<div class="buttons">
+					<div class="modal-button-wrapper">
+						<NcButton @click="showCollaboardModal = true">
+							<template #icon>
+								<DockWindowIcon :size="20" />
+							</template>
+							{{ t('integration_collaboard', 'Open here') }}
+						</NcButton>
+						<CollaboardModal v-if="showCollaboardModal"
+							:board-url="projectLink"
+							@close="showCollaboardModal = false" />
+					</div>
 					<a :href="projectLink" target="_blank">
 						<NcButton>
 							<template #icon>
@@ -171,38 +182,41 @@
 </template>
 
 <script>
-import DeleteIcon from 'vue-material-design-icons/Delete.vue'
 import ArrowLeftIcon from 'vue-material-design-icons/ArrowLeft.vue'
-import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant.vue'
+import CheckIcon from 'vue-material-design-icons/Check.vue'
+import CheckboxBlankOutlineIcon from 'vue-material-design-icons/CheckboxBlankOutline.vue'
+import CheckboxMarkedIcon from 'vue-material-design-icons/CheckboxMarked.vue'
+import DeleteIcon from 'vue-material-design-icons/Delete.vue'
+import DockWindowIcon from 'vue-material-design-icons/DockWindow.vue'
+import EyeOffOutlineIcon from 'vue-material-design-icons/EyeOffOutline.vue'
+import EyeOutlineIcon from 'vue-material-design-icons/EyeOutline.vue'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant.vue'
+import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
+import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant.vue'
 import ToggleSwitchIcon from 'vue-material-design-icons/ToggleSwitch.vue'
 import ToggleSwitchOffOutlineIcon from 'vue-material-design-icons/ToggleSwitchOffOutline.vue'
-import CheckboxMarkedIcon from 'vue-material-design-icons/CheckboxMarked.vue'
-import CheckboxBlankOutlineIcon from 'vue-material-design-icons/CheckboxBlankOutline.vue'
-import CheckIcon from 'vue-material-design-icons/Check.vue'
-import EyeOutlineIcon from 'vue-material-design-icons/EyeOutline.vue'
-import EyeOffOutlineIcon from 'vue-material-design-icons/EyeOffOutline.vue'
-import DockWindowIcon from 'vue-material-design-icons/DockWindow.vue'
-import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
 
 import ClippyIcon from './icons/ClippyIcon.vue'
 
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar.js'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 
 import CreateLinkForm from './CreateLinkForm.vue'
 
-import { Timer } from '../utils.js'
-import { fields } from '../fields.js'
+import { loadState } from '@nextcloud/initial-state'
 import moment from '@nextcloud/moment'
 import { generateUrl } from '@nextcloud/router'
+import { fields } from '../fields.js'
+import { Timer } from '../utils.js'
 
-import { showSuccess, showError } from '@nextcloud/dialogs'
+import { showError, showSuccess } from '@nextcloud/dialogs'
+import CollaboardModal from './CollaboardModal.vue'
 
 export default {
 	name: 'ProjectDetails',
 
 	components: {
+		CollaboardModal,
 		CreateLinkForm,
 		NcButton,
 		NcAvatar,
@@ -235,14 +249,16 @@ export default {
 
 	data() {
 		return {
+			state: loadState('integration_collaboard', 'collaboard-state'),
 			fields,
 			projectLinkCopied: false,
+			showCollaboardModal: false,
 		}
 	},
 
 	computed: {
 		projectLink() {
-			return 'https://web.collaboard.app/collaboard/' + this.project.id
+			return this.state.admin_domain_url + '/collaboard/' + this.project.id
 		},
 		fieldsToDisplay() {
 			const result = {}

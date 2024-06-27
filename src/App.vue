@@ -87,23 +87,23 @@ import PlusIcon from 'vue-material-design-icons/Plus.vue'
 
 import CollaboardIcon from './components/icons/CollaboardIcon.vue'
 
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 import NcAppContent from '@nextcloud/vue/dist/Components/NcAppContent.js'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 import NcContent from '@nextcloud/vue/dist/Components/NcContent.js'
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 
-import ProjectList from './components/ProjectList.vue'
 import CreateProjectForm from './components/CreateProjectForm.vue'
 import PersonalSettings from './components/PersonalSettings.vue'
 import ProjectDetails from './components/ProjectDetails.vue'
+import ProjectList from './components/ProjectList.vue'
 
-import { generateUrl } from '@nextcloud/router'
-import { loadState } from '@nextcloud/initial-state'
 import axios from '@nextcloud/axios'
-import { showSuccess, showError, showUndo, showMessage } from '@nextcloud/dialogs'
+import { showError, showMessage, showSuccess, showUndo } from '@nextcloud/dialogs'
+import { loadState } from '@nextcloud/initial-state'
 import moment from '@nextcloud/moment'
+import { generateUrl } from '@nextcloud/router'
 
 import { Timer } from './utils.js'
 
@@ -149,7 +149,7 @@ export default {
 
 	computed: {
 		connected() {
-			return !!this.state.url && !!this.state.user_name && !!this.state.token
+			return !!this.state.user_name && !!this.state.token
 		},
 		isLicenseActive() {
 			return this.state.licensing_info?.IsActive
@@ -161,11 +161,7 @@ export default {
 			return this.state.project_list.filter((b) => !b.trash).sort((a, b) => {
 				const ta = moment(a.updated_at).unix()
 				const tb = moment(b.updated_at).unix()
-				return ta > tb
-					? 1
-					: ta < tb
-						? -1
-						: 0
+				return tb - ta
 			})
 		},
 		activeProjectsById() {
@@ -196,7 +192,7 @@ export default {
 
 	methods: {
 		onConnected(userName, baseUrl) {
-			this.state.url = baseUrl
+			this.state.admin_api_url = baseUrl
 			this.state.user_name = userName
 			this.state.token = 'plop'
 			// window.location.reload()

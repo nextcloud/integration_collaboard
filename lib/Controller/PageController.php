@@ -57,16 +57,18 @@ class PageController extends Controller {
 	public function index(): TemplateResponse {
 		$token = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
 		$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
+		// don't expose the client secret to users
+		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret') !== '';
+		$usePopup = $this->config->getAppValue(Application::APP_ID, 'use_popup', '0') === '1';
+		
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
 
-		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
-		$url = $this->config->getUserValue($this->userId, Application::APP_ID, 'url', $adminUrl) ?: $adminUrl;
+		$adminApiUrl = $this->config->getAppValue(Application::APP_ID, 'admin_api_url', Application::DEFAULT_COLLABOARD_API) ?: Application::DEFAULT_COLLABOARD_API;
 
-		$adminInviteUrl = $this->config->getAppValue(Application::APP_ID, 'admin_invite_url', Application::DEFAULT_COLLABOARD_INVITE_URL) ?: Application::DEFAULT_COLLABOARD_INVITE_URL;
-		$inviteUrl = $this->config->getUserValue($this->userId, Application::APP_ID, 'invite_url', $adminInviteUrl) ?: $adminInviteUrl;
-
-		$sfaMethod = $this->config->getUserValue($this->userId, Application::APP_ID, 'sfa_method', Application::DEFAULT_2FA_METHOD) ?: Application::DEFAULT_2FA_METHOD;
+		$adminDomainUrl = $this->config->getAppValue(Application::APP_ID, 'admin_domain_url', Application::DEFAULT_COLLABOARD_DOMAIN) ?: Application::DEFAULT_COLLABOARD_DOMAIN;
+		$inviteUrl = $adminDomainUrl . '/acceptProjectInvitation';
 
 		$talkEnabled = $this->appManager->isEnabledForUser('spreed');
 
@@ -75,10 +77,15 @@ class PageController extends Controller {
 		$pageInitialState = [
 			// we consider the token is not valid until there is also a refresh token
 			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
-			'url' => $url,
+			'client_id' => $clientID,
+			'client_secret' => $clientSecret,
+			'use_popup' => $usePopup,
+
+			'admin_api_url' => $adminApiUrl,
+			'admin_domain_url' => $adminDomainUrl,
+
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
-			'sfa_method' => $sfaMethod,
 			'licensing_info' => $licensingInfo,
 
 			'talk_enabled' => $talkEnabled,
@@ -86,7 +93,7 @@ class PageController extends Controller {
 			'invite_url' => $inviteUrl,
 		];
 
-		if ($url !== '' && $token !== '' && $refreshToken !== '') {
+		if ($token !== '' && $refreshToken !== '') {
 			$projects = $this->collaboardAPIService->getProjects($this->userId);
 			if (isset($projects['error'])) {
 				$pageInitialState['project_list_error'] = $projects['error'];

@@ -14,7 +14,7 @@ class Admin implements ISettings {
 	private IConfig $config;
 	private IInitialState $initialStateService;
 
-	public function __construct(IConfig       $config,
+	public function __construct(IConfig $config,
 		IInitialState $initialStateService) {
 		$this->config = $config;
 		$this->initialStateService = $initialStateService;
@@ -24,14 +24,24 @@ class Admin implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm(): TemplateResponse {
-		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_instance_url', Application::DEFAULT_COLLABOARD_URL) ?: Application::DEFAULT_COLLABOARD_URL;
-		$adminInviteUrl = $this->config->getAppValue(Application::APP_ID, 'admin_invite_url', Application::DEFAULT_COLLABOARD_INVITE_URL) ?: Application::DEFAULT_COLLABOARD_INVITE_URL;
+		$adminUrl = $this->config->getAppValue(Application::APP_ID, 'admin_api_url', Application::DEFAULT_COLLABOARD_API) ?: Application::DEFAULT_COLLABOARD_API;
+		$adminDomainUrl = $this->config->getAppValue(Application::APP_ID, 'admin_domain_url', Application::DEFAULT_COLLABOARD_DOMAIN) ?: Application::DEFAULT_COLLABOARD_DOMAIN;
+
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
+		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
+		$usePopup = $this->config->getAppValue(Application::APP_ID, 'use_popup', '0') === '1';
+		$overrideLinkClick = $this->config->getAppValue(Application::APP_ID, 'override_link_click', '0') === '1';
 
 		$adminConfig = [
-			'admin_instance_url' => $adminUrl,
-			'admin_invite_url' => $adminInviteUrl,
-			'default_instance_url' => Application::DEFAULT_COLLABOARD_URL,
-			'default_invite_url' => Application::DEFAULT_COLLABOARD_INVITE_URL,
+			'client_id' => $clientID,
+			'client_secret' => $clientSecret,
+			'use_popup' => $usePopup,
+			'override_link_click' => $overrideLinkClick,
+
+			'admin_api_url' => $adminUrl,
+			'admin_domain_url' => $adminDomainUrl,
+			'default_api_url' => Application::DEFAULT_COLLABOARD_API,
+			'default_domain_url' => Application::DEFAULT_COLLABOARD_DOMAIN,
 		];
 		$this->initialStateService->provideInitialState('admin-config', $adminConfig);
 		return new TemplateResponse(Application::APP_ID, 'adminSettings');

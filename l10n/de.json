@@ -106,6 +106,10 @@
     "Created by" : "Erstellt von",
     "Updated at" : "Aktualisiert um",
     "Sign in with Collaboard" : "Melden Sie sich bei Collaboard an",
-    "Failed to save Collaboard OAuth state" : "Fehler beim Speichern des Collaboard OAuth-Zustands"
+    "Failed to save Collaboard OAuth state" : "Fehler beim Speichern des Collaboard OAuth-Zustands",
+    "Environment" : "Umwelt",
+    "Open Collaboard board links in Nextcloud" : "Öffnen Sie Collaboard-Board-Links in Nextcloud",
+    "Open here" : "Hier öffnen",
+    "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain." : "Wenn Sie Ihren Benutzern erlauben möchten, Boards in Nextcloud zu öffnen, setzen Sie sich mit dem Collaboard-Support in Verbindung, um Ihre Nextcloud-Domain auf die Whitelist zu setzen."
 },"pluralForm" :""
 }

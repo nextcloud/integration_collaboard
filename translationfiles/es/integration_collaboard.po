@@ -5,419 +5,325 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-06-25 11:27\n"
+"PO-Revision-Date: 2024-06-27 11:49\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: es\n"
 
-#, fuzzy
 msgid "Error getting OAuth access token. "
-msgstr ""
+msgstr "Error al obtener el token de acceso OAuth."
 
-#, fuzzy
 msgid "Error during OAuth exchanges"
-msgstr ""
+msgstr "Error durante los intercambios de OAuth"
 
-#, fuzzy
 msgid "Your Collaboard session has expired, please re-authenticate in your user settings."
-msgstr ""
+msgstr "Tu sesión de Collaboard ha expirado, por favor vuelve a autenticarte en la configuración de tu usuario."
 
-#, fuzzy
 msgid "Bad HTTP method"
-msgstr ""
+msgstr "Método HTTP incorrecto"
 
-#, fuzzy
 msgid "Bad credentials"
-msgstr ""
+msgstr "Credenciales incorrectas"
 
-#, fuzzy
 msgid "Collaboard API client error"
-msgstr ""
+msgstr "Error del cliente API de Collaboard"
 
-#, fuzzy
 msgid "OAuth access token refused"
-msgstr ""
+msgstr "Token de acceso OAuth rechazado"
 
-#, fuzzy
 msgid "Connected accounts"
-msgstr ""
+msgstr "Cuentas conectadas"
 
-#, fuzzy
 msgid "Collaboard integration"
-msgstr ""
+msgstr "Integración de Collaboard"
 
-#, fuzzy
 msgid "Collaboard"
-msgstr ""
+msgstr "Collaboard"
 
-#, fuzzy
 msgid "Integration of Collaboard"
-msgstr ""
+msgstr "Integración de Collaboard"
 
-#, fuzzy
 msgid "Collaboard whiteboard service integration"
-msgstr ""
+msgstr "Integración del servicio de pizarra Collaboard"
 
-#, fuzzy
 msgid "You are not connected to Collaboard"
-msgstr ""
+msgstr "No estás conectado a Collaboard"
 
-#, fuzzy
 msgid "Configure Collaboard integration"
-msgstr ""
+msgstr "Configurar la integración de Collaboard"
 
-#, fuzzy
 msgid "Failed to get the project list"
-msgstr ""
+msgstr "Error al obtener la lista de proyectos"
 
-#, fuzzy
 msgid "Loading project list"
-msgstr ""
+msgstr "Cargando lista de proyectos"
 
-#, fuzzy
 msgid "You haven't created any project yet"
-msgstr ""
+msgstr "Aún no has creado ningún proyecto"
 
-#, fuzzy
 msgid "Create a project"
-msgstr ""
+msgstr "Crea un proyecto"
 
-#, fuzzy
 msgid "Failed to get projects"
-msgstr ""
+msgstr "Error al obtener los proyectos"
 
-#, fuzzy
 msgid "New project was created in Collaboard"
-msgstr ""
+msgstr "Se creó un nuevo proyecto en Collaboard"
 
-#, fuzzy
 msgid "Failed to create new project"
-msgstr ""
+msgstr "Error al crear un nuevo proyecto"
 
-#, fuzzy
 msgid "Free Collaboard plan is limited to 3 projects"
-msgstr ""
+msgstr "El plan gratuito de Collaboard está limitado a 3 proyectos"
 
-#, fuzzy
 msgid "Failed to delete the project"
-msgstr ""
+msgstr "Error al eliminar el proyecto"
 
-#, fuzzy
 msgid "{name} deleted"
-msgstr ""
+msgstr "{name} eliminado"
 
-#, fuzzy
 msgid "If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret."
-msgstr ""
+msgstr "Si quieres permitir a tus usuarios de Nextcloud conectarse a Collaboard a través de OAuth, ponte en contacto con el soporte de Collaboard para obtener el ID y el secreto."
 
-#, fuzzy
 msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
-msgstr ""
+msgstr "Asegúrate de proporcionar el \"URI de redirección\" al Soporte de Collaboard"
 
-#, fuzzy
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
-msgstr ""
+msgstr "Coloque la \"ID de la aplicación\" y el \"Secreto de la aplicación\" a continuación. Sus usuarios de Nextcloud verán entonces un botón de \"Conectar con Collaboard\" en sus configuraciones personales."
 
-#, fuzzy
 msgid "Application ID"
-msgstr ""
+msgstr "ID de la aplicación"
 
-#, fuzzy
 msgid "ID of your Collaboard application"
-msgstr ""
+msgstr "ID de tu aplicación Collaboard"
 
-#, fuzzy
 msgid "Application secret"
-msgstr ""
+msgstr "Secreto de la aplicación"
 
-#, fuzzy
 msgid "Client secret of your Collaboard application"
-msgstr ""
+msgstr "Secreto del cliente de su aplicación Collaboard"
 
-#, fuzzy
 msgid "Use a popup to authenticate"
-msgstr ""
+msgstr "Usa una ventana emergente para autenticar"
 
-#, fuzzy
 msgid "Default Collaboard API server"
-msgstr ""
+msgstr "Servidor API de Collaboard por defecto"
 
-#, fuzzy
 msgid "You have specified a custom domain address. Did you forget to specify a custom API address?"
-msgstr ""
+msgstr "Ha especificado una dirección de dominio personalizada. ¿Olvidó especificar una dirección de API personalizada?"
 
-#, fuzzy
 msgid "Default Collaboard domain url"
-msgstr ""
+msgstr "URL del dominio Collaboard predeterminado"
 
-#, fuzzy
 msgid "You have specified a custom API address. Did you forget to specify a custom domain address?"
-msgstr ""
+msgstr "Ha especificado una dirección de API personalizada. ¿Olvidó especificar una dirección de dominio personalizada?"
 
-#, fuzzy
 msgid "Collaboard admin options saved"
-msgstr ""
+msgstr "Opciones de administrador de Collaboard guardadas"
 
-#, fuzzy
 msgid "Failed to save Collaboard admin options"
-msgstr ""
+msgstr "Error al guardar las opciones de administrador de Collaboard"
 
-#, fuzzy
 msgid "Invitation link"
-msgstr ""
+msgstr "Enlace de invitación"
 
-#, fuzzy
 msgid "Registered users permissions"
-msgstr ""
+msgstr "Permisos de usuarios registrados"
 
-#, fuzzy
 msgid "Allow guests"
-msgstr ""
+msgstr "Permitir invitados"
 
-#, fuzzy
 msgid "Allow guests (paid license required)"
-msgstr ""
+msgstr "Permitir invitados (se requiere licencia de pago)"
 
-#, fuzzy
 msgid "Guest permissions"
-msgstr ""
+msgstr "Permisos de invitado"
 
-#, fuzzy
 msgid "Password (optional)"
-msgstr ""
+msgstr "Contraseña (opcional)"
 
-#, fuzzy
 msgid "no password"
-msgstr ""
+msgstr "sin contraseña"
 
-#, fuzzy
 msgid "Expires in"
-msgstr ""
+msgstr "Caduca en"
 
-#, fuzzy
 msgid "Create another link"
-msgstr ""
+msgstr "Crea otro enlace"
 
-#, fuzzy
 msgid "Create link"
-msgstr ""
+msgstr "Crear enlace"
 
-#, fuzzy
 msgid "Share link to a Talk conversation"
-msgstr ""
+msgstr "Compartir enlace a una conversación de Talk"
 
-#, fuzzy
 msgid "No access"
-msgstr ""
+msgstr "Sin acceso"
 
-#, fuzzy
 msgid "Can view"
-msgstr ""
+msgstr "Puede ver"
 
-#, fuzzy
 msgid "Can edit"
-msgstr ""
+msgstr "Puede editar"
 
-#, fuzzy
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
-#, fuzzy
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
-#, fuzzy
 msgid "4 hours"
-msgstr ""
+msgstr "4 horas"
 
-#, fuzzy
 msgid "12 hours"
-msgstr ""
+msgstr "12 horas"
 
-#, fuzzy
 msgid "1 day"
-msgstr ""
+msgstr "1 día"
 
-#, fuzzy
 msgid "2 days"
-msgstr ""
+msgstr "2 días"
 
-#, fuzzy
 msgid "5 days"
-msgstr ""
+msgstr "5 días"
 
-#, fuzzy
 msgid "10 days"
-msgstr ""
+msgstr "10 días"
 
-#, fuzzy
 msgid "30 days"
-msgstr ""
+msgstr "30 días"
 
-#, fuzzy
 msgid "60 days"
-msgstr ""
+msgstr "60 días"
 
-#, fuzzy
 msgid "Invitation link was created"
-msgstr ""
+msgstr "Se creó el enlace de invitación"
 
-#, fuzzy
 msgid "Failed to create invitation link"
-msgstr ""
+msgstr "Error al crear el enlace de invitación"
 
-#, fuzzy
 msgid "Choose color"
-msgstr ""
+msgstr "Elegir color"
 
-#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
-#, fuzzy
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
-#, fuzzy
 msgid "Field \"{name}\" is missing"
-msgstr ""
+msgstr "El campo \"{name}\" falta"
 
-#, fuzzy
 msgid "Create a new project"
-msgstr ""
+msgstr "Crea un nuevo proyecto"
 
-#, fuzzy
 msgid "Ask your administrator to configure the Collaboard integration in Nextcloud."
-msgstr ""
+msgstr "Pide a tu administrador que configure la integración de Collaboard en Nextcloud."
 
-#, fuzzy
 msgid "Connect to Collaboard"
-msgstr ""
+msgstr "Conéctate a Collaboard"
 
-#, fuzzy
 msgid "Connected as {user}"
-msgstr ""
+msgstr "Conectado como {user}"
 
-#, fuzzy
 msgid "Disconnect from Collaboard"
-msgstr ""
+msgstr "Desconectar de Collaboard"
 
-#, fuzzy
 msgid "Successfully connected to Collaboard!"
-msgstr ""
+msgstr "¡Conexión exitosa a Collaboard!"
 
-#, fuzzy
 msgid "Error connecting to Collaboard:"
-msgstr ""
+msgstr "Error al conectar con Collaboard:"
 
-#, fuzzy
 msgid "Collaboard options saved"
-msgstr ""
+msgstr "Opciones de Collaboard guardadas"
 
-#, fuzzy
 msgid "Failed to save Collaboard options"
-msgstr ""
+msgstr "Error al guardar las opciones"
 
-#, fuzzy
 msgid "Back to project list"
-msgstr ""
+msgstr "Regresar a la lista de proyectos"
 
-#, fuzzy
 msgid "Delete project"
-msgstr ""
+msgstr "Eliminar proyecto"
 
-#, fuzzy
 msgid "Project personal link"
-msgstr ""
+msgstr "Enlace personal del proyecto"
 
-#, fuzzy
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copiar al portapapeles"
 
-#, fuzzy
 msgid "Open in a new tab"
-msgstr ""
+msgstr "Abrir en una nueva pestaña"
 
-#, fuzzy
 msgid "Enabled"
-msgstr ""
+msgstr "Habilitado"
 
-#, fuzzy
 msgid "Disabled"
-msgstr ""
+msgstr "Deshabilitado"
 
-#, fuzzy
 msgid "Project link copied!"
-msgstr ""
+msgstr "¡Enlace del proyecto copiado!"
 
-#, fuzzy
 msgid "Link could not be copied to clipboard"
-msgstr ""
+msgstr "El enlace no se pudo copiar al portapapeles"
 
-#, fuzzy
 msgid "Updated: {date}"
-msgstr ""
+msgstr "Actualizado: {date}"
 
-#, fuzzy
 msgid "Owner: {user}"
-msgstr ""
+msgstr "Propietario: {user}"
 
-#, fuzzy
 msgid "Reload project list from Collaboard"
-msgstr ""
+msgstr "Recargar la lista de proyectos desde Collaboard"
 
-#, fuzzy
 msgid "Send link to a Talk room"
-msgstr ""
+msgstr "Enviar enlace a una sala de Talk"
 
-#, fuzzy
 msgid "Search for users, groups or conversations"
-msgstr ""
+msgstr "Busca usuarios, grupos o conversaciones"
 
-#, fuzzy
 msgid "Conversations"
-msgstr ""
+msgstr "Conversaciones"
 
-#, fuzzy
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
-#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 msgid "You created a conversation with {name}"
-msgstr ""
+msgstr "Has creado una conversación con {name}"
 
 msgid "Failed to join"
-msgstr ""
+msgstr "Error al unirse"
 
 msgid "You joined {name}"
-msgstr ""
+msgstr "Te uniste a {name}"
 
 msgid "Collaboard project \"{name}\": {link}"
-msgstr ""
+msgstr "Proyecto Collaboard \"{name}\": {link}"
 
 msgid "Link sent to {name}"
-msgstr ""
+msgstr "Enlace enviado a {name}"
 
 msgid "Failed to send link"
-msgstr ""
+msgstr "Error al enviar el enlace"
 
 msgid "Project name"
-msgstr ""
+msgstr "Nombre del proyecto"
 
 msgid "New Project"
-msgstr ""
+msgstr "Nuevo Proyecto"
 
 msgid "Created at"
-msgstr ""
+msgstr "Creado en"
 
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 msgid "Updated at"
 msgstr "Actualizado a las"
@@ -427,3 +333,15 @@ msgstr "Inicia sesión con Collaboard"
 
 msgid "Failed to save Collaboard OAuth state"
 msgstr "Error al guardar el estado OAuth de Collaboard"
+
+msgid "Environment"
+msgstr "Ambiente"
+
+msgid "Open Collaboard board links in Nextcloud"
+msgstr "Abrir enlaces de tablero Collaboard en Nextcloud"
+
+msgid "Open here"
+msgstr "Abrir aquí"
+
+msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
+msgstr "Si desea permitir que sus usuarios abran tableros en Nextcloud, póngase en contacto con el soporte de Collaboard para incluir en la lista blanca su dominio de Nextcloud."

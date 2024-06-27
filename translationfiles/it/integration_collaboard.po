@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-06-25 11:27\n"
+"PO-Revision-Date: 2024-06-27 11:49\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: it\n"
@@ -333,3 +333,15 @@ msgstr "Accedi con Collaboard"
 
 msgid "Failed to save Collaboard OAuth state"
 msgstr "Impossibile salvare lo stato OAuth di Collaboard"
+
+msgid "Environment"
+msgstr "Ambiente"
+
+msgid "Open Collaboard board links in Nextcloud"
+msgstr "Apri i link della bacheca Collaboard in Nextcloud"
+
+msgid "Open here"
+msgstr "Apri qui"
+
+msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
+msgstr "Se vuoi permettere ai tuoi utenti di aprire lavagne in Nextcloud, mettiti in contatto con il Supporto Collaboard per inserire il tuo dominio Nextcloud nella whitelist."

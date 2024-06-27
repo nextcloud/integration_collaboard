@@ -5,420 +5,325 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-06-25 11:27\n"
+"PO-Revision-Date: 2024-06-27 11:49\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: sv\n"
 
-#, fuzzy
 msgid "Error getting OAuth access token. "
-msgstr ""
+msgstr "Fel vid hämtning av OAuth-åtkomsttoken. "
 
-#, fuzzy
 msgid "Error during OAuth exchanges"
-msgstr ""
+msgstr "Fel under OAuth-utbyten"
 
-#, fuzzy
 msgid "Your Collaboard session has expired, please re-authenticate in your user settings."
-msgstr ""
+msgstr "Din Collaboard-session har gått ut, vänligen autentisera om i dina användarinställningar."
 
-#, fuzzy
 msgid "Bad HTTP method"
-msgstr ""
+msgstr "Dålig HTTP-metod"
 
-#, fuzzy
 msgid "Bad credentials"
-msgstr ""
+msgstr "Ogiltiga referenser"
 
-#, fuzzy
 msgid "Collaboard API client error"
-msgstr ""
+msgstr "Collaboard API-klientfel"
 
-#, fuzzy
 msgid "OAuth access token refused"
-msgstr ""
+msgstr "OAuth-åtkomsttoken nekades"
 
-#, fuzzy
 msgid "Connected accounts"
-msgstr ""
+msgstr "Anslutna konton"
 
-#, fuzzy
 msgid "Collaboard integration"
-msgstr ""
+msgstr "Integration av Collaboard"
 
-#, fuzzy
 msgid "Collaboard"
-msgstr ""
+msgstr "Collaboard"
 
-#, fuzzy
 msgid "Integration of Collaboard"
-msgstr ""
+msgstr "Integration av Collaboard"
 
-#, fuzzy
 msgid "Collaboard whiteboard service integration"
-msgstr ""
+msgstr "Integration av Collaboard whiteboard-tjänst"
 
-#, fuzzy
 msgid "You are not connected to Collaboard"
-msgstr ""
+msgstr "Du är inte ansluten till Collaboard"
 
-#, fuzzy
 msgid "Configure Collaboard integration"
-msgstr ""
+msgstr "Konfigurera Collaboard-integration"
 
-#, fuzzy
 msgid "Failed to get the project list"
-msgstr ""
+msgstr "Misslyckades med att hämta projektlistan"
 
-#, fuzzy
 msgid "Loading project list"
-msgstr ""
+msgstr "Laddar projektlista"
 
-#, fuzzy
 msgid "You haven't created any project yet"
-msgstr ""
+msgstr "Du har inte skapat något projekt ännu"
 
-#, fuzzy
 msgid "Create a project"
-msgstr ""
+msgstr "Skapa ett projekt"
 
-#, fuzzy
 msgid "Failed to get projects"
-msgstr ""
+msgstr "Misslyckades med att hämta projekt"
 
-#, fuzzy
 msgid "New project was created in Collaboard"
-msgstr ""
+msgstr "Nytt projekt skapades i Collaboard"
 
-#, fuzzy
 msgid "Failed to create new project"
-msgstr ""
+msgstr "Misslyckades med att skapa nytt projekt"
 
-#, fuzzy
 msgid "Free Collaboard plan is limited to 3 projects"
-msgstr ""
+msgstr "Gratis Collaboard-plan är begränsat till 3 projekt"
 
-#, fuzzy
 msgid "Failed to delete the project"
-msgstr ""
+msgstr "Misslyckades med att radera projektet"
 
-#, fuzzy
 msgid "{name} deleted"
-msgstr ""
+msgstr "{name} raderades"
 
-#, fuzzy
 msgid "If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret."
-msgstr ""
+msgstr "Om du vill tillåta dina Nextcloud-användare att ansluta till Collaboard via OAuth, ta kontakt med Collaboard Support för att få ID och hemlighet."
 
-#, fuzzy
 msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
-msgstr ""
+msgstr "Se till att du tillhandahåller \"Redirect URI\" till Collaboard Support"
 
-#, fuzzy
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
-msgstr ""
+msgstr "Ange \"Applikations-ID\" och \"Applikationshemlighet\" nedan. Dina Nextcloud-användare kommer sedan att se en \"Anslut till Collaboard\"-knapp i sina personliga inställningar."
 
-#, fuzzy
 msgid "Application ID"
-msgstr ""
+msgstr "Applikations-ID"
 
-#, fuzzy
 msgid "ID of your Collaboard application"
-msgstr ""
+msgstr "ID för din Collaboard-applikation"
 
-#, fuzzy
 msgid "Application secret"
-msgstr ""
+msgstr "Applikationshemlighet"
 
-#, fuzzy
 msgid "Client secret of your Collaboard application"
-msgstr ""
+msgstr "Klientshemlighet för din Collaboard-applikation"
 
-#, fuzzy
 msgid "Use a popup to authenticate"
-msgstr ""
+msgstr "Använd en popup för att autentisera"
 
-#, fuzzy
 msgid "Default Collaboard API server"
-msgstr ""
+msgstr "Standard Collaboard API-server"
 
-#, fuzzy
 msgid "You have specified a custom domain address. Did you forget to specify a custom API address?"
-msgstr ""
+msgstr "Du har angett en anpassad domänadress. Glömde du att ange en anpassad API-adress?"
 
-#, fuzzy
 msgid "Default Collaboard domain url"
-msgstr ""
+msgstr "Standard Collaboard-domän-URL"
 
-#, fuzzy
 msgid "You have specified a custom API address. Did you forget to specify a custom domain address?"
-msgstr ""
+msgstr "Du har angett en anpassad API-adress. Glömde du att ange en anpassad domänadress?"
 
-#, fuzzy
 msgid "Collaboard admin options saved"
-msgstr ""
+msgstr "Collaboard-adminalternativen sparade"
 
-#, fuzzy
 msgid "Failed to save Collaboard admin options"
-msgstr ""
+msgstr "Misslyckades med att spara Collaboard-adminalternativ"
 
-#, fuzzy
 msgid "Invitation link"
-msgstr ""
+msgstr "Inbjudningslänk"
 
-#, fuzzy
 msgid "Registered users permissions"
-msgstr ""
+msgstr "Registrerade användares behörigheter"
 
-#, fuzzy
 msgid "Allow guests"
-msgstr ""
+msgstr "Tillåt gäster"
 
-#, fuzzy
 msgid "Allow guests (paid license required)"
-msgstr ""
+msgstr "Tillåt gäster (betalad licens krävs)"
 
-#, fuzzy
 msgid "Guest permissions"
-msgstr ""
+msgstr "Gästrättigheter"
 
-#, fuzzy
 msgid "Password (optional)"
-msgstr ""
+msgstr "Lösenord (valfritt)"
 
-#, fuzzy
 msgid "no password"
-msgstr ""
+msgstr "inget lösenord"
 
-#, fuzzy
 msgid "Expires in"
-msgstr ""
+msgstr "Gäller till"
 
-#, fuzzy
 msgid "Create another link"
-msgstr ""
+msgstr "Skapa en annan länk"
 
-#, fuzzy
 msgid "Create link"
-msgstr ""
+msgstr "Skapa länk"
 
-#, fuzzy
 msgid "Share link to a Talk conversation"
-msgstr ""
+msgstr "Dela länk till en Talk-konversation"
 
-#, fuzzy
 msgid "No access"
-msgstr ""
+msgstr "Ingen åtkomst"
 
-#, fuzzy
 msgid "Can view"
-msgstr ""
+msgstr "Kan visa"
 
-#, fuzzy
 msgid "Can edit"
-msgstr ""
+msgstr "Kan redigera"
 
-#, fuzzy
 msgid "Never"
-msgstr ""
+msgstr "Aldrig"
 
-#, fuzzy
 msgid "1 hour"
-msgstr ""
+msgstr "1 timme"
 
-#, fuzzy
 msgid "4 hours"
-msgstr ""
+msgstr "4 timmar"
 
-#, fuzzy
 msgid "12 hours"
-msgstr ""
+msgstr "12 timmar"
 
-#, fuzzy
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
-#, fuzzy
 msgid "2 days"
-msgstr ""
+msgstr "2 dagar"
 
-#, fuzzy
 msgid "5 days"
-msgstr ""
+msgstr "5 dagar"
 
-#, fuzzy
 msgid "10 days"
-msgstr ""
+msgstr "10 dagar"
 
-#, fuzzy
 msgid "30 days"
-msgstr ""
+msgstr "30 dagar"
 
-#, fuzzy
 msgid "60 days"
-msgstr ""
+msgstr "60 dagar"
 
-#, fuzzy
 msgid "Invitation link was created"
-msgstr ""
+msgstr "Inbjudningslänken skapades"
 
-#, fuzzy
 msgid "Failed to create invitation link"
-msgstr ""
+msgstr "Misslyckades med att skapa inbjudningslänk"
 
-#, fuzzy
 msgid "Choose color"
-msgstr ""
+msgstr "Välj färg"
 
-#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
-#, fuzzy
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
-#, fuzzy
 msgid "Field \"{name}\" is missing"
-msgstr ""
+msgstr "Fältet \"{name}\" saknas"
 
-#, fuzzy
 msgid "Create a new project"
-msgstr ""
+msgstr "Skapa ett nytt projekt"
 
-#, fuzzy
 msgid "Ask your administrator to configure the Collaboard integration in Nextcloud."
-msgstr ""
+msgstr "Be din administratör att konfigurera Collaboard-integrationen i Nextcloud."
 
-#, fuzzy
 msgid "Connect to Collaboard"
-msgstr ""
+msgstr "Anslut till Collaboard"
 
-#, fuzzy
 msgid "Connected as {user}"
-msgstr ""
+msgstr "Ansluten som {user}"
 
-#, fuzzy
 msgid "Disconnect from Collaboard"
-msgstr ""
+msgstr "Koppla från Collaboard"
 
-#, fuzzy
 msgid "Successfully connected to Collaboard!"
-msgstr ""
+msgstr "Framgångsrikt ansluten till Collaboard!"
 
-#, fuzzy
 msgid "Error connecting to Collaboard:"
-msgstr ""
+msgstr "Fel vid anslutning till Collaboard:"
 
-#, fuzzy
 msgid "Collaboard options saved"
-msgstr ""
+msgstr "Collaboard-inställningar sparade"
 
-#, fuzzy
 msgid "Failed to save Collaboard options"
-msgstr ""
+msgstr "Misslyckades med att spara Collaboard-inställningar"
 
-#, fuzzy
 msgid "Back to project list"
-msgstr ""
+msgstr "Tillbaka till projektlistan"
 
-#, fuzzy
 msgid "Delete project"
-msgstr ""
+msgstr "Radera projekt"
 
-#, fuzzy
 msgid "Project personal link"
-msgstr ""
+msgstr "Personlig projektlänk"
 
-#, fuzzy
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiera till urklipp"
 
-#, fuzzy
 msgid "Open in a new tab"
-msgstr ""
+msgstr "Öppna i en ny flik"
 
-#, fuzzy
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiverad"
 
-#, fuzzy
 msgid "Disabled"
-msgstr ""
+msgstr "Inaktiverad"
 
-#, fuzzy
 msgid "Project link copied!"
-msgstr ""
+msgstr "Projektlänk kopierad!"
 
-#, fuzzy
 msgid "Link could not be copied to clipboard"
-msgstr ""
+msgstr "Länken kunde inte kopieras till urklipp"
 
-#, fuzzy
 msgid "Updated: {date}"
-msgstr ""
+msgstr "Uppdaterad: {date}"
 
-#, fuzzy
 msgid "Owner: {user}"
-msgstr ""
+msgstr "Ägare: {user}"
 
-#, fuzzy
 msgid "Reload project list from Collaboard"
-msgstr ""
+msgstr "Ladda om projektlistan från Collaboard"
 
-#, fuzzy
 msgid "Send link to a Talk room"
-msgstr ""
+msgstr "Skicka länk till ett Talk-rum"
 
-#, fuzzy
 msgid "Search for users, groups or conversations"
-msgstr ""
+msgstr "Sök efter användare, grupper eller konversationer"
 
-#, fuzzy
 msgid "Conversations"
-msgstr ""
+msgstr "Samtal"
 
-#, fuzzy
 msgid "Users"
-msgstr ""
+msgstr "Användare"
 
-#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Grupper"
 
-#, fuzzy
 msgid "Send"
-msgstr ""
+msgstr "Skicka"
 
 msgid "You created a conversation with {name}"
-msgstr ""
+msgstr "Du skapade en konversation med {name}"
 
 msgid "Failed to join"
-msgstr ""
+msgstr "Misslyckades med att ansluta"
 
 msgid "You joined {name}"
-msgstr ""
+msgstr "Du gick med i {name}"
 
 msgid "Collaboard project \"{name}\": {link}"
-msgstr ""
+msgstr "Collaboard-projekt \"{name}\": {link}"
 
 msgid "Link sent to {name}"
-msgstr ""
+msgstr "Länk skickad till {name}"
 
 msgid "Failed to send link"
-msgstr ""
+msgstr "Misslyckades med att skicka länken"
 
 msgid "Project name"
-msgstr ""
+msgstr "Projektnamn"
 
 msgid "New Project"
-msgstr ""
+msgstr "Nytt Projekt"
 
 msgid "Created at"
-msgstr ""
+msgstr "Skapad vid"
 
 msgid "Created by"
-msgstr ""
+msgstr "Skapad av"
 
 msgid "Updated at"
 msgstr "Uppdaterad kl"
@@ -428,3 +333,15 @@ msgstr "Logga in med Collaboard"
 
 msgid "Failed to save Collaboard OAuth state"
 msgstr "Misslyckades med att spara Collaboard OAuth-status"
+
+msgid "Environment"
+msgstr "Miljö"
+
+msgid "Open Collaboard board links in Nextcloud"
+msgstr "Öppna Collaboard-boardlänkar i Nextcloud"
+
+msgid "Open here"
+msgstr "Öppna här"
+
+msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
+msgstr "Om du vill tillåta dina användare att öppna tavlor i Nextcloud, ta kontakt med Collaboard Support för att vitlista din Nextcloud-domän."

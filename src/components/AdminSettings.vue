@@ -118,9 +118,6 @@
 				</div>
 			</div>
 
-			<p class="settings-hint">
-				{{ t('integration_collaboard', 'If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain.') }}
-			</p>
 			<NcCheckboxRadioSwitch
 				class="field"
 				:checked.sync="state.override_link_click"

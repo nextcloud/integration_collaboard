@@ -108,6 +108,10 @@ OC.L10N.register(
     "Created by" : "Created by",
     "Updated at" : "Updated at",
     "Sign in with Collaboard" : "Sign in with Collaboard",
-    "Failed to save Collaboard OAuth state" : "Failed to save Collaboard OAuth state"
+    "Failed to save Collaboard OAuth state" : "Failed to save Collaboard OAuth state",
+    "Environment" : "Environment",
+    "Open Collaboard board links in Nextcloud" : "Open Collaboard board links in Nextcloud",
+    "Open here" : "Open here",
+    "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain." : "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
 },
 "");

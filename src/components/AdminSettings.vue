@@ -74,30 +74,9 @@
 				</div>
 				<div v-if="selectedOption === 'PREMISE'">
 					<div class="field">
-						<label for="collaboard-instance">
-							<EarthIcon :size="20" class="icon" />
-							{{ t('integration_collaboard', 'Default Collaboard API server') }}
-						</label>
-						<input id="collaboard-instance"
-							v-model="state.admin_api_url"
-							:class="{ 'greyed-out-text': !usingCustomApiUrl, 'invalid-url': !isApiUrlValid }"
-							type="text"
-							placeholder="https://..."
-							@input="onInput"
-							@blur="fillEmptyUrls">
-						<transition name="fade">
-							<div v-if="usingCustomDomainUrl && !usingCustomApiUrl" class="custom-address-notice">
-								<InformationOutlineIcon :size="20" class="icon" />
-								<span class="notice-text">
-									{{ t('integration_collaboard', 'You have specified a custom domain address. Did you forget to specify a custom API address?') }}
-								</span>
-							</div>
-						</transition>
-					</div>
-					<div class="field">
 						<label for="collaboard-domain-url">
 							<EarthIcon :size="20" class="icon" />
-							{{ t('integration_collaboard', 'Default Collaboard domain url') }}
+							{{ t('integration_collaboard', 'Collaboard Domain url') }}
 						</label>
 						<input id="collaboard-instance"
 							v-model="state.admin_domain_url"
@@ -111,6 +90,27 @@
 								<InformationOutlineIcon :size="20" class="icon" />
 								<span class="notice-text">
 									{{ t('integration_collaboard', 'You have specified a custom API address. Did you forget to specify a custom domain address?') }}
+								</span>
+							</div>
+						</transition>
+					</div>
+					<div class="field">
+						<label for="collaboard-instance">
+							<EarthIcon :size="20" class="icon" />
+							{{ t('integration_collaboard', 'Collaboard API server') }}
+						</label>
+						<input id="collaboard-instance"
+							v-model="state.admin_api_url"
+							:class="{ 'greyed-out-text': !usingCustomApiUrl, 'invalid-url': !isApiUrlValid }"
+							type="text"
+							placeholder="https://..."
+							@input="onInput"
+							@blur="fillEmptyUrls">
+						<transition name="fade">
+							<div v-if="usingCustomDomainUrl && !usingCustomApiUrl" class="custom-address-notice">
+								<InformationOutlineIcon :size="20" class="icon" />
+								<span class="notice-text">
+									{{ t('integration_collaboard', 'You have specified a custom domain address. Did you forget to specify a custom API address?') }}
 								</span>
 							</div>
 						</transition>

@@ -18,6 +18,8 @@ use OCA\Collaboard\Service\CollaboardAPIService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\RedirectResponse;
+use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Services\IInitialState;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
@@ -30,6 +32,7 @@ class ConfigController extends Controller {
 	private IConfig $config;
 	private CollaboardAPIService $collaboardAPIService;
 	private ?string $userId;
+	private $initialStateService;
 	private LoggerInterface $logger;
 
 	public function __construct(
@@ -38,6 +41,7 @@ class ConfigController extends Controller {
 		IConfig $config,
 		private IURLGenerator $urlGenerator,
 		private IL10N $l,
+		IInitialState $initialStateService,
 		CollaboardAPIService $collaboardAPIService,
 		?string $userId,
 		LoggerInterface $logger
@@ -47,6 +51,7 @@ class ConfigController extends Controller {
 		$this->l = $l;
 		$this->collaboardAPIService = $collaboardAPIService;
 		$this->userId = $userId;
+		$this->initialStateService = $initialStateService;
 		$this->logger = $logger;
 	}
 
@@ -130,6 +135,19 @@ class ConfigController extends Controller {
 			$this->config->setAppValue(Application::APP_ID, $key, $value);
 		}
 		return new DataResponse(1);
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 *
+	 * @param string $user_name
+	 * @param string $user_id
+	 * @return TemplateResponse
+	 */
+	public function popupSuccessPage(string $user_name, string $user_id): TemplateResponse {
+		$this->initialStateService->provideInitialState('popup-data', ['user_name' => $user_name, 'user_id' => $user_id]);
+		return new TemplateResponse(Application::APP_ID, 'popupSuccess', [], TemplateResponse::RENDER_AS_GUEST);
 	}
 
 	/**

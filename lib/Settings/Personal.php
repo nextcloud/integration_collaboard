@@ -43,6 +43,7 @@ class Personal implements ISettings {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
 		// don't expose the client secret to users
 		$clientSecret = ($this->config->getAppValue(Application::APP_ID, 'client_secret') !== '');
+		$usePopup = $this->config->getAppValue(Application::APP_ID, 'use_popup', '0') === '1';
 
 		$collaboardUserName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$collaboardUserDisplayName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_displayname');
@@ -55,6 +56,8 @@ class Personal implements ISettings {
 			'token' => ($token && $refreshToken) ? 'dummyTokenContent' : '',
 			'client_id' => $clientID,
 			'client_secret' => $clientSecret,
+			'use_popup' => $usePopup,
+
 			'user_name' => $collaboardUserName,
 			'user_displayname' => $collaboardUserDisplayName,
 

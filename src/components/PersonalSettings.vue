@@ -142,7 +142,6 @@ export default {
 					.then((data) => {
 						this.state.token = 'dummyToken'
 						this.state.user_name = data.userName
-						this.state.user_id = data.userId
 					})
 			} else {
 				oauthConnect(this.state.client_id, this.state.admin_api_url, 'settings')

@@ -12,7 +12,7 @@ OC.L10N.register(
     "Collaboard integration" : "Integration av Collaboard",
     "Collaboard" : "Collaboard",
     "Integration of Collaboard" : "Integration av Collaboard",
-    "Collaboard whiteboard service integration" : "Integration av Collaboard whiteboard-tjänst",
+    "Collaboard whiteboard service integration" : "Integration av Collaboard-tjänsten",
     "You are not connected to Collaboard" : "Du är inte ansluten till Collaboard",
     "Configure Collaboard integration" : "Konfigurera Collaboard-integration",
     "Failed to get the project list" : "Misslyckades med att hämta projektlistan",

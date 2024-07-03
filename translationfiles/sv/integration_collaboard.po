@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-06-27 11:49\n"
+"PO-Revision-Date: 2024-07-03 16:31\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: sv\n"
@@ -44,7 +44,7 @@ msgid "Integration of Collaboard"
 msgstr "Integration av Collaboard"
 
 msgid "Collaboard whiteboard service integration"
-msgstr "Integration av Collaboard whiteboard-tjänst"
+msgstr "Integration av Collaboard-tjänsten"
 
 msgid "You are not connected to Collaboard"
 msgstr "Du är inte ansluten till Collaboard"
@@ -88,15 +88,18 @@ msgstr "Om du vill tillåta dina Nextcloud-användare att ansluta till Collaboar
 msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
 msgstr "Se till att du tillhandahåller \"Redirect URI\" till Collaboard Support"
 
+#, fuzzy
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
 msgstr "Ange \"Applikations-ID\" och \"Applikationshemlighet\" nedan. Dina Nextcloud-användare kommer sedan att se en \"Anslut till Collaboard\"-knapp i sina personliga inställningar."
 
+#, fuzzy
 msgid "Application ID"
 msgstr "Applikations-ID"
 
 msgid "ID of your Collaboard application"
 msgstr "ID för din Collaboard-applikation"
 
+#, fuzzy
 msgid "Application secret"
 msgstr "Applikationshemlighet"
 

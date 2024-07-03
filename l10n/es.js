@@ -12,7 +12,7 @@ OC.L10N.register(
     "Collaboard integration" : "Integración de Collaboard",
     "Collaboard" : "Collaboard",
     "Integration of Collaboard" : "Integración de Collaboard",
-    "Collaboard whiteboard service integration" : "Integración del servicio de pizarra Collaboard",
+    "Collaboard whiteboard service integration" : "Integración del servicio Collaboard",
     "You are not connected to Collaboard" : "No estás conectado a Collaboard",
     "Configure Collaboard integration" : "Configurar la integración de Collaboard",
     "Failed to get the project list" : "Error al obtener la lista de proyectos",

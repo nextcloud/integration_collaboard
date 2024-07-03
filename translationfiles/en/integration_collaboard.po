@@ -55,7 +55,7 @@ msgid "Integration of Collaboard"
 msgstr "Integration of Collaboard"
 
 msgid "Collaboard whiteboard service integration"
-msgstr "Collaboard whiteboard service integration"
+msgstr "Collaboard service integration"
 
 msgid "You are not connected to Collaboard"
 msgstr "You are not connected to Collaboard"
@@ -100,16 +100,16 @@ msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
 msgstr "Make sure you provide the \"Redirect URI\" to Collaboard Support"
 
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
-msgstr "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
+msgstr "Put the \"App ID\" and \"App secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
 
 msgid "Application ID"
-msgstr "Application ID"
+msgstr "App ID"
 
 msgid "ID of your Collaboard application"
 msgstr "ID of your Collaboard application"
 
 msgid "Application secret"
-msgstr "Application secret"
+msgstr "App secret"
 
 msgid "Client secret of your Collaboard application"
 msgstr "Client secret of your Collaboard application"

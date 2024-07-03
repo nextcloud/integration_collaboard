@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-06-27 11:49\n"
+"PO-Revision-Date: 2024-07-03 16:31\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: de\n"
@@ -14,13 +14,13 @@ msgid "Error getting OAuth access token. "
 msgstr "Fehler beim Abrufen des OAuth-Zugriffstokens. "
 
 msgid "Error during OAuth exchanges"
-msgstr "Fehler während des OAuth-Austauschs"
+msgstr "Fehler beim Erstellen der OAuth-Verbindung"
 
 msgid "Your Collaboard session has expired, please re-authenticate in your user settings."
-msgstr "Ihre Collaboard-Sitzung ist abgelaufen, bitte authentifizieren Sie sich erneut in Ihren Benutzereinstellungen."
+msgstr "Deine Collaboard-Sitzung ist abgelaufen. Bitte authentisiere Dich erneut in Deinen Benutzereinstellungen."
 
 msgid "Bad HTTP method"
-msgstr "Schlechte HTTP-Methode"
+msgstr "Ungültige HTTP-Methode"
 
 msgid "Bad credentials"
 msgstr "Ungültige Anmeldeinformationen"
@@ -44,10 +44,10 @@ msgid "Integration of Collaboard"
 msgstr "Integration von Collaboard"
 
 msgid "Collaboard whiteboard service integration"
-msgstr "Integration des Collaboard-Whiteboard-Dienstes"
+msgstr "Integration des Collaboard-Dienstes"
 
 msgid "You are not connected to Collaboard"
-msgstr "Sie sind nicht mit Collaboard verbunden"
+msgstr "Du bist nicht mit Collaboard verbunden"
 
 msgid "Configure Collaboard integration"
 msgstr "Collaboard-Integration konfigurieren"
@@ -59,10 +59,10 @@ msgid "Loading project list"
 msgstr "Projektliste wird geladen"
 
 msgid "You haven't created any project yet"
-msgstr "Sie haben noch kein Projekt erstellt"
+msgstr "Du hast noch kein Projekt erstellt"
 
 msgid "Create a project"
-msgstr "Erstellen Sie ein Projekt"
+msgstr "Projekt erstellen"
 
 msgid "Failed to get projects"
 msgstr "Fehler beim Abrufen von Projekten"
@@ -74,7 +74,7 @@ msgid "Failed to create new project"
 msgstr "Fehler beim Erstellen eines neuen Projekts"
 
 msgid "Free Collaboard plan is limited to 3 projects"
-msgstr "Der kostenlose Collaboard-Plan ist auf 3 Projekte begrenzt"
+msgstr "Der kostenlose Collaboard-Zugang ist auf 3 Projekte begrenzt"
 
 msgid "Failed to delete the project"
 msgstr "Fehler beim Löschen des Projekts"
@@ -83,40 +83,41 @@ msgid "{name} deleted"
 msgstr "{name} gelöscht"
 
 msgid "If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret."
-msgstr "Wenn Sie Ihren Nextcloud-Benutzern erlauben möchten, sich über OAuth mit Collaboard zu verbinden, wenden Sie sich an den Collaboard-Support, um die ID und das Geheimnis zu erhalten."
+msgstr "Wenn Du Deinen Nextcloud-Benutzern erlauben möchtest, sich über OAuth mit Collaboard zu verbinden, wende Dich an den Collaboard-Support, um die App-ID und das App Secret zu erhalten."
 
 msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
-msgstr "Stellen Sie sicher, dass Sie die \"Redirect URI\" an den Collaboard Support weitergeben"
+msgstr "Stelle sicher, dass Du die \"Redirect URI\" an den Collaboard Support weitergibst"
 
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
-msgstr "Geben Sie unten die \"Anwendungs-ID\" und das \"Anwendungsgeheimnis\" ein. Ihre Nextcloud-Benutzer sehen dann eine Schaltfläche \"Mit Collaboard verbinden\" in ihren persönlichen Einstellungen."
+msgstr "Gib unten die \"App-ID\" und das \"App Secret\" ein. Deine Nextcloud-Benutzer sehen dann die Schaltfläche \"Mit Collaboard verbinden\" in ihren persönlichen Einstellungen."
 
 msgid "Application ID"
-msgstr "Anwendungs-ID"
+msgstr "App-ID"
 
 msgid "ID of your Collaboard application"
-msgstr "ID Ihrer Collaboard-Anwendung"
+msgstr "ID Deiner Collaboard-Anwendung"
 
+#, fuzzy
 msgid "Application secret"
-msgstr "Anwendungsgeheimnis"
+msgstr "App Secret"
 
 msgid "Client secret of your Collaboard application"
-msgstr "Kundengeheimnis Ihrer Collaboard-Anwendung"
+msgstr "Client Secret Ihrer Collaboard-Anwendung"
 
 msgid "Use a popup to authenticate"
-msgstr "Verwenden Sie ein Popup zur Authentifizierung"
+msgstr "Verwenden Sie ein Pop-up zur Authentisierung"
 
 msgid "Default Collaboard API server"
 msgstr "Standard Collaboard API-Server"
 
 msgid "You have specified a custom domain address. Did you forget to specify a custom API address?"
-msgstr "Sie haben eine benutzerdefinierte Domain-Adresse angegeben. Haben Sie vergessen, eine benutzerdefinierte API-Adresse anzugeben?"
+msgstr "Du hast eine benutzerdefinierte Domain-Adresse angegeben. Hast Du vergessen, eine benutzerdefinierte API-Adresse anzugeben?"
 
 msgid "Default Collaboard domain url"
 msgstr "Standard Collaboard-Domain-URL"
 
 msgid "You have specified a custom API address. Did you forget to specify a custom domain address?"
-msgstr "Sie haben eine benutzerdefinierte API-Adresse angegeben. Haben Sie vergessen, eine benutzerdefinierte Domain-Adresse anzugeben?"
+msgstr "Du hast eine benutzerdefinierte API-Adresse angegeben. Hast Du vergessen, eine benutzerdefinierte Domain-Adresse anzugeben?"
 
 msgid "Collaboard admin options saved"
 msgstr "Collaboard-Admin-Optionen gespeichert"
@@ -128,13 +129,13 @@ msgid "Invitation link"
 msgstr "Einladungslink"
 
 msgid "Registered users permissions"
-msgstr "Berechtigungen registrierter Benutzer"
+msgstr "Berechtigungen für registrierte Benutzer"
 
 msgid "Allow guests"
 msgstr "Gäste zulassen"
 
 msgid "Allow guests (paid license required)"
-msgstr "Gäste zulassen (bezahlte Lizenz erforderlich)"
+msgstr "Gäste zulassen (Lizenz erforderlich)"
 
 msgid "Guest permissions"
 msgstr "Gastberechtigungen"
@@ -149,7 +150,7 @@ msgid "Expires in"
 msgstr "Läuft ab in"
 
 msgid "Create another link"
-msgstr "Erstellen Sie einen weiteren Link"
+msgstr "Einen weiteren Link erstellen"
 
 msgid "Create link"
 msgstr "Link erstellen"
@@ -167,7 +168,7 @@ msgid "Can edit"
 msgstr "Kann bearbeiten"
 
 msgid "Never"
-msgstr "Niemals"
+msgstr "Nie"
 
 msgid "1 hour"
 msgstr "1 Stunde"
@@ -215,19 +216,19 @@ msgid "Field \"{name}\" is missing"
 msgstr "Das Feld \"{name}\" fehlt"
 
 msgid "Create a new project"
-msgstr "Erstellen Sie ein neues Projekt"
+msgstr "Neues Projekt erstellen"
 
 msgid "Ask your administrator to configure the Collaboard integration in Nextcloud."
-msgstr "Bitten Sie Ihren Administrator, die Collaboard-Integration in Nextcloud zu konfigurieren."
+msgstr "Bitte Deinen Administrator die Collaboard-Integration in Nextcloud zu konfigurieren."
 
 msgid "Connect to Collaboard"
-msgstr "Verbinden Sie sich mit Collaboard"
+msgstr "Verbindung mit Collaboard herstellen"
 
 msgid "Connected as {user}"
 msgstr "Verbunden als {user}"
 
 msgid "Disconnect from Collaboard"
-msgstr "Von Collaboard trennen"
+msgstr "Verbindung mit Collaboard trennen"
 
 msgid "Successfully connected to Collaboard!"
 msgstr "Erfolgreich mit Collaboard verbunden!"
@@ -239,7 +240,7 @@ msgid "Collaboard options saved"
 msgstr "Collaboard-Einstellungen gespeichert"
 
 msgid "Failed to save Collaboard options"
-msgstr "Fehler beim Speichern der Collaboard-Optionen"
+msgstr "Fehler beim Speichern der Collaboard-Einstellungen"
 
 msgid "Back to project list"
 msgstr "Zurück zur Projektliste"
@@ -248,7 +249,7 @@ msgid "Delete project"
 msgstr "Projekt löschen"
 
 msgid "Project personal link"
-msgstr "Projektpersonenlink"
+msgstr "Persönlicher Projektlink"
 
 msgid "Copy to clipboard"
 msgstr "In die Zwischenablage kopieren"
@@ -278,7 +279,7 @@ msgid "Reload project list from Collaboard"
 msgstr "Projektliste von Collaboard neu laden"
 
 msgid "Send link to a Talk room"
-msgstr "Link zu einem Talk-Raum senden"
+msgstr "Link zu einem Talk Room senden"
 
 msgid "Search for users, groups or conversations"
 msgstr "Suche nach Benutzern, Gruppen oder Unterhaltungen"
@@ -296,13 +297,13 @@ msgid "Send"
 msgstr "Senden"
 
 msgid "You created a conversation with {name}"
-msgstr "Sie haben eine Unterhaltung mit {name} erstellt"
+msgstr "Du hast eine Unterhaltung mit {name} gestartet"
 
 msgid "Failed to join"
 msgstr "Fehler beim Beitreten"
 
 msgid "You joined {name}"
-msgstr "Sie sind {name} beigetreten"
+msgstr "Du bist {name} beigetreten"
 
 msgid "Collaboard project \"{name}\": {link}"
 msgstr "Collaboard-Projekt \"{name}\": {link}"
@@ -329,19 +330,19 @@ msgid "Updated at"
 msgstr "Aktualisiert um"
 
 msgid "Sign in with Collaboard"
-msgstr "Melden Sie sich bei Collaboard an"
+msgstr "Mit Collaboard anmelden"
 
 msgid "Failed to save Collaboard OAuth state"
 msgstr "Fehler beim Speichern des Collaboard OAuth-Zustands"
 
 msgid "Environment"
-msgstr "Umwelt"
+msgstr "Umgebung"
 
 msgid "Open Collaboard board links in Nextcloud"
-msgstr "Öffnen Sie Collaboard-Board-Links in Nextcloud"
+msgstr "Collaboard-Board-Links in Nextcloud öffnen"
 
 msgid "Open here"
 msgstr "Hier öffnen"
 
 msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
-msgstr "Wenn Sie Ihren Benutzern erlauben möchten, Boards in Nextcloud zu öffnen, setzen Sie sich mit dem Collaboard-Support in Verbindung, um Ihre Nextcloud-Domain auf die Whitelist zu setzen."
+msgstr "Wenn Du möchtest, dass Deine Benutzer Boards in Nextcloud öffnen können, kontaktiere bitte den Collaboard-Support, um Deine Nextcloud-Domain auf die Whitelist setzen zu lassen."

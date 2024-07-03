@@ -8,11 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
+- Use OAuth flow to authenticate
+- Support localisation in German, French, Italian, Swedish and Spanish
+- Support opening boards in Nextcloud
+- Changed API and Domain URLs configuration. Removed user-level configuration.
 - Use public API endpoints where possible @MB-Finski
 - Login flow now matches that of the Collaboard website @MB-Finski
 
 ### Fixed
 
+- Participating projects not being shown
+- Projects being not ordered by last update
 - Login no longer possible through all endpoints, use Authenticate instead @MB-Finski
 
 ## 1.0.6 - 2023-08-01

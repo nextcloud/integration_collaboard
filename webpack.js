@@ -17,6 +17,8 @@ webpackConfig.entry = {
 	personalSettings: { import: path.join(__dirname, 'src', 'personalSettings.js'), filename: appId + '-personalSettings.js' },
 	adminSettings: { import: path.join(__dirname, 'src', 'adminSettings.js'), filename: appId + '-adminSettings.js' },
 	main: { import: path.join(__dirname, 'src', 'main.js'), filename: appId + '-main.js' },
+	standalone: { import: path.join(__dirname, 'src', 'standalone.js'), filename: appId + '-standalone.js' },
+	popupSuccess: { import: path.join(__dirname, 'src', 'popupSuccess.js'), filename: appId + '-popupSuccess.js' },
 }
 
 webpackConfig.plugins.push(

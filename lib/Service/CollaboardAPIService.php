@@ -70,8 +70,8 @@ class CollaboardAPIService {
 
 	public function getProjectOwner(string $userId, string $projectId): array {
 		$params = [
-			'PageSize' => 100,
-			'PageNumber' => 1,
+			'pageSize' => 100,
+			'pageNumber' => 1,
 		];
 		$response = $this->request($userId, 'public/api/public/v2.0/collaborationhub/projects/' . urlencode($projectId) . '/users', $params);
 		if (isset($response['error']) || !isset($response['Results']) || !is_array($response['Results'])) {

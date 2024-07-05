@@ -23,8 +23,8 @@ use OCP\AppFramework\Services\IInitialState;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
-use OCP\PreConditionNotMetException;
 use OCP\IURLGenerator;
+use OCP\PreConditionNotMetException;
 use Psr\Log\LoggerInterface;
 
 class ConfigController extends Controller {
@@ -111,11 +111,11 @@ class ConfigController extends Controller {
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token_expires_at');
 		}
 
-		$this->logger->info('setConfig' , [
-				'app' => Application::APP_ID,
-				'values' => $values,
-				'result' => $result,
-			]);
+		$this->logger->info('setConfig', [
+			'app' => Application::APP_ID,
+			'values' => $values,
+			'result' => $result,
+		]);
 
 		return new DataResponse($result);
 	}
@@ -127,7 +127,7 @@ class ConfigController extends Controller {
 	 * @return DataResponse
 	 */
 	public function setAdminConfig(array $values): DataResponse {
-		$this->logger->info('setAdminConfig' , [
+		$this->logger->info('setAdminConfig', [
 			'values' => $values,
 		]);
 
@@ -164,7 +164,7 @@ class ConfigController extends Controller {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
 		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
 
-		$this->logger->info('oauthRedirect' , [
+		$this->logger->info('oauthRedirect', [
 			'code' => $code,
 			'clientID' => $clientID,
 			'clientSecret' => $clientSecret,
@@ -183,7 +183,7 @@ class ConfigController extends Controller {
 				'grant_type' => 'authorization_code'
 			], 'POST');
 
-			$this->logger->info('requestOAuthAccessToken' , [
+			$this->logger->info('requestOAuthAccessToken', [
 				'app' => Application::APP_ID,
 				'result' => $result,
 			]);
@@ -194,7 +194,7 @@ class ConfigController extends Controller {
 				if (isset($result['expires_in'])) {
 					$nowTs = (new Datetime())->getTimestamp();
 					$expiresAt = $nowTs + (int) $result['expires_in'];
-					$this->config->setUserValue($this->userId, Application::APP_ID, 'token_expires_at', $expiresAt);
+					$this->config->setUserValue($this->userId, Application::APP_ID, 'token_expires_at', (string)$expiresAt);
 				}
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $accessToken);
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'refresh_token', $refreshToken);
@@ -234,13 +234,13 @@ class ConfigController extends Controller {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
 	private function storeUserInfo(): array {
 		$info = $this->collaboardAPIService->getUserInfo($this->userId);
-		$this->logger->info('storeUserInfo' , [
-				'info' => $info,
-			]);
+		$this->logger->info('storeUserInfo', [
+			'info' => $info,
+		]);
 
 		if (isset($info["Result"])) {
 			$result = $info["Result"];

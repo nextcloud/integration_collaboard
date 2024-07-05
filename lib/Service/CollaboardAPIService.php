@@ -70,8 +70,8 @@ class CollaboardAPIService {
 
 	public function getProjectOwner(string $userId, string $projectId): array {
 		$params = [
-			'PageSize' => 100,
-			'PageNumber' => 1,
+			'pageSize' => 100,
+			'pageNumber' => 1,
 		];
 		$response = $this->request($userId, 'public/api/public/v2.0/collaborationhub/projects/' . urlencode($projectId) . '/users', $params);
 		if (isset($response['error']) || !isset($response['Results']) || !is_array($response['Results'])) {
@@ -372,15 +372,16 @@ class CollaboardAPIService {
 			if (isset($result['expires_in'])) {
 				$nowTs = (new Datetime())->getTimestamp();
 				$expiresAt = $nowTs + (int) $result['expires_in'];
-				$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', $expiresAt);
+				$this->config->setUserValue($userId, Application::APP_ID, 'token_expires_at', (string)$expiresAt);
 			}
 			return true;
 		} else {
 			// impossible to refresh the token
+			$errorDescription = $result['error_description'] ?? '[no error description]';
 			$this->logger->error(
 				'Token is not valid anymore. Impossible to refresh it. '
-					. $result['error'] . ' '
-					. $result['error_description'] ?? '[no error description]',
+						. $result['error'] . ' '
+						. $errorDescription,
 				['app' => Application::APP_ID]
 			);
 			return false;
@@ -434,10 +435,10 @@ class CollaboardAPIService {
 	public function revokeToken(string $userId): bool {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
 		$token = $this->config->getUserValue($userId, Application::APP_ID, 'token');
-		$revokeResponse = $this->request($userId, 'auth/oauth2/token/revoke', [
+		$this->request($userId, 'auth/oauth2/token/revoke', [
 			'client_id' => $clientID,
 			'token' => $token,
 		], 'POST', false);
-		return $revokeResponse === '';
+		return true;
 	}
 }

@@ -112,6 +112,11 @@ OC.L10N.register(
     "Environment" : "Ambiente",
     "Open Collaboard board links in Nextcloud" : "Abrir enlaces de tablero Collaboard en Nextcloud",
     "Open here" : "Abrir aquí",
-    "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain." : "Si desea permitir que sus usuarios abran tableros en Nextcloud, póngase en contacto con el soporte de Collaboard para incluir en la lista blanca su dominio de Nextcloud."
+    "To allow your Nextcloud users to connect to Collaboard via OAuth, check " : "Para permitir que tus usuarios de Nextcloud se conecten a Collaboard a través de OAuth, marca ",
+    "Collaboard for Nextcloud." : "Collaboard para Nextcloud.",
+    "Make sure you provide the \"Redirect URI\"" : "Asegúrate de proporcionar el \"URI de redirección\"",
+    "Collaboard Domain url" : "URL del dominio Collaboard",
+    "Collaboard API server" : "Servidor API de Collaboard",
+    "Please configure the Collaboard integration in Nextcloud administration settings. Check " : "Por favor, configure la integración de Collaboard en la configuración de administración de Nextcloud. Verifique "
 },
 "");

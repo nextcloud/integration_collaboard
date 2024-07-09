@@ -5,7 +5,8 @@
 			{{ t('integration_collaboard', 'Collaboard integration') }}
 		</h2>
 		<p v-if="!showOAuth && !connected" class="settings-hint">
-			{{ t('integration_collaboard', 'Ask your administrator to configure the Collaboard integration in Nextcloud.') }}
+			{{ t('integration_collaboard', 'Please configure the Collaboard integration in Nextcloud administration settings. Check ') }}
+			<a class="external" href="https://help.collaboard.app/nextcloud-integration" target="_blank">{{ t('integration_collaboard', 'Collaboard for Nextcloud.') }}</a>
 		</p>
 		<div id="collaboard-content">
 			<NcButton v-if="!connected && showOAuth"

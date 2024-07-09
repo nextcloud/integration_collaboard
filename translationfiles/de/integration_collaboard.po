@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-07-03 16:31\n"
+"PO-Revision-Date: 2024-07-09 15:59\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: de\n"
@@ -43,6 +43,7 @@ msgstr "Collaboard"
 msgid "Integration of Collaboard"
 msgstr "Integration von Collaboard"
 
+#, fuzzy
 msgid "Collaboard whiteboard service integration"
 msgstr "Integration des Collaboard-Dienstes"
 
@@ -88,9 +89,11 @@ msgstr "Wenn Du Deinen Nextcloud-Benutzern erlauben möchtest, sich über OAuth 
 msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
 msgstr "Stelle sicher, dass Du die \"Redirect URI\" an den Collaboard Support weitergibst"
 
+#, fuzzy
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
 msgstr "Gib unten die \"App-ID\" und das \"App Secret\" ein. Deine Nextcloud-Benutzer sehen dann die Schaltfläche \"Mit Collaboard verbinden\" in ihren persönlichen Einstellungen."
 
+#, fuzzy
 msgid "Application ID"
 msgstr "App-ID"
 
@@ -344,5 +347,20 @@ msgstr "Collaboard-Board-Links in Nextcloud öffnen"
 msgid "Open here"
 msgstr "Hier öffnen"
 
-msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
-msgstr "Wenn Du möchtest, dass Deine Benutzer Boards in Nextcloud öffnen können, kontaktiere bitte den Collaboard-Support, um Deine Nextcloud-Domain auf die Whitelist setzen zu lassen."
+msgid "To allow your Nextcloud users to connect to Collaboard via OAuth, check "
+msgstr "Um Ihren Nextcloud-Benutzern die Verbindung zu Collaboard über OAuth zu ermöglichen, überprüfen Sie "
+
+msgid "Collaboard for Nextcloud."
+msgstr "Collaboard für Nextcloud."
+
+msgid "Make sure you provide the \"Redirect URI\""
+msgstr "Stellen Sie sicher, dass Sie die \"Weiterleitungs-URI\" angeben"
+
+msgid "Collaboard Domain url"
+msgstr "Collaboard Domain-URL"
+
+msgid "Collaboard API server"
+msgstr "Collaboard API-Server"
+
+msgid "Please configure the Collaboard integration in Nextcloud administration settings. Check "
+msgstr "Bitte konfigurieren Sie die Collaboard-Integration in den Nextcloud-Administrationseinstellungen. Überprüfen Sie "

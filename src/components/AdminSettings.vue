@@ -6,12 +6,13 @@
 		</h2>
 		<div class="collaboard-content">
 			<p class="settings-hint">
-				{{ t('integration_collaboard', 'If you want to allow your Nextcloud users to connect to Collaboard via OAuth, get in touch with Collaboard Support to get the ID and secret.') }}
+				{{ t('integration_collaboard', 'To allow your Nextcloud users to connect to Collaboard via OAuth, check ') }}
+				<a class="external" href="https://help.collaboard.app/nextcloud-integration" target="_blank">{{ t('integration_collaboard', 'Collaboard for Nextcloud.') }}</a>
 			</p>
 			<br>
 			<p class="settings-hint">
 				<InformationVariantIcon :size="24" class="icon" />
-				{{ t('integration_collaboard', 'Make sure you provide the "Redirect URI" to Collaboard Support') }}
+				{{ t('integration_collaboard', 'Make sure you provide the "Redirect URI"') }}
 				&nbsp;<b> {{ redirect_uri }} </b>
 			</p>
 			<br>

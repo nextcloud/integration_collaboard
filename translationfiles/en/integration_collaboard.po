@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nextcloud 3.14159\n"
 "Report-Msgid-Bugs-To: translations\@example.com\n"
-"POT-Creation-Date: 2024-06-26 14:24+0200\n"
+"POT-Creation-Date: 2024-07-09 15:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: Nextcloud 3.14159\n"
 "Report-Msgid-Bugs-To: translations\@example.com\n"
-"POT-Creation-Date: 2024-06-26 14:24+0200\n"
+"POT-Creation-Date: 2024-07-09 15:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgid "Integration of Collaboard"
 msgstr "Integration of Collaboard"
 
 msgid "Collaboard whiteboard service integration"
-msgstr "Collaboard service integration"
+msgstr "Collaboard whiteboard service integration"
 
 msgid "You are not connected to Collaboard"
 msgstr "You are not connected to Collaboard"
@@ -100,16 +100,16 @@ msgid "Make sure you provide the \"Redirect URI\" to Collaboard Support"
 msgstr "Make sure you provide the \"Redirect URI\" to Collaboard Support"
 
 msgid "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
-msgstr "Put the \"App ID\" and \"App secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
+msgstr "Put the \"Application ID\" and \"Application secret\" below. Your Nextcloud users will then see a \"Connect to Collaboard\" button in their personal settings."
 
 msgid "Application ID"
-msgstr "App ID"
+msgstr "Application ID"
 
 msgid "ID of your Collaboard application"
 msgstr "ID of your Collaboard application"
 
 msgid "Application secret"
-msgstr "App secret"
+msgstr "Application secret"
 
 msgid "Client secret of your Collaboard application"
 msgstr "Client secret of your Collaboard application"
@@ -349,10 +349,25 @@ msgid "Environment"
 msgstr "Environment"
 
 msgid "Open Collaboard board links in Nextcloud"
-msgstr "Open Collaboard board links in Nextcloud"
+msgstr "Open Collaboard project links in Nextcloud"
 
 msgid "Open here"
 msgstr "Open here"
 
-msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
-msgstr "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
+msgid "To allow your Nextcloud users to connect to Collaboard via OAuth, check "
+msgstr "To allow your Nextcloud users to connect to Collaboard via OAuth, refer to "
+
+msgid "Collaboard for Nextcloud."
+msgstr "Collaboard for Nextcloud."
+
+msgid "Make sure you provide the \"Redirect URI\""
+msgstr "Make sure you provide the \"Redirect URI\""
+
+msgid "Collaboard Domain url"
+msgstr "Collaboard Domain URL"
+
+msgid "Collaboard API server"
+msgstr "Collaboard API server"
+
+msgid "Please configure the Collaboard integration in Nextcloud administration settings. Check "
+msgstr "Please configure the Collaboard integration in Nextcloud administration settings. Refer to  "

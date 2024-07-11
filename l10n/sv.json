@@ -108,8 +108,13 @@
     "Sign in with Collaboard" : "Logga in med Collaboard",
     "Failed to save Collaboard OAuth state" : "Misslyckades med att spara Collaboard OAuth-status",
     "Environment" : "Miljö",
-    "Open Collaboard board links in Nextcloud" : "Öppna Collaboard-boardlänkar i Nextcloud",
+    "Open Collaboard board links in Nextcloud" : "Öppna Collaboard-projektlänkar i Nextcloud",
     "Open here" : "Öppna här",
-    "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain." : "Om du vill tillåta dina användare att öppna tavlor i Nextcloud, ta kontakt med Collaboard Support för att vitlista din Nextcloud-domän."
+    "To allow your Nextcloud users to connect to Collaboard via OAuth, check " : "För att låta dina Nextcloud-användare koppla upp sig till Collaboard via OAuth, se ",
+    "Collaboard for Nextcloud." : "Collaboard för Nextcloud.",
+    "Make sure you provide the \"Redirect URI\"" : "Se till att du anger \"Omdirigerings-URI\"",
+    "Collaboard Domain url" : "Collaboard domän-URL",
+    "Collaboard API server" : "Collaboard API-server",
+    "Please configure the Collaboard integration in Nextcloud administration settings. Check " : "Konfigurera Collaboard-integrationen i Nextclouds administrationsinställningar. Se till "
 },"pluralForm" :""
 }

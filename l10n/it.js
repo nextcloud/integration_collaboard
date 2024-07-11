@@ -110,8 +110,13 @@ OC.L10N.register(
     "Sign in with Collaboard" : "Accedi con Collaboard",
     "Failed to save Collaboard OAuth state" : "Impossibile salvare lo stato OAuth di Collaboard",
     "Environment" : "Ambiente",
-    "Open Collaboard board links in Nextcloud" : "Apri i link della bacheca Collaboard in Nextcloud",
+    "Open Collaboard board links in Nextcloud" : "Apri i link del progetto Collaboard in Nextcloud",
     "Open here" : "Apri qui",
-    "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain." : "Se vuoi permettere ai tuoi utenti di aprire lavagne in Nextcloud, mettiti in contatto con il Supporto Collaboard per inserire il tuo dominio Nextcloud nella whitelist."
+    "To allow your Nextcloud users to connect to Collaboard via OAuth, check " : "Per consentire ai tuoi utenti di Nextcloud di collegarsi a Collaboard tramite OAuth, fai riferimento a ",
+    "Collaboard for Nextcloud." : "Collaboard per Nextcloud.",
+    "Make sure you provide the \"Redirect URI\"" : "Assicurati di fornire il \"Redirect URI\"",
+    "Collaboard Domain url" : "URL del dominio Collaboard",
+    "Collaboard API server" : "Server API di Collaboard",
+    "Please configure the Collaboard integration in Nextcloud administration settings. Check " : "Configura l'integrazione di Collaboard nelle impostazioni di amministrazione di Nextcloud. Fai riferimento a "
 },
 "");

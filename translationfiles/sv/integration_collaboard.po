@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
 "Project-Id-Version: Nextcloud\n"
-"PO-Revision-Date: 2024-07-03 16:31\n"
+"PO-Revision-Date: 2024-07-11 10:26\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
 "Language: sv\n"
@@ -43,6 +43,7 @@ msgstr "Collaboard"
 msgid "Integration of Collaboard"
 msgstr "Integration av Collaboard"
 
+#, fuzzy
 msgid "Collaboard whiteboard service integration"
 msgstr "Integration av Collaboard-tjänsten"
 
@@ -341,10 +342,26 @@ msgid "Environment"
 msgstr "Miljö"
 
 msgid "Open Collaboard board links in Nextcloud"
-msgstr "Öppna Collaboard-boardlänkar i Nextcloud"
+msgstr "Öppna Collaboard-projektlänkar i Nextcloud"
 
 msgid "Open here"
 msgstr "Öppna här"
 
-msgid "If you want to allow your users to open boards in Nextcloud, get in touch with Collaboard Support to whitelist your Nextcloud domain."
-msgstr "Om du vill tillåta dina användare att öppna tavlor i Nextcloud, ta kontakt med Collaboard Support för att vitlista din Nextcloud-domän."
+msgid "To allow your Nextcloud users to connect to Collaboard via OAuth, check "
+msgstr "För att låta dina Nextcloud-användare koppla upp sig till Collaboard via OAuth, se "
+
+msgid "Collaboard for Nextcloud."
+msgstr "Collaboard för Nextcloud."
+
+msgid "Make sure you provide the \"Redirect URI\""
+msgstr "Se till att du anger \"Omdirigerings-URI\""
+
+#, fuzzy
+msgid "Collaboard Domain url"
+msgstr "Collaboard domän-URL"
+
+msgid "Collaboard API server"
+msgstr "Collaboard API-server"
+
+msgid "Please configure the Collaboard integration in Nextcloud administration settings. Check "
+msgstr "Konfigurera Collaboard-integrationen i Nextclouds administrationsinställningar. Se till "

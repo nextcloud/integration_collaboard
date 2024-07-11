@@ -349,13 +349,13 @@ msgid "Environment"
 msgstr "Environment"
 
 msgid "Open Collaboard board links in Nextcloud"
-msgstr "Open Collaboard board links in Nextcloud"
+msgstr "Open Collaboard project links in Nextcloud"
 
 msgid "Open here"
 msgstr "Open here"
 
 msgid "To allow your Nextcloud users to connect to Collaboard via OAuth, check "
-msgstr "To allow your Nextcloud users to connect to Collaboard via OAuth, check "
+msgstr "To allow your Nextcloud users to connect to Collaboard via OAuth, refer to "
 
 msgid "Collaboard for Nextcloud."
 msgstr "Collaboard for Nextcloud."
@@ -364,10 +364,10 @@ msgid "Make sure you provide the \"Redirect URI\""
 msgstr "Make sure you provide the \"Redirect URI\""
 
 msgid "Collaboard Domain url"
-msgstr "Collaboard Domain url"
+msgstr "Collaboard Domain URL"
 
 msgid "Collaboard API server"
 msgstr "Collaboard API server"
 
 msgid "Please configure the Collaboard integration in Nextcloud administration settings. Check "
-msgstr "Please configure the Collaboard integration in Nextcloud administration settings. Check "
+msgstr "Please configure the Collaboard integration in Nextcloud administration settings. Refer to  "

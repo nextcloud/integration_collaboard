@@ -108,13 +108,13 @@
     "Sign in with Collaboard" : "Sign in with Collaboard",
     "Failed to save Collaboard OAuth state" : "Failed to save Collaboard OAuth state",
     "Environment" : "Environment",
-    "Open Collaboard board links in Nextcloud" : "Open Collaboard board links in Nextcloud",
+    "Open Collaboard board links in Nextcloud" : "Open Collaboard project links in Nextcloud",
     "Open here" : "Open here",
-    "To allow your Nextcloud users to connect to Collaboard via OAuth, check " : "To allow your Nextcloud users to connect to Collaboard via OAuth, check ",
+    "To allow your Nextcloud users to connect to Collaboard via OAuth, check " : "To allow your Nextcloud users to connect to Collaboard via OAuth, refer to ",
     "Collaboard for Nextcloud." : "Collaboard for Nextcloud.",
     "Make sure you provide the \"Redirect URI\"" : "Make sure you provide the \"Redirect URI\"",
-    "Collaboard Domain url" : "Collaboard Domain url",
+    "Collaboard Domain url" : "Collaboard Domain URL",
     "Collaboard API server" : "Collaboard API server",
-    "Please configure the Collaboard integration in Nextcloud administration settings. Check " : "Please configure the Collaboard integration in Nextcloud administration settings. Check "
+    "Please configure the Collaboard integration in Nextcloud administration settings. Check " : "Please configure the Collaboard integration in Nextcloud administration settings. Refer to  "
 },"pluralForm" :""
 }

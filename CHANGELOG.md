@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.8 - 2024-07-11
+
+### Updated
+
+- Added link to OAuth configuration help guide
+
 ## 1.0.7 - 2024-07-07
 
 ### Updated

@@ -6,14 +6,13 @@
 		<iframe
 			class="frame"
 			frameborder="0"
-			scrolling="no"
 			:allowFullScreen="true"
 			:src="boardUrl" />
 	</NcModal>
 </template>
 
 <script>
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal.js';
 
 export default {
 	name: 'CollaboardModal',

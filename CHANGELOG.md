@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.9 - 2024-08-30
+
+### Fixed
+
+- Support scrolling embedded projects
+
 ## 1.0.8 - 2024-07-11
 
 ### Updated

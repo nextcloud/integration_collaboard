@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js';
+import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 
 export default {
 	name: 'CollaboardModal',
